@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './recent-films.component.html',
-  styleUrl: './recent-films.component.css'
+  styleUrl: './recent-films.component.scss'
 })
 export class RecentFilmsComponent {
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './film-create-page.component.html',
-  styleUrl: './film-create-page.component.css'
+  styleUrl: './film-create-page.component.scss'
 })
 export class FilmCreatePageComponent {
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './cookie-popup.component.html',
-  styleUrl: './cookie-popup.component.css'
+  styleUrl: './cookie-popup.component.scss'
 })
 export class CookiePopupComponent {
 

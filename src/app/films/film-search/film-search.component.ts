@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './film-search.component.html',
-  styleUrl: './film-search.component.css'
+  styleUrl: './film-search.component.scss'
 })
 export class FilmSearchComponent {
 

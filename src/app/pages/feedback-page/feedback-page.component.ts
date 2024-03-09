@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './feedback-page.component.html',
-  styleUrl: './feedback-page.component.css'
+  styleUrl: './feedback-page.component.scss'
 })
 export class FeedbackPageComponent {
 
