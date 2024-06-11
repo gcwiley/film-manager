@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+// import angular modules
+
+
 @Component({
   selector: 'app-main-page',
   standalone: true,
