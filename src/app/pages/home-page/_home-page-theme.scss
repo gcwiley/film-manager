@@ -1,17 +1,17 @@
-
 @use '@angular/material' as mat;
 
 // color mixin
 @mixin color($theme) {
-   .announcement-banner {
-      color: mat.get-theme-color($theme, accent, 200-contrast);
-      background-color: mat.get-theme-color($theme, accent, 200);
+   .home-page-container {
+      color: mat.get-theme-color($theme, primary, 900-contrast);
+      background-color: mat.get-theme-color($theme, primary, 200);
    }
 }
+
 // typography mixin
 @mixin typography($theme) {
-   .announcement-banner {
-      font: mat.get-theme-typography($theme, headline-1);
+   .home-page-container {
+      font: mat.get-theme-typography($theme, subtitle-1);
    }
 }
 
