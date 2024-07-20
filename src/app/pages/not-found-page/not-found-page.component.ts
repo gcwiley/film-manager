@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // import the shared components
-import { HeaderComponent, FooterComponent } from '../../shared';
+import { FooterComponent } from '../../shared';
 
 // import the angular material modules
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
    templateUrl: './not-found-page.component.html',
    styleUrl: './not-found-page.component.scss',
    standalone: true,
-   imports: [RouterModule, HeaderComponent, FooterComponent, MatButtonModule],
+   imports: [RouterModule, FooterComponent, MatButtonModule],
 })
 export class NotFoundPageComponent {}

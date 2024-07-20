@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-issues-page',
-  standalone: true,
-  imports: [],
-  templateUrl: './issues-page.component.html',
-  styleUrl: './issues-page.component.scss'
+   selector: 'app-issues-page',
+   templateUrl: './issues-page.component.html',
+   styleUrl: './issues-page.component.scss',
+   standalone: true,
+   imports: [],
 })
-export class IssuesPageComponent {
-
-}
+export class IssuesPageComponent {}

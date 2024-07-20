@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+// color mixin
+@mixin color($theme) {
+   .film-grid {
+      color: mat.get-theme-color($theme, accent, 200-contrast);
+      background-color: mat.get-theme-color($theme, accent, 200);
+   }
+}
+// typography mixin
+@mixin typography($theme) {
+   .film-grid {
+      font: mat.get-theme-typography($theme, headline-1);
+   }
+}
+
+// theme mixin
+@mixin theme($theme) {
+   $color-config: mat.get-color-config($theme);
+   @if $color-config != null {
+      @include color($theme);
+   }
+
+   $typography-config: mat.get-typography-config($theme);
+   @if $typography-config != null {
+      @include typography($theme);
+   }
+}

@@ -1,5 +1,22 @@
 @use '@angular/material' as mat;
 
+// FILM COMPONENT THEMES
+@use '../app/films/film-details/film-details-theme';
+@use '../app/films/film-form/film-form-theme';
+@use '../app/films/film-grid/film-grid-theme';
+@use '../app/films/film-list/film-list-theme';
+@use '../app/films/film-search/film-search-theme';
+@use '../app/films/recent-films/recent-films-theme';
+
+// ISSUE COMPONENT THEMES
+@use '../app/issues/issue-form/issue-form-theme';
+@use '../app/issues/issue-list/issue-list-theme';
+@use '../app/issues/recent-issues/recent-issues-theme';
+
+// PAGE COMPONENT THEMES
+
+
+
 // SHARED COMPONENT THEMES
 @use '../app/shared/announcement-banner/announcement-banner-theme';
 @use '../app/shared/cookie-popup/cookie-popup-theme';

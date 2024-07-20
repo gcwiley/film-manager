@@ -1,7 +1,6 @@
 export { AboutPageComponent } from "./about-page/about-page.component";
 export { FeedbackPageComponent } from "./feedback-page/feedback-page.component";
-export { FilmCreatePageComponent } from "./film-pages/film-create-page/film-create-page.component";
-export { FilmDetailsPageComponent } from "./film-pages/film-details-page/film-details-page.component";
+export { FilmCreatePageComponent, FilmDetailsPageComponent, FilmGridPageComponent } from "./film-pages";
 export { IssuesPageComponent } from "./issues-page/issues-page.component";
 export { HomePageComponent } from "./home-page/home-page.component";
 export { NotFoundPageComponent } from "./not-found-page/not-found-page.component";
