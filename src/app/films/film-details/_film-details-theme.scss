@@ -3,26 +3,24 @@
 // color mixin
 @mixin color($theme) {
    .film-details {
-      color: mat.get-theme-color($theme, accent, 200-contrast);
-      background-color: mat.get-theme-color($theme, accent, 200);
+      color: mat.get-theme-color($theme, secondary, 20);
+      background-color: mat.get-theme-color($theme, secondary, 20);
    }
 }
 // typography mixin
 @mixin typography($theme) {
    .film-details {
-      font: mat.get-theme-typography($theme, headline-1);
+      font: mat.get-theme-typography($theme, body-medium);
    }
 }
 
 // theme mixin
 @mixin theme($theme) {
-   $color-config: mat.get-color-config($theme);
-   @if $color-config != null {
+   @if mat.theme-has($theme, color) {
       @include color($theme);
    }
 
-   $typography-config: mat.get-typography-config($theme);
-   @if $typography-config != null {
+   @if mat.theme-has($theme, typography) {
       @include typography($theme);
    }
 }

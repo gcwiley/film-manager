@@ -3,14 +3,14 @@
 // color mixin
 @mixin color($theme) {
    .footer-content {
-      color: mat.get-theme-color($theme, primary, 500);
+      color: mat.get-theme-color($theme, primary, 50);
    }
 }
 
 // typography mixin
 @mixin typography($theme) {
    .footer-content {
-      font: mat.get-theme-typography($theme, headline-1);
+      font: mat.get-theme-typography($theme, body-medium);
    }
 }
 

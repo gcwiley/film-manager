@@ -1,14 +1,15 @@
-<app-header></app-header>
-<app-announcement></app-announcement>
+<app-navbar></app-navbar>
+<app-announcement-banner></app-announcement-banner>
 
-<mat-grid-list>
-    <mat-grid-tile>
-        <h2>Content goes here!</h2>
-    </mat-grid-tile>
+<main class="film-details-page-container">
+    <article class="film-description">
+        <!-- film description -->
+        <app-film-description></app-film-description>
+    </article>
 
-    <mat-grid-tile>
-        <h2>Content goes here!</h2>
-    </mat-grid-tile>
-</mat-grid-list>
-
+    <aside class="film-details">
+        <!-- film details -->
+        <app-film-details></app-film-details>
+    </aside>
+</main>
 <app-footer></app-footer>

@@ -1,0 +1,19 @@
+
+
+// controls the header background size
+.header-background {
+    overflow: hidden;
+    position: relative;
+    height: 420px;
+}
+
+// controls the size of the header section
+.header-section {
+    width: 90%;
+    position: absolute;
+    z-index: 0;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -23,10 +23,9 @@ export const routes: Routes = [
     { path: 'reset-password', component: ResetPasswordPageComponent },
     { path: 'signin', component: SigninPageComponent },
     { path: 'signup', component: SignupPageComponent },
-    // film pages
     { path: 'films', component: FilmGridPageComponent },
     { path: 'films/:id', component: FilmDetailsPageComponent },
-    { path: 'create-film', component: FilmCreatePageComponent },
-    { path: 'edit/:id', component: FilmCreatePageComponent },
+    { path: 'films/create', component: FilmCreatePageComponent },
+    { path: 'films/edit/:id', component: FilmCreatePageComponent },
     { path: '**', component: NotFoundPageComponent },
 ];

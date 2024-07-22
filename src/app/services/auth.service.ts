@@ -12,7 +12,9 @@ export class AuthService {
    constructor() {}
 
    // signin to application
-   signIn() {}
+   signIn() {
+      window.alert('You have signed in. Not!')
+   }
 
    // sign out of application
    signOut() {}

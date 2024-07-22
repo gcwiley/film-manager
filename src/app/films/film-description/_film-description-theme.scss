@@ -2,14 +2,14 @@
 
 // color mixin
 @mixin color($theme) {
-   .film-create-page {
+   .film-description {
       color: mat.get-theme-color($theme, secondary, 10);
       background-color: mat.get-theme-color($theme, secondary, 20);
    }
 }
 // typography mixin
 @mixin typography($theme) {
-   .film-create-page {
+   .film-description {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }
