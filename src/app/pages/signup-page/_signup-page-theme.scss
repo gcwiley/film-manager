@@ -2,7 +2,7 @@
 
 // color mixin
 @mixin color($theme) {
-   .not-found-page-container {
+   .signup-page-container {
       color: mat.get-theme-color($theme, primary, 20);
       background-color: mat.get-theme-color($theme, primary, 20);
    }
@@ -10,7 +10,7 @@
 
 // typography mixin
 @mixin typography($theme) {
-   .not-found-page-container {
+   .signup-page-container {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }

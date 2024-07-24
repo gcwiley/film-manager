@@ -39,21 +39,25 @@ export class SigninPageComponent {
    year = new Date().getFullYear();
 
    // inject the router, form builder, and the auth service
-   constructor(
-      private router: Router,
-      private formBuilder: FormBuilder,
-      private authService: AuthService
-   ) {}
+   constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) {}
 
    // create the signin form with email and password fields
    signinForm = this.formBuilder.group({
       email: [null, Validators.required, Validators.email],
-      password: [null, Validators.required]
+      password: [null, Validators.required],
    });
 
    // Sign in with email and password
-  // if successful, navigate admin to the main page
-  onSubmitSignIn() {
-   window.alert('Under construction!')
- }
+   // if successful, navigate admin to the main page
+   onSubmitSignIn() {
+      this.authService
+         .signInWithEmailAndPassword(this.signinForm.value.email ?? '', this.signinForm.value.password ?? '')
+         .then(() => {
+            // navigates user to the main page
+            this.router.navigateByUrl('/');
+         })
+         .catch((error) => {
+            window.alert(error.message);
+         });
+   }
 }

@@ -66,7 +66,6 @@
    @include signin-page-theme.theme($theme);
    @include signup-page-theme.theme($theme);
 
-
    // shared components themes
    @include announcement-banner-theme.theme($theme);
    @include carousel-theme.theme($theme);

@@ -14,8 +14,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
 
-// import the env variables - fix this!
+// import the env variables
 import { environment } from '../environments/environment';
 
 // import the routes
@@ -25,19 +26,21 @@ export const appConfig: ApplicationConfig = {
    providers: [
       // sets up providers necessary to enable Router functionality for the application
       provideRouter(routes),
-      // comment
+      //  enable animations in an application
       provideAnimationsAsync(),
-      // creates and initializes a firebase app instance
+      // creates and initializes an firebase app instance
       provideFirebaseApp(() => initializeApp(environment.firebase)),
-      // comment
+      // creates and initializes a firestore instance
       provideFirestore(() => getFirestore()),
-      // comment
+      // creates and initializes an auth instance
       provideAuth(() => getAuth()),
       // comment
       provideFunctions(() => getFunctions()),
-      // comment
+      // creates and initializes a firebase storage instance
       provideStorage(() => getStorage()),
-      // comment
+      // creates and initializes a Firebase Cloud Messaging instance
       provideMessaging(() => getMessaging()),
+      // comment
+      provideDatabase(() => getDatabase()),
    ],
 };
