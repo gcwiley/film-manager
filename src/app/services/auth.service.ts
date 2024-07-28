@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-// comment here
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, signOut } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
 @Injectable({
    providedIn: 'root',
@@ -18,11 +17,6 @@ export class AuthService {
    // Creates a new user account associated with the specified email address and password.
    async createUserWithEmailAndPassword(email: string, password: string) {
       return await createUserWithEmailAndPassword(this.auth, email, password);
-   }
-
-   // Asynchronously signs in as an anonymous user.
-   async signInAnonymously() {
-      return await signInAnonymously(this.auth);
    }
 
    // sign out of application

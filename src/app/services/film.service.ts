@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 
-// import { getDatabase } from '@angular/fire/database'
-
 @Injectable({
    providedIn: 'root',
 })
 export class FilmService {
-   constructor() {}
+   
+   getFilms(): void {
+      // add code
+   }
+
+   deleteFilm(): void {
+      // add code here
+   }
 }

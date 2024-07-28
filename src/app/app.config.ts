@@ -21,7 +21,7 @@ import { environment } from '../environments/environment';
 
 // import the routes
 import { routes } from './app.routes';
-
+ 
 export const appConfig: ApplicationConfig = {
    providers: [
       // sets up providers necessary to enable Router functionality for the application
@@ -34,7 +34,7 @@ export const appConfig: ApplicationConfig = {
       provideFirestore(() => getFirestore()),
       // creates and initializes an auth instance
       provideAuth(() => getAuth()),
-      // comment
+      // registers a set of functions obtained by 'getFunctions' to be available for dependency injection.
       provideFunctions(() => getFunctions()),
       // creates and initializes a firebase storage instance
       provideStorage(() => getStorage()),

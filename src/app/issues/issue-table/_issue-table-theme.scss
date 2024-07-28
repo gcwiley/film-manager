@@ -2,14 +2,14 @@
 
 // color mixin
 @mixin color($theme) {
-   .issue-list {
+   .issue-table {
       color: mat.get-theme-color($theme, secondary, 10);
       background-color: mat.get-theme-color($theme, secondary, 20);
    }
 }
 // typography mixin
 @mixin typography($theme) {
-   .issue-list {
+   .issue-table {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }
