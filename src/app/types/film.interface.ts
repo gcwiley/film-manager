@@ -1,11 +1,13 @@
 // define the film interface
 export interface Film {
-    _id?: string;
+    id?: string;
     title: string;
     director: string;
     releaseDate: string;
     genre: string;
     summary: string;
+    createdAt: string;
+    updatedAt: string;
  }
  
  // define the genre inferface

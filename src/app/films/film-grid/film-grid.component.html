@@ -1,1 +1,18 @@
-<!-- fix this! -->
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight" [gutterSize]="gutterSize">
+    @for (film of films; track film) {
+    <mat-grid-tile [colspan]="colspan" [rowspan]="rowspan">
+       <mat-card class="hero-card" appearance="raised">
+          <mat-card-header>
+             <mat-card-title>{{ film.title }}</mat-card-title>
+             <mat-card-subtitle>{{ film.director }}</mat-card-subtitle>
+          </mat-card-header>
+ 
+          <span class="spacer"></span>
+ 
+          <mat-card-actions>
+             <a mat-button routerLink="/films/{{ film.id }}">OPEN</a>
+          </mat-card-actions>
+       </mat-card>
+    </mat-grid-tile>
+    }
+ </mat-grid-list>

@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import {
+   Auth,
+   signInWithEmailAndPassword,
+   createUserWithEmailAndPassword,
+   signInWithPopup,
+   GoogleAuthProvider,
+   signOut,
+} from '@angular/fire/auth';
 
 @Injectable({
    providedIn: 'root',
@@ -17,6 +24,11 @@ export class AuthService {
    // Creates a new user account associated with the specified email address and password.
    async createUserWithEmailAndPassword(email: string, password: string) {
       return await createUserWithEmailAndPassword(this.auth, email, password);
+   }
+
+   // Authenticates a Firebase client using a popup-based OAuth authentication flow.
+   async signInWithPopup() {
+      return await signInWithPopup(this.auth, new GoogleAuthProvider)
    }
 
    // sign out of application

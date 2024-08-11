@@ -5,7 +5,7 @@
 @use '../app/films/film-details/film-details-theme';
 @use '../app/films/film-form/film-form-theme';
 @use '../app/films/film-grid/film-grid-theme';
-@use '../app/films/film-list/film-list-theme';
+@use '../app/films/film-table/film-table-theme';
 @use '../app/films/film-search/film-search-theme';
 @use '../app/films/recent-films/recent-films-theme';
 
@@ -44,7 +44,7 @@
    @include film-details-theme.theme($theme);
    @include film-form-theme.theme($theme);
    @include film-grid-theme.theme($theme);
-   @include film-list-theme.theme($theme);
+   @include film-table-theme.theme($theme);
    @include film-search-theme.theme($theme);
    @include recent-films-theme.theme($theme);
 

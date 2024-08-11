@@ -63,7 +63,7 @@ export class FilmTableComponent implements AfterViewInit {
    dataSource = new MatTableDataSource<Film>();
 
    // columns to display
-   columnsToDisplay = ['update', 'update'];
+   columnsToDisplay = ['title', 'director', 'releaseDate', 'openFilm', 'editFilm', 'deleteFilm'];
 
    // comment
    constructor(private filmService: FilmService, private router: Router) {}

@@ -1,3 +1,9 @@
-<mat-list>
-    
+<mat-list class="recent-films mat-elevation-z1">
+   <span mat-subheader>Recent Films</span>
+   @for (film of recentFilms; track film) {
+   <mat-list-item lines="2">
+      <span matListItemTitle>{{ film.title }}</span>
+      <span matListItemLine>Added: {{ film.createdAt | date }}</span>
+   </mat-list-item>
+   }
 </mat-list>

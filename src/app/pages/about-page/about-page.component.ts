@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 // import the shared components
-import { NavbarComponent, FooterComponent } from '../../shared/index';
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../shared/index';
 
 @Component({
    selector: 'app-about-page',
    templateUrl: './about-page.component.html',
    styleUrl: './about-page.component.scss',
    standalone: true,
-   imports: [NavbarComponent, FooterComponent],
+   imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent],
 })
 export class AboutPageComponent {}
