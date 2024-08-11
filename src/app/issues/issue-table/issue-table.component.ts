@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -9,6 +9,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+// import mat paginator and mat sort
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+// import mat dialog here
+import {
+   MatDialog,
+   MatDialogActions,
+   MatDialogClose,
+   MatDialogContent,
+   MatDialogRef,
+   MatDialogTitle,
+} from '@angular/material/dialog';
 
 // import issue service
 import { IssueService } from '../../services/issue.service';
@@ -32,8 +46,16 @@ import { Issue } from '../../types/issue.interface';
       RouterModule,
    ],
 })
-export class IssueTableComponent implements OnInit {
-   // fix this later
+export class IssueTableComponent implements AfterViewInit {
+   // inject MatDialog
+   readonly dialog = inject(MatDialog);
+
+   // setup pagination for table
+   @ViewChild(MatPaginator) paginator!: MatPaginator;
+   // set up sort in table
+   @ViewChild(MatSort) sort!: MatSort;
+
+   // set the loading spinner to true
    isLoadingResults = true;
 
    // set up the data source
@@ -42,16 +64,29 @@ export class IssueTableComponent implements OnInit {
    // columns to display
    columnsToDisplay = ['title', 'artist', 'releaseDate', 'label', 'openAlbum', 'editAlbum', 'deleteAlbum'];
 
+   // comment
    constructor(private issueService: IssueService, private router: Router) {}
 
-   ngOnInit(): void {
-      this.getIssues();
+   // comment here
+   ngAfterViewInit(): void {
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      // get issue functions here
    }
 
    // gets all issues from issue service
    getIssues(): void {
       this.issueService.getIssues().subscribe(() => {
          this.dataSource.data = issues;
+      });
+   }
+
+   // open dialog window
+   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+      this.dialog.open(IssueTableDialogComponent, {
+         width: '250px',
+         enterAnimationDuration,
+         exitAnimationDuration,
       });
    }
 
@@ -62,4 +97,15 @@ export class IssueTableComponent implements OnInit {
          this.router.navigateByUrl('/film');
       });
    }
+}
+
+@Component({
+   selector: 'app-issue-table-dialog',
+   templateUrl: './issue-table-dialog.html',
+   standalone: true,
+   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+   changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class IssueTableDialogComponent {
+   readonly dialogRef = inject(MatDialogRef<IssueTableDialogComponent>);
 }

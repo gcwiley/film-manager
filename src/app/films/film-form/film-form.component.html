@@ -1,1 +1,58 @@
-<h2>Film Form</h2>
+<form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
+
+    <mat-card class="film-form">
+
+        <mat-card-header>
+            <mat-card-title>Add Film</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <!-- TITLE (title)-->
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput type="text" FormControlName="title">
+                <mat-error>A title is <strong>required.</strong></mat-error>
+            </mat-form-field>
+
+            <!-- DIRECTOR (director)-->
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Director</mat-label>
+                <input matInput type="text" FormControlName="director">
+                <mat-error>Please enter the film's director.</mat-error>
+            </mat-form-field>
+
+            <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Release Date</mat-label>
+                <input matInput type="text" FormControlName="releaseDate">
+                <mat-error>Please enter the release date of the film.</mat-error>
+            </mat-form-field>
+
+            <!-- GENRE (genre)-->
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Genre</mat-label>
+                <mat-select matNativeControl formControlName="genre">
+                  <mat-option value="horror">Horror</mat-option>
+                  <mat-option value="comedy">Comedy</mat-option>
+                  <mat-option value="Sci-Fi">Sci-Fi</mat-option>
+                </mat-select>
+                <mat-error>Please enter a genre for the film.</mat-error>
+            </mat-form-field>
+
+            <!-- SUMMARY (summary)-->
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Summary</mat-label>
+                <textarea matInput rows="10" FormControlName="summary"></textarea>
+                <mat-error>Please enter a short summary of the film.</mat-error>
+            </mat-form-field>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">Add Film</button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</form>
