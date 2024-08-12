@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { FilmService } from '../../services/film.service';
 
 // import the film interface
-import { Film } from '../../types/film.interface';
 import { RouterModule } from '@angular/router';
 import { SimpleTruncatePipe } from '../../pipes';
 
@@ -33,7 +32,7 @@ import { SimpleTruncatePipe } from '../../pipes';
 })
 export class FilmGridComponent implements OnInit {
    // create thge member variables
-   films: Film[] = [];
+   films: object[] = [];
 
    cols = 5;
    rowHeight = '1:1';
@@ -45,9 +44,39 @@ export class FilmGridComponent implements OnInit {
 
    constructor(private filmService: FilmService, private breakpointObserver: BreakpointObserver) {}
 
+   ngOnInit(): void {
+      this.getFilms();
+      this.layoutChanges();
+   }
+
+   // responsive code
+   layoutChanges(): void {
+      this.breakpointObserver
+         .observe([
+            Breakpoints.TabletPortrait,
+            Breakpoints.TabletLandscape,
+            Breakpoints.HandsetPortrait,
+            Breakpoints.HandsetLandscape,
+         ])
+         .subscribe((result) => {
+            const breakpoints = result.breakpoints;
+
+            // check to see if viewport is in table portrait mode
+            if (breakpoints[Breakpoints.TabletPortrait]) {
+               this.cols = 1;
+            } else if (breakpoints[Breakpoints.HandsetPortrait]) {
+               this.cols = 1;
+            } else if (breakpoints[Breakpoints.HandsetLandscape]) {
+               this.cols = 1;
+            } else if (breakpoints[Breakpoints.TabletLandscape]) {
+               this.cols = 2;
+            }
+         });
+   }
+
    getFilms(): void {
-      this.filmService.getFilms().subscribe((films) => {
-         this.films = films
-      })
+      this.filmService.getAllFilms().subscribe((films) => {
+         this.films = films;
+      });
    }
 }

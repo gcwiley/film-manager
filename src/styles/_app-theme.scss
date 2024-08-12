@@ -11,7 +11,7 @@
 
 // ISSUE COMPONENT THEMES
 @use '../app/issues/issue-form/issue-form-theme';
-@use '../app/issues/issue-list/issue-list-theme';
+@use '../app/issues/issue-table/issue-table-theme';
 @use '../app/issues/recent-issues/recent-issues-theme';
 
 // PAGE COMPONENT THEMES
@@ -50,7 +50,7 @@
 
    // issue component themes
    @include issue-form-theme.theme($theme);
-   @include issue-list-theme.theme($theme);
+   @include issue-table-theme.theme($theme);
    @include recent-issues-theme.theme($theme);
 
    // page themes

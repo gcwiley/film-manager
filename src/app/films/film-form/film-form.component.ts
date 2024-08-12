@@ -47,6 +47,49 @@ export class FilmFormComponent implements OnInit {
 
    // create the film form
    filmForm = this.formBuilder.group({
-      // fix this!
-   })
+      title: ['', Validators.required],
+      director: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      genre: ['', Validators.required],
+      summary: ['', Validators.required],
+   });
+
+   ngOnInit(): void {
+      // find out if we have an "id" or not
+      this.route.paramMap.subscribe((paramMap: ParamMap) => {
+         if (paramMap.has('id')) {
+            this.mode = 'edit';
+            this.id = paramMap.get('id');
+            this.filmService.getFilmById(this.id).then((film) => {
+               this.film = film;
+               // overrides values of initial form controls
+               this.filmForm.setValue({
+                  // set value for every form control
+                  title: this.film.title,
+                  director: this.film.director,
+                  releaseDate: this.film.releaseDate,
+                  genre: this.film.genre,
+                  summary: this.film.summary,
+               });
+            });
+         } else {
+            this.mode = 'create';
+            this.id = null;
+         }
+      });
+   }
+
+   onSaveFilm(): void {
+      if (this.mode === 'create') {
+         this.filmService.addFilm(this.filmForm.value).then(() => {
+            // navigates user back to the homepage
+            this.router.navigateByUrl('/')
+         })
+      } else {
+         this.filmService.updateFilmById(this.id, this.filmForm.value).then(() => {
+            // navigates user back to the homepage
+            this.router.navigateByUrl('/')
+         })
+      }
+   }
 }

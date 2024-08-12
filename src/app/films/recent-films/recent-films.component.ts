@@ -8,8 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 // import the film service
 import { FilmService } from '../../services/film.service';
 
-// import the film interface
-import { Film } from '../../types/film.interface';
 
 @Component({
    selector: 'app-recent-films',
@@ -19,13 +17,15 @@ import { Film } from '../../types/film.interface';
    imports: [CommonModule, MatListModule, MatIconModule],
 })
 export class RecentFilmsComponent implements OnInit {
-   recentFilms!: Film[];
+   recentFilms!: object[];
 
    constructor(private filmService: FilmService) {}
 
-   ngOnInit(): void {}
+   ngOnInit(): void {
+      this.getRecentFilms()
+   }
 
    getRecentFilms(): void {
-      this.filmService.getRecentlyCreatedFilms().subscribe((recentFilms) => (this.recentFilms = recentFilms));
+      this.filmService.getRecentlyCreatedFilms('films').then((films) => (this.recentFilms = films));
    }
 }

@@ -1,6 +1,6 @@
 // define the film interface
 export interface Film {
-    id?: string;
+    id: string;
     title: string;
     director: string;
     releaseDate: string;
