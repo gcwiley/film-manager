@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-// import firestore
+// import firestore functions
 import {
    Firestore,
    collection,
@@ -10,8 +10,8 @@ import {
    deleteDoc,
    getDocs,
    getDoc,
-   orderBy,
    query,
+   orderBy,
    limit,
 } from '@angular/fire/firestore';
 
@@ -28,17 +28,6 @@ export class FilmService {
    constructor(private firestore: Firestore) {}
 
    // GET: all films from firestore database
-   // this method uses 'from' to convert the promise returned by 'getDocs' into an observable and then uses 'map' to transform the data
-   getFilms(collectionName: string): Observable<object[]> {
-      // creates a reference to the collection
-      const myCollection = collection(this.firestore, collectionName);
-      return from(getDocs(myCollection)).pipe(
-         map((querySnapshot) => {
-            return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-         })
-      );
-   }
-
    // this function retrieves all documents from a specified Firestore collection and transforms them into an array of film objects.
    getAllFilms(): Observable<Film[]> {
       // name of the collection within the database
@@ -73,9 +62,10 @@ export class FilmService {
    }
 
    // GET: an individual film by ID - returns an observable
-   getFilm(id: string): Observable<Film | Error> {
+   getFilmById(id: string): Observable<Film | Error> {
+      // comment here
       const collectionName = 'films';
-      // create a reference to the collection
+      // create a reference to the films collection
       const docRef = doc(this.firestore, collectionName, id);
       return from(getDoc(docRef)).pipe(
          map((docSnapshot) => {
@@ -99,73 +89,67 @@ export class FilmService {
       );
    }
 
-   // GET: an individual film by ID
-   async getFilmById(collectionName: string, docId: string) {
-      // creates a reference to the collection
-      const myDocRef = doc(this.firestore, collectionName, docId);
-      const docSnap = await getDoc(myDocRef);
-      if (docSnap.exists()) {
-         console.log('Document data:', docSnap.data());
-         return docSnap.data();
-      } else {
-         // doc.data() will be undefined in this case
-         console.log('No such document!');
-         return null;
-      }
-   }
-
    // GET: film count from database
-   async getFilmCount(collectionName: string): Promise<number> {
-      // creates a reference to the specified collection in firestore
+   getFilmCount(): Observable<number> {
+      const collectionName = 'films';
       const myCollection = collection(this.firestore, collectionName);
-      // retrieves all documents from the collection
-      const queryShapshot = await getDocs(myCollection);
-      // returns the count of documents
-      return queryShapshot.size;
+      return from(getDocs(myCollection)).pipe(
+         map((querySnapshot) => {
+            return querySnapshot.size;
+         })
+      );
    }
 
    // GET: recently 10 most recented added films from database
-   async getRecentlyCreatedFilms(collectionName: string): Promise<object[]> {
-      // creates a reference to the specified collection in firestore
+   getRecentlyCreatedFilms(): Observable<Film[]> {
+      // specifies the collection name
+      const collectionName = 'films';
+      // creates a collection reference
       const myCollection = collection(this.firestore, collectionName);
-      // creates a query that orders the documents by a 'createdAt' field in descending order (newest first) and limits the results to 10
+
+      // builds a query using the query method
       const q = query(myCollection, orderBy('createdAt', 'desc'), limit(10));
-      // executes the query and retrieves the documents
-      const queryShapshot = await getDocs(q);
-      // extracts the documents data and ID into an array
-      return queryShapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      // retrieves the documents using getDocs
+      return from(getDocs(q)).pipe(
+         map((querySnapshot) => {
+            return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Film));
+         })
+      );
    }
 
    // SAVE METHODS
 
-   // add new film to firestore database
-   async addFilm(data: unknown) {
+   // ADD METHOD - RETURNS OBSERVABLE
+   addFilm(data: Film): Observable<Film> {
       const collectionName = 'films';
       const myCollection = collection(this.firestore, collectionName);
-      // adds a new document to a collection with an auto-generated ID
-      const docRef = await addDoc(myCollection, data);
-      console.log('Document written with ID: ', docRef.id);
-      return docRef.id; // return the document ID
+
+      return from(addDoc(myCollection, data)).pipe(
+         map((docRef) => {
+            // check if data alread has an id property
+            if (data.id) {
+               return data; // if it does, just return the data as is
+            } else {
+               // use object.assign to avoid overwriting
+               return Object.assign({}, data, { id: docRef.id });
+            }
+         })
+      );
    }
 
-   async deleteFilmById(collectionName: string, docId: string) {
-      // the doc method creates a reference to a specific document within a firestore collection
-      const myDocRef = doc(this.firestore, collectionName, docId);
-
-      // Deletes the document referred to by the specified DocumentReference.
-      await deleteDoc(myDocRef)
-         .then(() => console.log('Document successfully deleted!'))
-         .catch((error) => console.error('Error removing document: ', error));
-   }
-
-   // update a film in firestore database
-   async updateFilmById(docId: string, data: object) {
+   // DELETE METHOD - RETURNS OBSERVABLE
+   deleteFilmById(docId: string): Observable<void> {
       const collectionName = 'films';
-      // use the doc() method creates a reference to a specific document within a firestore collection
+      // comment here
       const myDocRef = doc(this.firestore, collectionName, docId);
+      // use the from method to convert promise returned by deleteDoc into an observable
+      return from(deleteDoc(myDocRef));
+   }
 
-      await updateDoc(myDocRef, data)
-         .then(() => console.log('Document successfully updated'))
-         .catch((error) => console.error('Error updating document: ', error));
+   // UPDATE METHOD - RETURNS OBSERVABLE
+   updateFilmById(collectionName: string, docId: string, data: Partial<Film>): Observable<void> {
+      const myDocRef = doc(this.firestore, collectionName, docId);
+      return from(updateDoc(myDocRef, data));
    }
 }

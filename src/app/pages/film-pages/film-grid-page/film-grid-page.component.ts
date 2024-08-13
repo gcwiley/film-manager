@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
 
-// import the film service
-import { FilmService } from '../../../services/film.service';
+// import angular material
+import { MatDividerModule } from '@angular/material/divider';
+
+// import the shared components
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../../shared';
+
+// import the film grid component
+import { FilmGridComponent } from '../../../films';
 
 @Component({
    selector: 'app-film-grid-page',
    templateUrl: './film-grid-page.component.html',
    styleUrl: './film-grid-page.component.scss',
    standalone: true,
-   imports: [],
+   imports: [MatDividerModule, NavbarComponent, AnnouncementBannerComponent, FooterComponent, FilmGridComponent],
 })
 export class FilmGridPageComponent {
-   // create the member variables
-   films: object[] = [];
-
-   constructor(private filmService: FilmService) {}
-
-   getFilms(): void {
-      this.filmService.getAllDocsAsObservable('films').subscribe((films) => {
-         this.films = films;
-      });
-   }
+   text = 'this is a test!'
 }

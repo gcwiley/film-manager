@@ -40,7 +40,7 @@ export class FilmFormComponent implements OnInit {
    formBuilder = inject(FormBuilder);
 
    public mode = 'create';
-   private id!: string | null;
+   private id!: string;
    private film!: Film;
 
    constructor(private router: Router, public route: ActivatedRoute, private filmService: FilmService) {}
@@ -60,7 +60,7 @@ export class FilmFormComponent implements OnInit {
          if (paramMap.has('id')) {
             this.mode = 'edit';
             this.id = paramMap.get('id');
-            this.filmService.getFilmById(this.id).then((film) => {
+            this.filmService.getFilmById(this.id).subscribe((film) => {
                this.film = film;
                // overrides values of initial form controls
                this.filmForm.setValue({

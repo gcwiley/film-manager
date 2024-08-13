@@ -2,3 +2,7 @@
 
 2. Set up film table
 
+3. finish issue service
+
+4. color palette
+

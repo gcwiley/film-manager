@@ -77,7 +77,7 @@ export class FilmTableComponent implements AfterViewInit {
 
    // get all films from film service
    getFilms(): void {
-      this.filmService.getFilms().subscribe((films) => {
+      this.filmService.getAllFilms().subscribe((films) => {
          this.dataSource.data = films;
          this.isLoadingResults = false;
       });
@@ -94,7 +94,7 @@ export class FilmTableComponent implements AfterViewInit {
 
    // deletes a film
    onDeleteFilm(id: string): void {
-      this.filmService.deleteFilm(id).subscribe(() => {
+      this.filmService.deleteFilmById(id).subscribe(() => {
          // navigates admin back to the admin page
          this.router.navigateByUrl('/admin');
       });

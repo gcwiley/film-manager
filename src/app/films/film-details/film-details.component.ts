@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 // import the angular material modules
 import { MatListModule } from '@angular/material/list';
 
-// import the film type
+// import the film interface
 import { Film } from '../../types/film.interface';
 
 // import the film service
@@ -19,7 +19,7 @@ import { FilmService } from '../../services/film.service';
    imports: [CommonModule, MatListModule],
 })
 export class FilmDetailsComponent implements OnInit {
-   film!: Film | undefined;
+   film!: Film;
 
    constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 
@@ -27,8 +27,17 @@ export class FilmDetailsComponent implements OnInit {
       this.getFilm();
    }
 
-   // get film by id
+   // GET film by id
    getFilm(): void {
-      window.alert('Get Film')
+      const id = this.route.snapshot.paramMap.get('id')!;
+      this.filmService.getFilmById(id).subscribe((film) => {
+         // check if the returned value is an error before assigning it to this.film
+         if (film instanceof Error) {
+            // handle the error, e.g. display an error message
+            console.error(film.message);
+         } else {
+            this.film = film;
+         }
+      });
    }
 }

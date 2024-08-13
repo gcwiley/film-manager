@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { RouterModule } from '@angular/router';
 
 // import the angular material modules
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,8 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FilmService } from '../../services/film.service';
 
 // import the film interface
-import { RouterModule } from '@angular/router';
-import { SimpleTruncatePipe } from '../../pipes';
+import { Film } from '../../types/film.interface';
 
 @Component({
    selector: 'app-film-grid',
@@ -27,12 +27,11 @@ import { SimpleTruncatePipe } from '../../pipes';
       MatCardModule,
       MatIconModule,
       MatButtonModule,
-      SimpleTruncatePipe,
    ],
 })
 export class FilmGridComponent implements OnInit {
    // create thge member variables
-   films: object[] = [];
+   films: Film[] = [];
 
    cols = 5;
    rowHeight = '1:1';
