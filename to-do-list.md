@@ -6,3 +6,5 @@
 
 4. color palette
 
+5. recent films component
+
