@@ -11,7 +11,6 @@ import { IssueService } from '../../services/issue.service';
 // import the issue interface
 import { Issue } from '../../types/issue.interface';
 
-
 @Component({
   selector: 'app-recent-issues',
   templateUrl: './recent-issues.component.html',
@@ -20,11 +19,17 @@ import { Issue } from '../../types/issue.interface';
   imports: [CommonModule, MatListModule, MatIconModule],
 })
 export class RecentIssuesComponent implements OnInit {
+  // declare the variable!
   recentIssues!: Issue[];
 
+  // comment here
   constructor(private issueService: IssueService) {}
 
+  ngOnInit(): void {
+    this.getRecentIssues()
+  }
+
   getRecentIssues(): void {
-    this.issueService
+    this.issueService.getRecentlyCreatedIssues()
   }
 }

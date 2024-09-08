@@ -93,5 +93,53 @@ export class IssueService {
       );
    }
 
-   
+   // GET 10 most recently added issues from database
+   getRecentlyCreatedIssues(): Observable<Issue[]> {
+      // specifies the collection name
+      const collectionName = 'issues';
+      // creates a collection reference
+      const myCollection = collection(this.firestore, collectionName);
+      // builds a query using the query method
+      const q = query(myCollection, orderBy('created', 'desc'), limit(10));
+      // retrieves the documents using getDocs
+      return from(getDocs(q)).pipe(
+         map((querySnapshot) => {
+            return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Issue));
+         })
+      );
+   }
+
+   // SAVE METHODS
+
+   // ADD METHOD - RETURNS OBSERVABLE
+   addIssue(data: Issue): Observable<Issue> {
+      const collectionName = 'issues';
+      const myCollection = collection(this.firestore, collectionName);
+      return from(addDoc(myCollection, data)).pipe(
+         map((docRef) => {
+            // check if data already has an id property
+            if (data.id) {
+               return data; // if it does, just return the data as is
+            } else {
+               // use object.assign to avoid overwriting
+               return Object.assign({}, data, { id: docRef.id });
+            }
+         })
+      );
+   }
+
+   // DELETE METHOD - RETURN OBSERVABLE
+   deleteIssueById(docId: string): Observable<void> {
+      const collectionName = 'films';
+      // comment here
+      const myDocRef = doc(this.firestore, collectionName, docId);
+      // use the from method to convert promise returned by deleteDoc into an observable
+      return from(deleteDoc(myDocRef));
+   }
+
+   // UPDATE METHOD - RETURNS OBSERVABLE
+   updateIssueById(collectionName: string, docId: string, data: Partial<Issue>): Observable<void> {
+      const myDocRef = doc(this.firestore, collectionName, docId);
+      return from(updateDoc(myDocRef, data));
+   }
 }

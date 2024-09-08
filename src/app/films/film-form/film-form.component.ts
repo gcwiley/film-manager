@@ -81,12 +81,12 @@ export class FilmFormComponent implements OnInit {
 
    onSaveFilm(): void {
       if (this.mode === 'create') {
-         this.filmService.addFilm(this.filmForm.value).then(() => {
+         this.filmService.addFilm(this.filmForm.value).subscribe(() => {
             // navigates user back to the homepage
             this.router.navigateByUrl('/')
          })
       } else {
-         this.filmService.updateFilmById(this.id, this.filmForm.value).then(() => {
+         this.filmService.updateFilmById(this.id, this.filmForm.value).subscribe(() => {
             // navigates user back to the homepage
             this.router.navigateByUrl('/')
          })

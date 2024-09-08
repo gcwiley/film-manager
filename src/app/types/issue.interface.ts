@@ -1,6 +1,6 @@
 // define the issue interface
 export interface Issue {
-    _id?: string;
+    id: string;
     title: string;
     category: string;
     status: string;

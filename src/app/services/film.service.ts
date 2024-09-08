@@ -100,16 +100,14 @@ export class FilmService {
       );
    }
 
-   // GET: recently 10 most recented added films from database
+   // GET: 10 most recented added films from database
    getRecentlyCreatedFilms(): Observable<Film[]> {
       // specifies the collection name
       const collectionName = 'films';
       // creates a collection reference
       const myCollection = collection(this.firestore, collectionName);
-
       // builds a query using the query method
       const q = query(myCollection, orderBy('createdAt', 'desc'), limit(10));
-
       // retrieves the documents using getDocs
       return from(getDocs(q)).pipe(
          map((querySnapshot) => {
@@ -124,10 +122,9 @@ export class FilmService {
    addFilm(data: Film): Observable<Film> {
       const collectionName = 'films';
       const myCollection = collection(this.firestore, collectionName);
-
       return from(addDoc(myCollection, data)).pipe(
          map((docRef) => {
-            // check if data alread has an id property
+            // check if data already has an id property
             if (data.id) {
                return data; // if it does, just return the data as is
             } else {

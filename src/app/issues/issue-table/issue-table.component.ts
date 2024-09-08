@@ -76,7 +76,7 @@ export class IssueTableComponent implements AfterViewInit {
 
    // gets all issues from issue service
    getIssues(): void {
-      this.issueService.getIssues().subscribe(() => {
+      this.issueService.getAllIssues().subscribe(() => {
          this.dataSource.data = issues;
       });
    }
@@ -92,7 +92,7 @@ export class IssueTableComponent implements AfterViewInit {
 
    // deletes an issue
    onDeleteIssue(id: string): void {
-      this.issueService.deleteIssue(id).subscribe(() => {
+      this.issueService.updateIssueById(id).subscribe(() => {
          // navigates admin back to the admin page
          this.router.navigateByUrl('/film');
       });
