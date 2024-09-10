@@ -1,4 +1,4 @@
-// comment here
+// import the config function
 import { ApplicationConfig } from '@angular/core';
 
 // import the router helper function
