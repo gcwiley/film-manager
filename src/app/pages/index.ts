@@ -1,4 +1,5 @@
 export { AboutPageComponent } from "./about-page/about-page.component";
+export { ErrorPageComponent } from "./error-page/error-page.component";
 export { FeedbackPageComponent } from "./feedback-page/feedback-page.component";
 export { FilmCreatePageComponent, FilmDetailsPageComponent, FilmGridPageComponent } from "./film-pages";
 export { IssuesPageComponent } from "./issues-page/issues-page.component";

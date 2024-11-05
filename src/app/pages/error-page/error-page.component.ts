@@ -5,9 +5,9 @@ import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '.
 
 @Component({
    standalone: true,
-   selector: 'app-about-page',
-   templateUrl: './about-page.component.html',
-   styleUrl: './about-page.component.scss',
+   selector: 'app-error-page',
+   templateUrl: './error-page.component.html',
+   styleUrl: './error-page.component.scss',
    imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent],
 })
-export class AboutPageComponent {}
+export class ErrorPageComponent {}
