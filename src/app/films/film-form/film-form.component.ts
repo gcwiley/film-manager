@@ -1,7 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +23,6 @@ import { Film } from '../../types/film.interface';
    styleUrl: './film-form.component.scss',
    standalone: true,
    imports: [
-      CommonModule,
       MatCardModule,
       MatButtonModule,
       MatFormFieldModule,
@@ -32,64 +30,37 @@ import { Film } from '../../types/film.interface';
       MatSelectModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      FormsModule,
-      ReactiveFormsModule,
    ],
 })
 export class FilmFormComponent implements OnInit {
-   formBuilder = inject(FormBuilder);
+   filmForm!: FormGroup;
+   filmId!: string;
 
-   public mode = 'create';
-   private id!: string;
-   private film!: Film;
-
-   constructor(private router: Router, public route: ActivatedRoute, private filmService: FilmService) {}
-
-   // create the film form
-   filmForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      director: ['', Validators.required],
-      releaseDate: ['', Validators.required],
-      genre: ['', Validators.required],
-      summary: ['', Validators.required],
-   });
+   constructor(
+      private formBuilder: FormBuilder,
+      private filmService: FilmService,
+      private route: ActivatedRoute,
+      private router: Router
+   ) {}
 
    ngOnInit(): void {
-      // find out if we have an "id" or not
-      this.route.paramMap.subscribe((paramMap: ParamMap) => {
-         if (paramMap.has('id')) {
-            this.mode = 'edit';
-            this.id = paramMap.get('id');
-            this.filmService.getFilmById(this.id).subscribe((film) => {
-               this.film = film;
-               // overrides values of initial form controls
-               this.filmForm.setValue({
-                  // set value for every form control
-                  title: this.film.title,
-                  director: this.film.director,
-                  releaseDate: this.film.releaseDate,
-                  genre: this.film.genre,
-                  summary: this.film.summary,
-               });
-            });
-         } else {
-            this.mode = 'create';
-            this.id = null;
-         }
-      });
+      // get film id from route
+      this.filmId = this.route.snapshot.paramMap.get('id'!);
+      this.filmService.getFilmById(this.filmId).subscribe((film) => {
+         this.createForm(film)
+      })
    }
 
-   onSaveFilm(): void {
-      if (this.mode === 'create') {
-         this.filmService.addFilm(this.filmForm.value).subscribe(() => {
-            // navigates user back to the homepage
-            this.router.navigateByUrl('/')
-         })
-      } else {
-         this.filmService.updateFilmById(this.id, this.filmForm.value).subscribe(() => {
-            // navigates user back to the homepage
-            this.router.navigateByUrl('/')
-         })
-      }
+   // comment
+   createForm(film: Film): void {
+      this.filmForm = this.formBuilder.group({
+         title: [film.title, Validators.required],
+         director: [film.director, Validators.required],
+         releaseDate: [film.releaseDate, Validators.required],
+         genre: [film.genre, Validators.required],
+         summary: [film.summary, Validators.required]
+      })
    }
+
+  
 }

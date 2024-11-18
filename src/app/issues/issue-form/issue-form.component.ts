@@ -19,7 +19,7 @@ import { IssueService } from '../../services/issue.service';
 import { Issue, IssueStatus, IssueCategory } from '../../types/issue.interface';
 
 // import the issue data values
-import { ISSUE_CATEGORY, ISSUE_STATUS } from '../../../assets/data/issue-data';
+import { ISSUE_CATEGORY, ISSUE_STATUS } from '../../../assets/issue-data';
 
 @Component({
    selector: 'app-issue-form',
@@ -68,7 +68,7 @@ export class IssueFormComponent implements OnInit {
          if (paramMap.has('id')) {
             this.mode = 'edit';
             this.id = paramMap.get('id');
-            this.issueService.getIssue(this.id).subscribe((issue) => {
+            this.issueService.getIssueById(this.id).subscribe((issue) => {
                this.issue = issue;
                // overrides values of initial form controls
                this.issueForm.setValue({
@@ -93,7 +93,7 @@ export class IssueFormComponent implements OnInit {
             this.router.navigateByUrl('/');
          });
       } else {
-         this.issueService.updateIssue(this.issueForm.value).subscribe(() => {
+         this.issueService.updateIssueById(this.issueForm.value).subscribe(() => {
             // navigates user back to homepage
             this.router.navigateByUrl('/');
          });

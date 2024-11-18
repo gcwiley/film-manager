@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 // import the pages
 import {
    AboutPageComponent,
+   ErrorPageComponent,
    FeedbackPageComponent,
    FilmCreatePageComponent,
    FilmDetailsPageComponent,
@@ -16,8 +17,8 @@ import {
 } from './pages';
 
 export const routes: Routes = [
-    { path: '', component: HomePageComponent },
-    { path: 'about', component: AboutPageComponent },
+    { path: '', component: HomePageComponent, title: 'My Film App' },
+    { path: 'about', component: AboutPageComponent, title: 'About Page' },
     { path: 'issues', component: IssuesPageComponent },
     { path: 'feedback', component: FeedbackPageComponent },
     { path: 'reset-password', component: ResetPasswordPageComponent },
@@ -27,5 +28,6 @@ export const routes: Routes = [
     { path: 'films/:id', component: FilmDetailsPageComponent },
     { path: 'films/create', component: FilmCreatePageComponent },
     { path: 'films/edit/:id', component: FilmCreatePageComponent },
+    { path: 'error', component: ErrorPageComponent, title: "Error"},
     { path: '**', component: NotFoundPageComponent },
 ];

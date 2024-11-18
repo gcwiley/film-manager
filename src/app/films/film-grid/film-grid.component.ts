@@ -30,17 +30,16 @@ import { Film } from '../../types/film.interface';
    ],
 })
 export class FilmGridComponent implements OnInit {
-   // create thge member variables
+   // create the member variables
    films: Film[] = [];
 
    cols = 5;
    rowHeight = '1:1';
    gutterSize = '0px';
-
-   // comment here
    colspan = 1;
    rowspan = 1;
 
+   // inject the film service
    constructor(private filmService: FilmService, private breakpointObserver: BreakpointObserver) {}
 
    ngOnInit(): void {

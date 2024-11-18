@@ -145,8 +145,9 @@ export class FilmService {
    }
 
    // UPDATE METHOD - RETURNS OBSERVABLE
-   updateFilmById(collectionName: string, docId: string, data: Partial<Film>): Observable<void> {
-      const myDocRef = doc(this.firestore, collectionName, docId);
-      return from(updateDoc(myDocRef, data));
+   updateFilmById(filmId: string, updatedFilm: Film): Promise<void> {
+      const collectionName = 'films';
+      const filmRef = doc(this.firestore, collectionName, filmId);
+      return updateDoc(filmRef, updatedFilm);
    }
 }

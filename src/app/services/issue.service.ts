@@ -138,7 +138,8 @@ export class IssueService {
    }
 
    // UPDATE METHOD - RETURNS OBSERVABLE
-   updateIssueById(collectionName: string, docId: string, data: Partial<Issue>): Observable<void> {
+   updateIssueById(docId: string, data: Partial<Issue>): Observable<void> {
+      const collectionName = 'issues';
       const myDocRef = doc(this.firestore, collectionName, docId);
       return from(updateDoc(myDocRef, data));
    }

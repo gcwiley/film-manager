@@ -16,7 +16,9 @@ import {
 // import interface for focusable items
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 
-// import keycodes
+// import constants representing the keycodes for the left arrow, right arrow, and tab keys
+// this allows the components to easily refer to these keycodes when handling keyboard events, making the code
+// more readable and maintainable.
 import { LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 
 // import animation module

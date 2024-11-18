@@ -6,14 +6,11 @@ import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '.
 // import the film components
 import { FilmDetailsComponent, FilmDescriptionComponent } from '../../../films';
 
-// import the film service
-import { FilmService } from '../../../services/film.service';
-
 @Component({
+   standalone: true,
    selector: 'app-film-details-page',
    templateUrl: './film-details-page.component.html',
    styleUrl: './film-details-page.component.scss',
-   standalone: true,
    imports: [
       NavbarComponent,
       AnnouncementBannerComponent,
@@ -22,9 +19,4 @@ import { FilmService } from '../../../services/film.service';
       FilmDescriptionComponent,
    ],
 })
-export class FilmDetailsPageComponent {
-
-
-   // inject film service
-
-}
+export class FilmDetailsPageComponent {}

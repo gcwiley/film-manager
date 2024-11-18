@@ -1,0 +1,20 @@
+<div class="docs-homepage--featured-components docs-homepage-carousel-row">
+   <div class="docs-homepage-header">
+      <h2>Featured Films</h2>
+
+      <a mat-button routerLink="/components">
+         <mat-icon>chevron_right</mat-icon>
+      </a>
+   </div>
+   <app-carousel>
+      @for (film of films; track film) {
+      <a carousel-item class="carousel-item docs-featured-component-carousel-item" routerLink="/components/">
+         <div class="docs-container-img-container">
+            <img src="" alt="" role="presentation" />
+         </div>
+      </a>
+      } @empty {
+         <p>No films founds</p>
+      }
+   </app-carousel>
+</div>
