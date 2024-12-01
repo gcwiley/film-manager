@@ -9,11 +9,10 @@ import { Film } from '../../types/film.interface';
 import { FilmService } from '../../services/film.service';
 
 @Component({
-   selector: 'app-film-description',
-   templateUrl: './film-description.component.html',
-   styleUrl: './film-description.component.scss',
-   standalone: true,
-   imports: [NgIf],
+    selector: 'app-film-description',
+    templateUrl: './film-description.component.html',
+    styleUrl: './film-description.component.scss',
+    imports: [NgIf]
 })
 export class FilmDescriptionComponent implements OnInit {
    film!: Film;

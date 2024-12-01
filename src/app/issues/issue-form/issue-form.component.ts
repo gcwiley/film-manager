@@ -22,22 +22,21 @@ import { Issue, IssueStatus, IssueCategory } from '../../types/issue.interface';
 import { ISSUE_CATEGORY, ISSUE_STATUS } from '../../../assets/issue-data';
 
 @Component({
-   selector: 'app-issue-form',
-   templateUrl: './issue-form.component.html',
-   styleUrl: './issue-form.component.scss',
-   standalone: true,
-   imports: [
-      CommonModule,
-      MatCardModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-      MatDatepickerModule,
-      MatNativeDateModule,
-      FormsModule,
-      ReactiveFormsModule,
-   ],
+    selector: 'app-issue-form',
+    templateUrl: './issue-form.component.html',
+    styleUrl: './issue-form.component.scss',
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ]
 })
 export class IssueFormComponent implements OnInit {
    public mode = 'create';

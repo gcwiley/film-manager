@@ -18,19 +18,18 @@ import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
-   selector: 'app-film-form',
-   templateUrl: './film-form.component.html',
-   styleUrl: './film-form.component.scss',
-   standalone: true,
-   imports: [
-      MatCardModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-      MatDatepickerModule,
-      MatNativeDateModule,
-   ],
+    selector: 'app-film-form',
+    templateUrl: './film-form.component.html',
+    styleUrl: './film-form.component.scss',
+    imports: [
+        MatCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+    ]
 })
 export class FilmFormComponent implements OnInit {
    filmForm!: FormGroup;

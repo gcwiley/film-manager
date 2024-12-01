@@ -12,19 +12,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent, FooterComponent } from '../../shared';
 
 @Component({
-   selector: 'app-signup-page',
-   templateUrl: './signup-page.component.html',
-   styleUrl: './signup-page.component.scss',
-   standalone: true,
-   imports: [
-      MatCardModule,
-      MatInputModule,
-      MatFormFieldModule,
-      MatCheckboxModule,
-      MatButtonModule,
-      MatIconModule,
-      NavbarComponent,
-      FooterComponent,
-   ],
+    selector: 'app-signup-page',
+    templateUrl: './signup-page.component.html',
+    styleUrl: './signup-page.component.scss',
+    imports: [
+        MatCardModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
+        NavbarComponent,
+        FooterComponent,
+    ]
 })
 export class SignupPageComponent {}

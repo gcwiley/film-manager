@@ -31,21 +31,20 @@ import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
-   selector: 'app-film-table',
-   templateUrl: './film-table.component.html',
-   styleUrl: './film-table.component.scss',
-   standalone: true,
-   imports: [
-      CommonModule,
-      MatRippleModule,
-      MatTableModule,
-      MatIconModule,
-      MatButtonModule,
-      MatTooltipModule,
-      MatProgressSpinnerModule,
-      RouterModule,
-      MatPaginator,
-   ],
+    selector: 'app-film-table',
+    templateUrl: './film-table.component.html',
+    styleUrl: './film-table.component.scss',
+    imports: [
+        CommonModule,
+        MatRippleModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        RouterModule,
+        MatPaginator,
+    ]
 })
 export class FilmTableComponent implements AfterViewInit {
    // inject MatDialog
@@ -102,11 +101,10 @@ export class FilmTableComponent implements AfterViewInit {
 }
 
 @Component({
-   selector: 'app-film-table-dialog',
-   templateUrl: './film-table-dialog.html',
-   standalone: true,
-   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
-   changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-film-table-dialog',
+    templateUrl: './film-table-dialog.html',
+    imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilmTableDialogComponent {
    readonly dialogRef = inject(MatDialogRef<FilmTableDialogComponent>);

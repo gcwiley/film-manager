@@ -11,21 +11,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent, AnnouncementBannerComponent, CarouselComponent, FooterComponent, LogoComponent } from '../../shared';
 
 @Component({
-   selector: 'app-home-page',
-   templateUrl: './home-page.component.html',
-   styleUrl: './home-page.component.scss',
-   standalone: true,
-   imports: [
-      RouterModule,
-      MatCardModule,
-      MatButtonModule,
-      MatDividerModule,
-      MatIconModule,
-      LogoComponent,
-      NavbarComponent,
-      AnnouncementBannerComponent,
-      CarouselComponent,
-      FooterComponent,
-   ],
+    selector: 'app-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrl: './home-page.component.scss',
+    imports: [
+        RouterModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        LogoComponent,
+        NavbarComponent,
+        AnnouncementBannerComponent,
+        CarouselComponent,
+        FooterComponent,
+    ]
 })
 export class HomePageComponent {}

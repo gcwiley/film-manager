@@ -19,23 +19,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent, FooterComponent } from '../../shared';
 
 @Component({
-   standalone: true,
-   selector: 'app-signin-page',
-   templateUrl: './signin-page.component.html',
-   styleUrl: './signin-page.component.scss',
-   changeDetection: ChangeDetectionStrategy.OnPush,
-   imports: [
-      ReactiveFormsModule,
-      NgIf,
-      MatCardModule,
-      MatInputModule,
-      MatFormFieldModule,
-      MatCheckboxModule,
-      MatButtonModule,
-      MatIconModule,
-      NavbarComponent,
-      FooterComponent,
-   ],
+    selector: 'app-signin-page',
+    templateUrl: './signin-page.component.html',
+    styleUrl: './signin-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        ReactiveFormsModule,
+        NgIf,
+        MatCardModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
+        NavbarComponent,
+        FooterComponent,
+    ]
 })
 export class SigninPageComponent {
    // create the signin form with email and password fields

@@ -7,11 +7,9 @@ import { NavbarComponent, FooterComponent } from '../../../shared';
 import { FilmFormComponent, RecentFilmsComponent } from '../../../films/index';
 
 @Component({
-   selector: 'app-film-create-page',
-
-   templateUrl: './film-create-page.component.html',
-   styleUrl: './film-create-page.component.scss',
-   standalone: true,
-   imports: [NavbarComponent, FooterComponent, FilmFormComponent, RecentFilmsComponent],
+    selector: 'app-film-create-page',
+    templateUrl: './film-create-page.component.html',
+    styleUrl: './film-create-page.component.scss',
+    imports: [NavbarComponent, FooterComponent, FilmFormComponent, RecentFilmsComponent]
 })
 export class FilmCreatePageComponent {}

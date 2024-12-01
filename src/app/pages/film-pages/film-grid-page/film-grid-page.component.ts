@@ -10,11 +10,10 @@ import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '.
 import { FilmGridComponent } from '../../../films';
 
 @Component({
-   selector: 'app-film-grid-page',
-   templateUrl: './film-grid-page.component.html',
-   styleUrl: './film-grid-page.component.scss',
-   standalone: true,
-   imports: [MatDividerModule, NavbarComponent, AnnouncementBannerComponent, FooterComponent, FilmGridComponent],
+    selector: 'app-film-grid-page',
+    templateUrl: './film-grid-page.component.html',
+    styleUrl: './film-grid-page.component.scss',
+    imports: [MatDividerModule, NavbarComponent, AnnouncementBannerComponent, FooterComponent, FilmGridComponent]
 })
 export class FilmGridPageComponent {
    text = 'this is a test!'

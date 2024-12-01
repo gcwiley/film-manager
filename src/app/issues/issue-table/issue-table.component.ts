@@ -31,20 +31,19 @@ import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../types/issue.interface';
 
 @Component({
-   selector: 'app-issue-table',
-   templateUrl: './issue-table.component.html',
-   styleUrl: './issue-table.component.scss',
-   standalone: true,
-   imports: [
-      CommonModule,
-      MatRippleModule,
-      MatTableModule,
-      MatIconModule,
-      MatButtonModule,
-      MatTooltipModule,
-      MatProgressSpinnerModule,
-      RouterModule,
-   ],
+    selector: 'app-issue-table',
+    templateUrl: './issue-table.component.html',
+    styleUrl: './issue-table.component.scss',
+    imports: [
+        CommonModule,
+        MatRippleModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        RouterModule,
+    ]
 })
 export class IssueTableComponent implements AfterViewInit {
    // inject MatDialog
@@ -100,11 +99,10 @@ export class IssueTableComponent implements AfterViewInit {
 }
 
 @Component({
-   selector: 'app-issue-table-dialog',
-   templateUrl: './issue-table-dialog.html',
-   standalone: true,
-   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
-   changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-issue-table-dialog',
+    templateUrl: './issue-table-dialog.html',
+    imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IssueTableDialogComponent {
    readonly dialogRef = inject(MatDialogRef<IssueTableDialogComponent>);

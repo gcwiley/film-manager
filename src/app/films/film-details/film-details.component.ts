@@ -12,11 +12,10 @@ import { Film } from '../../types/film.interface';
 import { FilmService } from '../../services/film.service';
 
 @Component({
-   standalone: true,
-   selector: 'app-film-details',
-   templateUrl: './film-details.component.html',
-   styleUrl: './film-details.component.scss',
-   imports: [CommonModule, MatListModule],
+    selector: 'app-film-details',
+    templateUrl: './film-details.component.html',
+    styleUrl: './film-details.component.scss',
+    imports: [CommonModule, MatListModule]
 })
 export class FilmDetailsComponent implements OnInit {
    film!: Film;

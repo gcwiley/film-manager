@@ -16,18 +16,17 @@ import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
-   selector: 'app-film-grid',
-   templateUrl: './film-grid.component.html',
-   styleUrl: './film-grid.component.scss',
-   standalone: true,
-   imports: [
-      CommonModule,
-      RouterModule,
-      MatGridListModule,
-      MatCardModule,
-      MatIconModule,
-      MatButtonModule,
-   ],
+    selector: 'app-film-grid',
+    templateUrl: './film-grid.component.html',
+    styleUrl: './film-grid.component.scss',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatGridListModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+    ]
 })
 export class FilmGridComponent implements OnInit {
    // create the member variables

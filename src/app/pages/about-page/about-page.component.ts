@@ -4,10 +4,9 @@ import { Component } from '@angular/core';
 import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../shared/index';
 
 @Component({
-   standalone: true,
-   selector: 'app-about-page',
-   templateUrl: './about-page.component.html',
-   styleUrl: './about-page.component.scss',
-   imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent],
+    selector: 'app-about-page',
+    templateUrl: './about-page.component.html',
+    styleUrl: './about-page.component.scss',
+    imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent]
 })
 export class AboutPageComponent {}

@@ -12,11 +12,10 @@ import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
-   selector: 'app-recent-films',
-   templateUrl: './recent-films.component.html',
-   styleUrl: './recent-films.component.scss',
-   standalone: true,
-   imports: [CommonModule, MatListModule, MatIconModule],
+    selector: 'app-recent-films',
+    templateUrl: './recent-films.component.html',
+    styleUrl: './recent-films.component.scss',
+    imports: [CommonModule, MatListModule, MatIconModule]
 })
 export class RecentFilmsComponent implements OnInit {
    // declare the variable

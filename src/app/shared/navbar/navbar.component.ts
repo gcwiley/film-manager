@@ -9,10 +9,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LogoComponent } from '../logo/logo.component';
 
 @Component({
-   selector: 'app-navbar',
-   templateUrl: './navbar.component.html',
-   styleUrl: './navbar.component.scss',
-   standalone: true,
-   imports: [MatIconModule, MatButtonModule, MatMenuModule, LogoComponent],
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss',
+    imports: [MatIconModule, MatButtonModule, MatMenuModule, LogoComponent]
 })
 export class NavbarComponent {}

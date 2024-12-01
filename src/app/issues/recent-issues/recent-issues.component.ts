@@ -12,11 +12,10 @@ import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../types/issue.interface';
 
 @Component({
-  selector: 'app-recent-issues',
-  templateUrl: './recent-issues.component.html',
-  styleUrl: './recent-issues.component.scss',
-  standalone: true,
-  imports: [CommonModule, MatListModule, MatIconModule],
+    selector: 'app-recent-issues',
+    templateUrl: './recent-issues.component.html',
+    styleUrl: './recent-issues.component.scss',
+    imports: [CommonModule, MatListModule, MatIconModule]
 })
 export class RecentIssuesComponent implements OnInit {
   // declare the variable!

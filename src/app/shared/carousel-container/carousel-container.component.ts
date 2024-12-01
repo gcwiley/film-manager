@@ -14,11 +14,10 @@ import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
-  standalone: true,
-   selector: 'app-carousel-container',
-   templateUrl: './carousel-container.component.html',
-   styleUrl: './carousel-container.component.scss',
-   imports: [MatIconModule, MatButtonModule, CarouselComponent, CarouselItemDirective],
+    selector: 'app-carousel-container',
+    templateUrl: './carousel-container.component.html',
+    styleUrl: './carousel-container.component.scss',
+    imports: [MatIconModule, MatButtonModule, CarouselComponent, CarouselItemDirective]
 })
 export class CarouselContainerComponent implements OnInit {
 
