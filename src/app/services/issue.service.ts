@@ -15,10 +15,11 @@ import {
    limit,
 } from '@angular/fire/firestore';
 
-import { Observable, from, map } from 'rxjs';
+// import the rxjs functions
+import { Observable, from, map, switchMap } from 'rxjs';
 
-// import the issue interface
-import { Issue } from '../types/issue.interface';
+// import the issue DTOs
+import { IssueDto, IssueInputDto } from '../shared/dto/issue.dto';
 
 @Injectable({
    providedIn: 'root',
@@ -56,7 +57,7 @@ export class IssueService {
    }
 
    // GET an individual issue by ID
-   getIssueById(id: string): Observable<Issue | Error> {
+   getIssueByIdTest(id: string): Observable<Issue | Error> {
       // name of collection
       const collectionName = 'issues';
       // create a reference to issue collection
@@ -128,19 +129,27 @@ export class IssueService {
       );
    }
 
-   // DELETE METHOD - RETURN OBSERVABLE
-   deleteIssueById(docId: string): Observable<void> {
-      const collectionName = 'films';
-      // comment here
-      const myDocRef = doc(this.firestore, collectionName, docId);
-      // use the from method to convert promise returned by deleteDoc into an observable
-      return from(deleteDoc(myDocRef));
+   // get issue by id
+   public getIssueById(id: string): Observable<IssueDto> {
+      // gets the reference to the doc by it's id
+      const ref = doc(this.firestore, 'issues', id);
+      // comment
+      return from(getDoc(ref)).pipe(map((doc) => ({ id, ...doc.data() } as IssueDto)));
    }
 
-   // UPDATE METHOD - RETURNS OBSERVABLE
-   updateIssueById(docId: string, data: Partial<Issue>): Observable<void> {
-      const collectionName = 'issues';
-      const myDocRef = doc(this.firestore, collectionName, docId);
-      return from(updateDoc(myDocRef, data));
+   // delete a issue by id
+   public deleteIssueById(id: string): Observable<void> {
+      // gets the reference to the doc(issue) by it's id
+      const ref = doc(this.firestore, 'issues', id);
+      // deletes the document in the database by it's id
+      return from(deleteDoc(ref)).pipe(map(() => undefined));
+   }
+
+   // update a issue by id
+   public updateIssueById(id: string, body: Partial<IssueDto>): Observable<IssueDto> {
+      // gets the reference to the doc by it's id
+      const ref = doc(this.firestore, 'issues', id);
+      // updates fields in document
+      return from(updateDoc(ref, { ...body })).pipe(switchMap(() => this.getIssueById(id)));
    }
 }

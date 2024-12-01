@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { from } from 'rxjs';
+
+// import firebase auth
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -14,14 +18,12 @@ import { MatIconModule } from '@angular/material/icon';
 // import the shared components
 import { NavbarComponent, FooterComponent } from '../../shared';
 
-// import the auth service
-import { AuthService } from '../../services/auth.service';
-
 @Component({
+   standalone: true,
    selector: 'app-signin-page',
    templateUrl: './signin-page.component.html',
    styleUrl: './signin-page.component.scss',
-   standalone: true,
+   changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
       ReactiveFormsModule,
       NgIf,
@@ -36,28 +38,30 @@ import { AuthService } from '../../services/auth.service';
    ],
 })
 export class SigninPageComponent {
-   year = new Date().getFullYear();
-
-   // inject the router, form builder, and the auth service
-   constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) {}
-
    // create the signin form with email and password fields
-   signinForm = this.formBuilder.group({
-      email: [null, Validators.required, Validators.email],
-      password: [null, Validators.required],
+   public signinForm = this.formBuilder.nonNullable.group({
+      email: ['', Validators.required, Validators.email],
+      password: ['', Validators.required],
    });
 
-   // Sign in with email and password
-   // if successful, navigate admin to the main page
-   onSubmitSignIn() {
-      this.authService
-         .signInWithEmailAndPassword(this.signinForm.value.email ?? '', this.signinForm.value.password ?? '')
-         .then(() => {
-            // navigates user to the main page
-            this.router.navigateByUrl('/');
-         })
-         .catch((error) => {
-            window.alert(error.message);
-         });
+   // inject the router, form builder, and the auth service
+   constructor(private router: Router, private formBuilder: FormBuilder, private auth: Auth) {}
+
+   // Sign in with email and password, if successful, navigates admin to the main page
+   public onSubmitSignIn(): void {
+      // error checking code
+      if (this.signinForm.invalid) {
+         return;
+      }
+
+      from(
+         signInWithEmailAndPassword(
+            this.auth,
+            this.signinForm.controls.email.value,
+            this.signinForm.controls.password.value
+         )
+      ).subscribe(() => {
+         this.router.navigate(['/']);
+      });
    }
 }

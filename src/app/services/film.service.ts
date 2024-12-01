@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-// import firestore functions
+// import the firestore functions
 import {
    Firestore,
    collection,
@@ -15,10 +15,11 @@ import {
    limit,
 } from '@angular/fire/firestore';
 
-import { Observable, from, map } from 'rxjs';
+// import the rxjs functions
+import { Observable, from, map, switchMap } from 'rxjs';
 
-// import the film interface
-import { Film } from '../types/film.interface';
+// import the film DTO
+import { FilmDto, FilmInputDto } from '../shared/dto/film.dto';
 
 @Injectable({
    providedIn: 'root',
@@ -62,7 +63,7 @@ export class FilmService {
    }
 
    // GET: an individual film by ID - returns an observable
-   getFilmById(id: string): Observable<Film | Error> {
+   getFilmByIdTest(id: string): Observable<Film | Error> {
       // comment here
       const collectionName = 'films';
       // create a reference to the films collection
@@ -135,19 +136,26 @@ export class FilmService {
       );
    }
 
-   // DELETE METHOD - RETURNS OBSERVABLE
-   deleteFilmById(docId: string): Observable<void> {
-      const collectionName = 'films';
-      // comment here
-      const myDocRef = doc(this.firestore, collectionName, docId);
-      // use the from method to convert promise returned by deleteDoc into an observable
-      return from(deleteDoc(myDocRef));
+   // get film by id
+   public getFilmById(id: string): Observable<FilmDto> {
+      // gets the reference to the doc by it's id
+      const ref = doc(this.firestore, 'films', id);
+      // comment
+      return from(getDoc(ref)).pipe(map((doc) => ({ id, ...doc.data() } as FilmDto)));
    }
 
-   // UPDATE METHOD - RETURNS OBSERVABLE
-   updateFilmById(filmId: string, updatedFilm: Film): Promise<void> {
-      const collectionName = 'films';
-      const filmRef = doc(this.firestore, collectionName, filmId);
-      return updateDoc(filmRef, updatedFilm);
+   // delete a film by id
+   public deleteFilmById(id: string): Observable<void> {
+      // get the reference to the doc by it's id
+      const ref = doc(this.firestore, 'films', id);
+      // deletes the film in the database by it's id
+      return from(deleteDoc(ref)).pipe(map(() => undefined));
+   }
+
+   // update a film by id
+   public updateFilmById(id: string, body: Partial<FilmDto>): Observable<FilmDto> {
+      const ref = doc(this.firestore, 'films', id);
+      // updates field in document
+      return from(updateDoc(ref, { ...body })).pipe(switchMap(() => this.getFilmById(id)))
    }
 }
