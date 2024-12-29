@@ -10,31 +10,29 @@ import { CarouselComponent, CarouselItemDirective } from '../carousel/carousel.c
 // import the film service
 import { FilmService } from '../../services/film.service';
 
-// import the film interface 
+// import the film interface
 import { Film } from '../../types/film.interface';
 
 @Component({
-    selector: 'app-carousel-container',
-    templateUrl: './carousel-container.component.html',
-    styleUrl: './carousel-container.component.scss',
-    imports: [MatIconModule, MatButtonModule, CarouselComponent, CarouselItemDirective]
+   standalone: true,
+   selector: 'app-carousel-container',
+   templateUrl: './carousel-container.component.html',
+   styleUrl: './carousel-container.component.scss',
+   imports: [MatIconModule, MatButtonModule, CarouselComponent, CarouselItemDirective],
 })
 export class CarouselContainerComponent implements OnInit {
+   films: Film[] = [];
 
-  films: Film[] = [];
+   // inject the film service
+   constructor(private filmService: FilmService) {}
 
-  // inject the film service
-  constructor(private filmService: FilmService) {}
+   ngOnInit(): void {
+      this.getFilms();
+   }
 
-  ngOnInit(): void {
-    this.getFilms()
-  }
-
-  getFilms(): void {
-    this.filmService.getRecentlyCreatedFilms().subscribe((films) => {
-      this.films = films
-    })
-  }
-
-
+   getFilms(): void {
+      this.filmService.getRecentlyCreatedFilms().subscribe((films) => {
+         this.films = films;
+      });
+   }
 }

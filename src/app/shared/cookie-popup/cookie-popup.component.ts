@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-cookie-popup',
-    imports: [],
-    templateUrl: './cookie-popup.component.html',
-    styleUrl: './cookie-popup.component.scss'
+   standalone: true,
+   selector: 'app-cookie-popup',
+   templateUrl: './cookie-popup.component.html',
+   styleUrl: './cookie-popup.component.scss',
+   imports: [],
 })
-export class CookiePopupComponent {
-
-}
+export class CookiePopupComponent {}

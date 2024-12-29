@@ -3,10 +3,11 @@ import { interval, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Component({
-    selector: 'app-clock',
-    templateUrl: './clock.component.html',
-    styleUrl: './clock.component.scss',
-    imports: [DatePipe]
+   standalone: true,
+   selector: 'app-clock',
+   templateUrl: './clock.component.html',
+   styleUrl: './clock.component.scss',
+   imports: [DatePipe],
 })
 export class ClockComponent implements OnInit, OnDestroy {
    // stores the current time as a Date object

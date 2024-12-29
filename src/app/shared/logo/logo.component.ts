@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-logo',
-    imports: [],
-    templateUrl: './logo.component.html',
-    styleUrl: './logo.component.scss'
+   standalone: true,
+   selector: 'app-logo',
+   templateUrl: './logo.component.html',
+   styleUrl: './logo.component.scss',
+   imports: [],
 })
 export class LogoComponent {}
