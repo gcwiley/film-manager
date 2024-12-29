@@ -8,8 +8,8 @@ export interface ConfirmDialogData {
 }
 
 @Component({
-   selector: 'app-confirm-dialog',
    standalone: true,
+   selector: 'app-confirm-dialog',
    templateUrl: './confirm-dialog.component.html',
    styleUrl: './confirm-dialog.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,

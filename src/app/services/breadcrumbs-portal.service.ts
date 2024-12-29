@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Portal } from '../shared/dto/portal.dto';
+import { Portal } from '../dto/portal.dto';
 
 @Injectable({
    providedIn: 'root',

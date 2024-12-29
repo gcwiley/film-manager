@@ -19,7 +19,7 @@ import {
 import { Observable, from, map, switchMap } from 'rxjs';
 
 // import the issue DTOs
-import { IssueDto, IssueInputDto } from '../shared/dto/issue.dto';
+import { IssueDto, IssueInputDto } from '../dto/issue.dto';
 
 @Injectable({
    providedIn: 'root',

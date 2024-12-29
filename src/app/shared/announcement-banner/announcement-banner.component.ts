@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-announcement-banner',
-    imports: [],
-    templateUrl: './announcement-banner.component.html',
-    styleUrl: './announcement-banner.component.scss'
+   standalone: true,
+   selector: 'app-announcement-banner',
+   templateUrl: './announcement-banner.component.html',
+   styleUrl: './announcement-banner.component.scss',
+   imports: [],
 })
 export class AnnouncementBannerComponent {
    text = 'my film app is currently in development.';

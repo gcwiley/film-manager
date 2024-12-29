@@ -19,7 +19,7 @@ import {
 import { Observable, from, map, switchMap } from 'rxjs';
 
 // import the film DTO
-import { FilmDto, FilmInputDto } from '../shared/dto/film.dto';
+import { FilmDto, FilmInputDto } from '../dto/film.dto';
 
 @Injectable({
    providedIn: 'root',
