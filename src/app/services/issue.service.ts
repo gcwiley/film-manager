@@ -1,60 +1,76 @@
-import { Injectable } from '@angular/core';
-
-// import firestore
+import { Injectable, inject } from '@angular/core';
 import {
    Firestore,
-   collection,
+   QueryConstraint,
    addDoc,
+   collection,
    doc,
-   updateDoc,
-   deleteDoc,
-   getDocs,
    getDoc,
-   query,
-   orderBy,
+   getDocs,
    limit,
+   orderBy,
+   query,
+   updateDoc,
+   where,
 } from '@angular/fire/firestore';
-
-// import the rxjs functions
-import { Observable, from, map, switchMap } from 'rxjs';
-
-// import the issue DTOs
+import { deleteDoc } from 'firebase/firestore';
+import { Observable, combineLatest, from, map, switchMap } from 'rxjs';
+import { Pagination } from '../dto/pagination.dto';
 import { IssueDto, IssueInputDto } from '../dto/issue.dto';
+
+interface IssueListInput {
+   page: number;
+   limit: number;
+   sort: keyof IssueDto;
+   order: 'asc' | 'desc';
+   query: string;
+}
 
 @Injectable({
    providedIn: 'root',
 })
 export class IssueService {
-   // inject the firestore in the film service constructor
-   constructor(private firestore: Firestore) {}
+   private firestore: Firestore = inject(Firestore);
 
-   // Get all issues from firestore database
-   getAllIssues(): Observable<Issue[]> {
-      // name of the collection within the datebase
-      const collectionName = 'issues';
-      // create a reference to the firestore collection using the collection name and the firestore instance
-      const myCollection = collection(this.firestore, collectionName);
-      // comment here
-      return from(getDocs(myCollection)).pipe(
-         map((querySnapshot) => {
-            // this interates over each document (doc) in the querySnapshot and applies a transformation to each
-            return querySnapshot.docs.map((doc) => {
-               // this extracts the data from the document
-               const data = doc.data();
-               // this creates a issue object for each document, populating its properties with the data from the document and the document ID
-               return {
-                  id: doc.id,
-                  title: data['title'],
-                  category: data['category'],
-                  status: data['status'],
-                  description: data['description'],
-                  createdBy: data['createdBy'],
-                  updatedBy: data['updatedBy'],
-               };
+   // fetches a paginated list of issues from firestore based on the provided 'input'
+   public getIssues(input: IssueListInput): Observable<Pagination<IssueDto>> {
+      const issuesRef = collection(this.firestore, 'issues');
+
+      const queryConstraints: QueryConstraint[] = [orderBy(input.sort, input.order), limit(input.limit)];
+
+      if (input.query) {
+         queryConstraints.push(
+            where(input.sort, '>=', input.query.toLowerCase()),
+            where(input.sort, '<=', input.query.toLowerCase() + '\uf8ff')
+         );
+      }
+
+      const queryRef = query(issuesRef, ...queryConstraints);
+
+      const totalCounts$ = from(getDocs(issuesRef)).pipe(map((res) => res.size));
+      const items$ = from(getDocs(queryRef)).pipe(
+         map((res) => {
+            const arr: IssueDto[] = [];
+            res.forEach((doc) => {
+               const data = doc.data() as Omit<IssueDto, 'id'>;
+               arr.push({ id: doc.id, ...data });
             });
+            return arr;
+         })
+      );
+
+      return combineLatest([totalCounts$, items$]).pipe(
+         map(([totalCount, items]) => {
+            return {
+               items,
+               totalCount,
+            };
          })
       );
    }
+
+   // create a new issue in firestore - fix this!
+   public addIssue(issue: IssueInputDto): 
 
    // GET an individual issue by ID
    getIssueByIdTest(id: string): Observable<Issue | Error> {
@@ -96,7 +112,6 @@ export class IssueService {
 
    // GET 10 most recently added issues from database
    getRecentlyCreatedIssues(): Observable<Issue[]> {
-      // specifies the collection name
       const collectionName = 'issues';
       // creates a collection reference
       const myCollection = collection(this.firestore, collectionName);
@@ -131,25 +146,19 @@ export class IssueService {
 
    // get issue by id
    public getIssueById(id: string): Observable<IssueDto> {
-      // gets the reference to the doc by it's id
       const ref = doc(this.firestore, 'issues', id);
-      // comment
       return from(getDoc(ref)).pipe(map((doc) => ({ id, ...doc.data() } as IssueDto)));
    }
 
    // delete a issue by id
    public deleteIssueById(id: string): Observable<void> {
-      // gets the reference to the doc(issue) by it's id
       const ref = doc(this.firestore, 'issues', id);
-      // deletes the document in the database by it's id
       return from(deleteDoc(ref)).pipe(map(() => undefined));
    }
 
    // update a issue by id
    public updateIssueById(id: string, body: Partial<IssueDto>): Observable<IssueDto> {
-      // gets the reference to the doc by it's id
       const ref = doc(this.firestore, 'issues', id);
-      // updates fields in document
       return from(updateDoc(ref, { ...body })).pipe(switchMap(() => this.getIssueById(id)));
    }
 }
