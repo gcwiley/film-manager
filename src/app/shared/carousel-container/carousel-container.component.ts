@@ -31,8 +31,6 @@ export class CarouselContainerComponent implements OnInit {
    }
 
    getFilms(): void {
-      this.filmService.getRecentlyCreatedFilms().subscribe((films) => {
-         this.films = films;
-      });
+      this.filmService.getRecentlyCreatedFilms()
    }
 }

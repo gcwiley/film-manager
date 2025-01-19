@@ -15,8 +15,8 @@ import {
 } from '@angular/fire/firestore';
 import { deleteDoc } from 'firebase/firestore';
 import { Observable, combineLatest, from, map, switchMap } from 'rxjs';
-import { Pagination } from '../dto/pagination.dto';
-import { FilmDto, FilmInputDto } from '../dto/film.dto';
+import { Pagination } from '../types/pageination.interface';
+import { FilmDto, FilmInputDto } from '../types/film.interface';
 
 interface FilmListInput {
    page: number;
@@ -84,13 +84,13 @@ export class FilmService {
       );
    }
 
-   // fetches a single film from Firestore based on the provided id
+   // fetches a single film from firestore based on the provided id
    public getFilmById(id: string): Observable<FilmDto> {
       const ref = doc(this.firestore, 'films', id);
       return from(getDoc(ref)).pipe(map((doc) => ({ id, ...doc.data() } as FilmDto)));
    }
 
-   // deletes a film from Firestore based on the provided id
+   // deletes a film from firestore based on the provided id
    public deleteFilmById(id: string): Observable<void> {
       const ref = doc(this.firestore, 'posts', id);
       return from(deleteDoc(ref)).pipe(map(() => undefined));

@@ -57,8 +57,6 @@ export class FilmGridComponent implements OnInit {
          ])
          .subscribe((result) => {
             const breakpoints = result.breakpoints;
-
-            // check to see if viewport is in table portrait mode
             if (breakpoints[Breakpoints.TabletPortrait]) {
                this.cols = 1;
             } else if (breakpoints[Breakpoints.HandsetPortrait]) {
@@ -72,7 +70,7 @@ export class FilmGridComponent implements OnInit {
    }
 
    getFilms(): void {
-      this.filmService.getAllFilms().subscribe((films) => {
+      this.filmService.getFilms().subscribe((films) => {
          this.films = films;
       });
    }
