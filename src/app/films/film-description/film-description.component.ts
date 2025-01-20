@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 // import the film interface
-import { Film } from '../../types/film.interface';
+import { FilmDto } from '../../types/film.interface';
 
 // import the film service
 import { FilmService } from '../../services/film.service';
@@ -15,7 +15,7 @@ import { FilmService } from '../../services/film.service';
     imports: [NgIf]
 })
 export class FilmDescriptionComponent implements OnInit {
-   film!: Film;
+   film!: FilmDto;
 
    constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 

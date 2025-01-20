@@ -10,7 +10,6 @@
       <div class="header-start">
          <a mat-raised-button class="header-button" routerLink="film/create">Add Film</a>
       </div>
-      <app-logo class="homepage-logo" />
    </div>
 </header>
 
@@ -28,23 +27,6 @@
             <mat-icon matButtonIcon iconPositionEnd>chevron_right</mat-icon>
          </a>
       </div>
-
-      <!-- CAROUSEL -->
-      <!-- <app-carousel [aria-label]="'Featured projects'">
-         @for (project of recentProjects; track project) {
-         <mat-card carousel-item class="UPDATE!">
-            <mat-card-header>
-               <mat-card-title>{{ project.title }}</mat-card-title>
-            </mat-card-header>
-
-            <span class="flex-spacer"></span>
-
-            <mat-card-actions>
-               <a mat-button color="primary" routerLink="/project/{{ project._id }}">OPEN</a>
-            </mat-card-actions>
-         </mat-card>
-         }
-      </app-carousel> -->
    </div>
 </main>
 

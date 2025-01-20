@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 
 // import the shared components
-import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../../shared';
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../../components';
 
 // import the film grid component
 import { FilmGridComponent } from '../../../films';

@@ -15,7 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FilmService } from '../../services/film.service';
 
 // import the film interface
-import { Film } from '../../types/film.interface';
+import { FilmDto } from '../../types/film.interface';
 
 @Component({
     selector: 'app-film-form',
@@ -50,8 +50,8 @@ export class FilmFormComponent implements OnInit {
       })
    }
 
-   // comment
-   createForm(film: Film): void {
+   // create the film form
+   createForm(film: FilmDto): void {
       this.filmForm = this.formBuilder.group({
          title: [film.title, Validators.required],
          director: [film.director, Validators.required],

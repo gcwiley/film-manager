@@ -9,11 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-// import the film service
-import { FilmService } from '../../services/film.service';
-
-// import the film interface
-import { Film } from '../../types/film.interface';
+// import the api interface
+import { ApiService } from '../../services/api.service';
+import { FilmDto } from '../../types/film.interface';
 
 @Component({
     selector: 'app-film-grid',
@@ -29,8 +27,7 @@ import { Film } from '../../types/film.interface';
     ]
 })
 export class FilmGridComponent implements OnInit {
-   // create the member variables
-   films: Film[] = [];
+   films: FilmDto[] = [];
 
    cols = 5;
    rowHeight = '1:1';
@@ -39,7 +36,7 @@ export class FilmGridComponent implements OnInit {
    rowspan = 1;
 
    // inject the film service
-   constructor(private filmService: FilmService, private breakpointObserver: BreakpointObserver) {}
+   constructor(private filmService: ApiService, private breakpointObserver: BreakpointObserver) {}
 
    ngOnInit(): void {
       this.getFilms();

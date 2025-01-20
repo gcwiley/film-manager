@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // import the shared components
-import { NavbarComponent, FooterComponent } from '../../shared';
+import { NavbarComponent, FooterComponent } from '../../components';
 
 @Component({
    selector: 'app-signup-page',
@@ -49,7 +49,7 @@ export class SignupPageComponent {
       from(
          createUserWithEmailAndPassword(this.auth, this.form.controls.email.value, this.form.controls.password.value)
       ).subscribe(() => {
-         this.router.navigate(['/']);
+         this.router.navigateByUrl('/');
       });
    }
 }

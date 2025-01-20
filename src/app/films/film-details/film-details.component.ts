@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 
 // import the film interface
-import { Film } from '../../types/film.interface';
+import { FilmDto } from '../../types/film.interface';
 
 // import the film service
 import { FilmService } from '../../services/film.service';
@@ -18,7 +18,7 @@ import { FilmService } from '../../services/film.service';
     imports: [CommonModule, MatListModule]
 })
 export class FilmDetailsComponent implements OnInit {
-   film!: Film;
+   film!: FilmDto;
 
    constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 

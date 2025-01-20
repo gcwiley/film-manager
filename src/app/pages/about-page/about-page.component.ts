@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // import the shared components
-import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../shared/index';
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../components/index';
 
 @Component({
     selector: 'app-about-page',

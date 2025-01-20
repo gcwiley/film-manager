@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // import the shared components
-import { NavbarComponent, FooterComponent} from '../../shared'
+import { NavbarComponent, FooterComponent} from '../../components'
 
 
 @Component({

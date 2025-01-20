@@ -16,19 +16,27 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 // import the film dto
 import { FilmDto } from '../../types/film.interface';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 // import film service
 import { FilmService } from '../../services/film.service';
+// import breadcrumbsPortal Service
+import { BreadcrumbsPortalService } from '../../services/breadcrumbs-portal.service';
 // import angular material
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { combineLatest, debounceTime } from 'rxjs';
+
+// import rxjs helper functions
+import { getParamPage } from '../../rxjs/get-param-page';
+import { getParamQuery } from '../../rxjs/get-param-query';
+import { getParamSort } from '../../rxjs/get-param-sort';
 
 @Component({
    selector: 'app-film-table',
@@ -54,7 +62,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       MatTableModule,
       MatTooltipModule,
       PortalModule,
-      RouterLink,
    ],
 })
 export class FilmTableComponent implements OnInit, OnDestroy {
@@ -89,6 +96,8 @@ export class FilmTableComponent implements OnInit, OnDestroy {
    constructor(
       // uses filmservice to get data from it
       private filmService: FilmService,
+      // inject the service
+      private breadcrumbsPortalService: BreadcrumbsPortalService,
       // router instance is used to navigate to a new page
       private router: Router,
       // used to get the route params
@@ -98,6 +107,7 @@ export class FilmTableComponent implements OnInit, OnDestroy {
    ) {
       // effect method is used to automatically update the data when necessary
       effect(() => {
+         // get the film data
          this.filmService
             .getFilms({
                // the current page the user is
@@ -120,11 +130,107 @@ export class FilmTableComponent implements OnInit, OnDestroy {
 
    // this is a lifecycle hook in angular that gets called when a component is about to be destroyed. It's the place where you preform cleanup tasks
    public ngOnDestroy(): void {
-      // portals are a way to dynamically insert content into your application's view, outside of the normal component hierarchy. 
+      // portals are a way to dynamically insert content into your application's view, outside of the normal component hierarchy.
       // detach method removes the portal's content from the view.
       this.portalContent?.detach();
    }
 
+   public ngOnInit(): void {
+      setTimeout(() => {
+         this.breadcrumbsPortalService.setPortal(this.portalContent); // set the portal
+         this.cdr.detectChanges(); // detect changes
+      });
+      // get the params
+      combineLatest([
+         this.route.queryParamMap.pipe(getParamPage()),
+         this.route.queryParamMap.pipe(getParamQuery()),
+         this.route.queryParamMap.pipe(getParamSort()),
+      ])
+         .pipe(debounceTime(1000), takeUntilDestroyed(this.destroyRef))
+         .subscribe(([page, query, sort]) => {
+            this.query.set(query);
+            this.pageIndex.set(page.pageIndex || 1);
+            this.pageSize.set(page.pageSize || 5);
+            this.sortBy.set(sort.sortBy || 'id');
+            this.sortDirection.set(sort.sortDirection || 'asc');
+         });
+   }
+
    // comment
-   
+   public onSortChange(event: Sort): void {
+      this.setFilterstoRoute({
+         sortBy: event.active,
+         sortDirection: event.direction,
+         pageIndex: null,
+      });
+   }
+
+   // comment
+   public onPageChange(event: PageEvent): void {
+      let pageIndex = null;
+      if (event.pageSize === this.pageSize()) {
+         pageIndex = event.pageIndex + 1 > 1 ? event.pageIndex + 1 : null;
+      }
+      this.setFilterstoRoute({
+         pageIndex,
+         pageSize: event.pageSize,
+      });
+   }
+
+   // comment
+   public onQueryChange(event: Event): void {
+      const query = (event.target as HTMLInputElement).value;
+      this.setFilterstoRoute({
+         query: query ? encodeURIComponent(query) : null,
+         pageIndex: null,
+      });
+   }
+
+   // comment
+   public onQueryRemove(): void {
+      this.setFilterstoRoute({
+         query: null,
+         pageIndex: null,
+      });
+   }
+
+   // comment
+   public onClear(): void {
+      this.setFilterstoRoute({
+         query: null,
+         pageIndex: null,
+         pageSize: null,
+         sortBy: null,
+         sortDirection: null,
+      });
+   }
+
+   // expands rows to show more details
+   public onExpand(event: Event, element: FilmDto): void {
+      this.expandedElement = this.expandedElement === element ? null : element;
+      this.cdr.markForCheck(); // mark for check
+      event.stopPropagation(); // stop the event
+   }
+
+   // comment
+   public trackByFilmId(_: number, target: FilmDto): string {
+      // return the id
+      return target.id;
+   }
+
+   // comment
+   private setFilterstoRoute(queryParams?: Params | null): void {
+      // navigate to the route
+      this.router.navigate([], {
+         queryParams, // the params
+         queryParamsHandling: 'merge', // the query params
+         replaceUrl: true, // replace the url
+      });
+   }
+
+   // defines the onDeleted method
+   public onDeleted(id: string): void {
+      // update the data
+      this.data.update((value) => value.filter((i) => i.id !== id));
+   }
 }

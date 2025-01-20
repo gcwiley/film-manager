@@ -8,7 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 // import the shared components
-import { NavbarComponent, AnnouncementBannerComponent, CarouselComponent, FooterComponent, LogoComponent } from '../../shared';
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../components';
 
 @Component({
     selector: 'app-home-page',
@@ -20,10 +20,8 @@ import { NavbarComponent, AnnouncementBannerComponent, CarouselComponent, Footer
         MatButtonModule,
         MatDividerModule,
         MatIconModule,
-        LogoComponent,
         NavbarComponent,
         AnnouncementBannerComponent,
-        CarouselComponent,
         FooterComponent,
     ]
 })

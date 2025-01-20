@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // import the shared component
-import { NavbarComponent, FooterComponent } from '../../../shared';
+import { NavbarComponent, FooterComponent } from '../../../components';
 
 // import the film components
 import { FilmFormComponent, RecentFilmsComponent } from '../../../films/index';

@@ -9,26 +9,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { FilmService } from '../../services/film.service';
 
 // import the film interface
-import { Film } from '../../types/film.interface';
+import { FilmDto } from '../../types/film.interface';
 
 @Component({
-    selector: 'app-recent-films',
-    templateUrl: './recent-films.component.html',
-    styleUrl: './recent-films.component.scss',
-    imports: [CommonModule, MatListModule, MatIconModule]
+   selector: 'app-recent-films',
+   templateUrl: './recent-films.component.html',
+   styleUrl: './recent-films.component.scss',
+   imports: [CommonModule, MatListModule, MatIconModule],
 })
 export class RecentFilmsComponent implements OnInit {
    // declare the variable
-   recentFilms!: Film[];
+   recentFilms!: FilmDto[];
 
    constructor(private filmService: FilmService) {}
 
    ngOnInit(): void {
-      this.getRecentFilms()
+      this.getRecentFilms();
    }
 
    // gets recently created films
-   getRecentFilms(): void {
-      this.filmService.getRecentlyCreatedFilms()
-   }
+   getRecentFilms(): void {}
 }
