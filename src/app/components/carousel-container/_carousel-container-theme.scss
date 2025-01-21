@@ -2,14 +2,14 @@
 
 // color mixin
 @mixin color($theme) {
-   .error-page {
-      color: mat.get-theme-color($theme, secondary, 10);
+   .carousel-container {
+      color: mat.get-theme-color($theme, secondary, 20);
       background-color: mat.get-theme-color($theme, secondary, 20);
    }
 }
 // typography mixin
 @mixin typography($theme) {
-   .error-page {
+   .carousel-container {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }

@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-announcement-banner',
-  standalone: true,
-  imports: [],
-  templateUrl: './announcement-banner.component.html',
-  styleUrl: './announcement-banner.component.scss'
+   standalone: true,
+   selector: 'app-announcement-banner',
+   templateUrl: './announcement-banner.component.html',
+   styleUrl: './announcement-banner.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush,
+   imports: [],
 })
 export class AnnouncementBannerComponent {
-
+  text = "this site is currently in development."
 }

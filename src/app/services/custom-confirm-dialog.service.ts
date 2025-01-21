@@ -22,7 +22,7 @@ export class CustomConfirmDialogService {
    private getTitle(type: CustomConfirmDialog) {
       switch (type) {
          case CustomConfirmDialog.Delete:
-            return 'custom-confirm-dialog.delelte-post.content';
+            return 'custom-confirm-dialog.delelte-post.content - fix this!';
          case CustomConfirmDialog.UnsavedWork:
             return 'fix-this!';
          default:

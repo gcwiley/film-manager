@@ -2,7 +2,7 @@
 
 // color mixin
 @mixin color($theme) {
-   .navbar-header {
+   .navbar {
       color: mat.get-theme-color($theme, primary, 20);
       background-color: mat.get-theme-color($theme, primary, 80);
    }
@@ -10,7 +10,7 @@
 
 // typography mixin
 @mixin typography($theme) {
-   .navbar-header {
+   .navbar {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }

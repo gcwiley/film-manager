@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CdkPortal } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+// import rxjs
+import { first } from 'rxjs';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -10,56 +14,82 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import the film service
 import { FilmService } from '../../services/film.service';
+import { BreadcrumbsPortalService } from '../../services/breadcrumbs-portal.service';
 
 // import the film interface
-import { FilmDto } from '../../types/film.interface';
+import { FilmInputDto } from '../../types/film.interface';
 
 @Component({
-    selector: 'app-film-form',
-    templateUrl: './film-form.component.html',
-    styleUrl: './film-form.component.scss',
-    imports: [
-        MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-    ]
+   standalone: true,
+   selector: 'app-film-form',
+   templateUrl: './film-form.component.html',
+   styleUrl: './film-form.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush,
+   imports: [
+      MatCardModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      FormsModule,
+      ReactiveFormsModule,
+   ],
 })
 export class FilmFormComponent implements OnInit {
-   filmForm!: FormGroup;
-   filmId!: string;
+   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
 
    constructor(
       private formBuilder: FormBuilder,
       private filmService: FilmService,
-      private route: ActivatedRoute,
-      private router: Router
+      private breadcrumbsPortalService: BreadcrumbsPortalService,
+      private router: Router,
+      private snackbar: MatSnackBar,
+      private cdr: ChangeDetectorRef
    ) {}
 
-   ngOnInit(): void {
-      // get film id from route
-      this.filmId = this.route.snapshot.paramMap.get('id'!);
-      this.filmService.getFilmById(this.filmId).subscribe((film) => {
-         this.createForm(film)
-      })
-   }
-
    // create the film form
-   createForm(film: FilmDto): void {
-      this.filmForm = this.formBuilder.group({
-         title: [film.title, Validators.required],
-         director: [film.director, Validators.required],
-         releaseDate: [film.releaseDate, Validators.required],
-         genre: [film.genre, Validators.required],
-         summary: [film.summary, Validators.required]
-      })
+   filmForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      director: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      genre: ['', Validators.required],
+      summary: ['', Validators.required],
+   });
+
+   public ngOnInit(): void {
+      setTimeout(() => {
+         this.breadcrumbsPortalService.setPortal(this.portalContent);
+         this.cdr.markForCheck();
+      });
    }
 
-  
+   // save a new film
+   public onSaveFilm(): void {
+      this.filmService
+         .addFilm(this.filmForm.value as FilmInputDto)
+         .pipe(first())
+         .subscribe({
+            next: (film) => {
+               this.filmForm.reset(film);
+               this.snackbar.open('Success', 'Close');
+               // navigate user back to homepage
+               this.router.navigateByUrl('/');
+            },
+            error: () => {
+               this.snackbar.open('Error', 'Close');
+            },
+         });
+   }
+
+   // comment
+   public onReset(event: Event): void {
+      event.preventDefault();
+      this.filmForm.reset();
+   }
 }

@@ -31,7 +31,9 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+// comment
 import { combineLatest, debounceTime } from 'rxjs';
+import { FilmDeleteDirective } from '../../directives/film-delete.directive';
 
 // import rxjs helper functions
 import { getParamPage } from '../../rxjs/get-param-page';
@@ -39,6 +41,7 @@ import { getParamQuery } from '../../rxjs/get-param-query';
 import { getParamSort } from '../../rxjs/get-param-sort';
 
 @Component({
+   standalone: true,
    selector: 'app-film-table',
    templateUrl: './film-table.component.html',
    styleUrl: './film-table.component.scss',
@@ -62,6 +65,8 @@ import { getParamSort } from '../../rxjs/get-param-sort';
       MatTableModule,
       MatTooltipModule,
       PortalModule,
+      RouterLink,
+      FilmDeleteDirective,
    ],
 })
 export class FilmTableComponent implements OnInit, OnDestroy {

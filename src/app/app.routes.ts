@@ -1,29 +1,38 @@
 import { Routes } from '@angular/router';
 
-// import the pages
-import {
-   AboutPageComponent,
-   ErrorPageComponent,
-   FilmCreatePageComponent,
-   FilmDetailsPageComponent,
-   FilmGridPageComponent,
-   HomePageComponent,
-   NotFoundPageComponent,
-   ResetPasswordPageComponent,
-   SigninPageComponent,
-   SignupPageComponent
-} from './pages';
-
 export const routes: Routes = [
-    { path: '', component: HomePageComponent, title: 'My Film App' },
-    { path: 'about', component: AboutPageComponent, title: 'About Page' },
-    { path: 'reset-password', component: ResetPasswordPageComponent },
-    { path: 'signin', component: SigninPageComponent },
-    { path: 'signup', component: SignupPageComponent },
-    { path: 'films', component: FilmGridPageComponent },
-    { path: 'films/:id', component: FilmDetailsPageComponent },
-    { path: 'films/create', component: FilmCreatePageComponent },
-    { path: 'films/edit/:id', component: FilmCreatePageComponent },
-    { path: 'error', component: ErrorPageComponent, title: "Error"},
-    { path: '**', component: NotFoundPageComponent },
+   {
+      path: '',
+      pathMatch: 'full',
+      loadComponent: () => import('./pages/home-page/home-page.component').then((m) => m.HomePageComponent),
+   },
+   {
+      path: 'about',
+      loadComponent: () => import('./pages/about-page/about-page.component').then((m) => m.AboutPageComponent),
+   },
+   {
+      path: 'films',
+      loadComponent: () =>
+         import('./pages/film-pages/film-grid-page/film-grid-page.component').then((m) => m.FilmGridPageComponent),
+   },
+   {
+      path: 'create',
+      loadComponent: () =>
+         import('./pages/film-pages/film-create-page/film-create-page.component').then(
+            (m) => m.FilmCreatePageComponent
+         ),
+   },
+   {
+      path: 'signin',
+      loadComponent: () => import('./pages/signin-page/signin-page.component').then((m) => m.SigninPageComponent),
+   },
+   {
+      path: '404',
+      loadComponent: () =>
+         import('./pages/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
+   },
+   {
+      path: '**',
+      redirectTo: '/404',
+   },
 ];

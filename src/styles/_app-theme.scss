@@ -22,13 +22,13 @@
 @use '../app/pages/signup-page/signup-page-theme';
 
 // COMPONENT THEMES
-@use '../app/shared/announcement-banner/announcement-banner-theme';
-@use '../app/shared/carousel/carousel-theme';
-@use '../app/shared/cookie-popup/cookie-popup-theme';
-@use '../app/shared/footer/footer-theme';
-@use '../app/shared/logo/logo-theme';
-@use '../app/shared/navbar/navbar-theme';
-
+@use '../app//components/announcement-banner/announcement-banner-theme';
+@use '../app/components/carousel/carousel-theme';
+@use '../app/components/carousel-container/carousel-container-theme';
+@use '../app/components/confirm-dialog/confirm-dialog-theme';
+@use '../app/components/footer/footer-theme';
+@use '../app/components/logo/logo-theme';
+@use '../app/components/navbar/navbar-theme';
 
 // Styles for the app are based on the current theme
 @mixin theme($theme) {
@@ -54,10 +54,11 @@
    @include signin-page-theme.theme($theme);
    @include signup-page-theme.theme($theme);
 
-   // shared components themes
+   // components themes
    @include announcement-banner-theme.theme($theme);
    @include carousel-theme.theme($theme);
-   @include cookie-popup-theme.theme($theme);
+   @include carousel-container-theme.theme($theme);
+   @include confirm-dialog-theme.theme($theme);
    @include footer-theme.theme($theme);
    @include logo-theme.theme($theme);
    @include navbar-theme.theme($theme);

@@ -27,13 +27,7 @@ export class FilmDescriptionComponent implements OnInit {
    getFilm(): void {
       const id = this.route.snapshot.paramMap.get('id')!;
       this.filmService.getFilmById(id).subscribe((film) => {
-         // check if the returned value in an error before assigning it to this.film
-         if (film instanceof Error) {
-            // handle the error, e.g. display an error message
-            console.error(film.message)
-         } else {
-            this.film = film
-         }
+         this.film = film
       })
    }
 }

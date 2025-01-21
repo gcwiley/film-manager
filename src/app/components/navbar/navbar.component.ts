@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // import angular material
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
    templateUrl: './navbar.component.html',
    styleUrl: './navbar.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
-   imports: [MatIconModule, MatButtonModule, MatToolbarModule],
+   imports: [MatIconModule, MatButtonModule, MatToolbarModule, RouterModule],
 })
 export class NavbarComponent {}

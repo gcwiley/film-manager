@@ -2,14 +2,14 @@
 
 // color mixin
 @mixin color($theme) {
-   .error-page {
-      color: mat.get-theme-color($theme, secondary, 10);
+   .confirm-dialog {
+      color: mat.get-theme-color($theme, secondary, 20);
       background-color: mat.get-theme-color($theme, secondary, 20);
    }
 }
 // typography mixin
 @mixin typography($theme) {
-   .error-page {
+   .confirm-dialog {
       font: mat.get-theme-typography($theme, body-medium);
    }
 }

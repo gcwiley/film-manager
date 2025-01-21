@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { VERSION } from '@angular/core';
 
 @Component({
-  selector: 'app-footer',
-  standalone: true,
-  imports: [],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+   standalone: true,
+   selector: 'app-footer',
+   templateUrl: './footer.component.html',
+   styleUrl: './footer.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush,
+   imports: [],
 })
 export class FooterComponent {
+  version = VERSION.full;
 
+  year = new Date().getFullYear();
 }
