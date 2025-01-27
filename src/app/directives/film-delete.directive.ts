@@ -13,7 +13,7 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from '../services/cus
 export class FilmDeleteDirective {
    // sets up a required input that expects a string value and provides an alias 'appFilmDelete' to be used when the directive is being used.
    public id = input.required<string>({ alias: 'appFilmDelete' });
-   // Output() decorator that marks a property as an output, which mean it will emit events.
+   // Output() decorator that marks a property as an output, which means it will emit events.
    // declares a public property called 'deleted' and creates a new EventEmitter that emits string values. 
    @Output() public deleted = new EventEmitter<string>();
 

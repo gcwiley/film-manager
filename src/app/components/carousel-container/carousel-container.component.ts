@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-carousel-container',
-  standalone: true,
-  imports: [],
-  templateUrl: './carousel-container.component.html',
-  styleUrl: './carousel-container.component.scss'
+   standalone: true,
+   selector: 'app-carousel-container',
+   templateUrl: './carousel-container.component.html',
+   styleUrl: './carousel-container.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush,
+   imports: [],
 })
-export class CarouselContainerComponent {
-
-}
+export class CarouselContainerComponent {}

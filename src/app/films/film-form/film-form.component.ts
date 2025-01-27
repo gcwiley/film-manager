@@ -1,5 +1,6 @@
 import { CdkPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -30,6 +31,7 @@ import { FilmInputDto } from '../../types/film.interface';
    styleUrl: './film-form.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
+      CommonModule,
       MatCardModule,
       MatButtonModule,
       MatFormFieldModule,

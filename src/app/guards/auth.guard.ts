@@ -1,11 +1,17 @@
+// this code defines an angular authentication guard (AuthGuard) and related utilities for controlling access to routes based on user authentication status
+
+// imports necessary modules
 import { Injectable } from '@angular/core';
 import { Auth, user } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { User } from 'firebase/auth';
-import { Observable, UnaryFunction } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, UnaryFunction, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 
+// a function type that takes an ActivatedRouteSnapshot(information about the route) and 'RouterStateSnapshop' (information about the router state) and returns an AuthPipe
 export type AuthPipeGenerator = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => AuthPipe;
+
+// a function type that takes an Observable of a Firebase User or null and returns an Observable of a boolean (access granted/denied), a string (redirect URL), or an array of route segments (redirect Url)
 export type AuthPipe = UnaryFunction<Observable<User | null>, Observable<boolean | string | unknown[]>>;
 
 export const loggedIn: AuthPipe = map((user) => !!user);
@@ -40,3 +46,4 @@ export const canActivate = (pipe: AuthPipeGenerator) => ({
 });
 
 export const isNotAnonymous: AuthPipe = map((user) => !!user && !user.isAnonymous);
+export const idTokenResult = switchMap((user: User | null) => (user ? user.getIdTokenResult() : of(null)));

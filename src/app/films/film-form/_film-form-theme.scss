@@ -3,8 +3,8 @@
 // color mixin
 @mixin color($theme) {
    .film-form {
-      color: mat.get-theme-color($theme, secondary);
-      background-color: mat.get-theme-color($theme, secondary);
+      color: mat.get-theme-color($theme, primary, 40);
+      background-color: mat.get-theme-color($theme, primary, 100);
    }
 }
 // typography mixin

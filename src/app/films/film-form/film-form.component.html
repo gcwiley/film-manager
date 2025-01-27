@@ -1,58 +1,73 @@
 <form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
+   <mat-card class="film-form" appearance="outlined">
+      <mat-card-header>
+         <mat-card-title>Add Film</mat-card-title>
+      </mat-card-header>
 
-    <mat-card class="film-form">
+      <mat-card-content>
+         <div class="row">
+            <div class="column">
+               <!-- TITLE (title)-->
+               <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Title</mat-label>
+                  <input matInput type="text" FormControlName="title" />
+                  <mat-error *ngIf="filmForm.controls['title'].hasError('required')"
+                     >Please enter a film title.</mat-error
+                  >
+               </mat-form-field>
+            </div>
+         </div>
 
-        <mat-card-header>
-            <mat-card-title>Add Film</mat-card-title>
-        </mat-card-header>
+         <div class="row">
+            <div class="column">
+               <!-- DIRECTOR (director)-->
+               <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Director</mat-label>
+                  <input matInput type="text" FormControlName="director" />
+                  <mat-error *ngIf="filmForm.controls['director'].hasError('required')">Please enter the film's director.</mat-error>
+               </mat-form-field>
+            </div>
+         </div>
 
-        <mat-card-content>
+         <div class="row">
+            <div class="column">
+               <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
+               <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Release Date</mat-label>
+                  <input matInput type="text" FormControlName="releaseDate" />
+                  <mat-error *ngIf="filmForm.controls['releaseDate'].hasError('required')">Please enter the release date of the film.</mat-error>
+               </mat-form-field>
+            </div>
 
-            <!-- TITLE (title)-->
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Title</mat-label>
-                <input matInput type="text" FormControlName="title">
-                <mat-error>A title is <strong>required.</strong></mat-error>
-            </mat-form-field>
+            <div class="column">
+               <!-- GENRE (genre)-->
+               <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Genre</mat-label>
+                  <mat-select matNativeControl formControlName="genre">
+                     <mat-option value="horror">Horror</mat-option>
+                     <mat-option value="comedy">Comedy</mat-option>
+                     <mat-option value="Sci-Fi">Sci-Fi</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="filmForm.controls['genre'].hasError('required')">Please enter a genre for the film.</mat-error>
+               </mat-form-field>
+            </div>
+         </div>
 
-            <!-- DIRECTOR (director)-->
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Director</mat-label>
-                <input matInput type="text" FormControlName="director">
-                <mat-error>Please enter the film's director.</mat-error>
-            </mat-form-field>
+         <div class="row">
+            <div class="column">
+               <!-- SUMMARY (summary)-->
+               <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Summary</mat-label>
+                  <textarea matInput rows="10" FormControlName="summary"></textarea>
+                  <mat-error *ngIf="filmForm.controls['summary'].hasError('required')">Please enter a short summary of the film.</mat-error>
+               </mat-form-field>
+            </div>
+         </div>
+      </mat-card-content>
 
-            <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Release Date</mat-label>
-                <input matInput type="text" FormControlName="releaseDate">
-                <mat-error>Please enter the release date of the film.</mat-error>
-            </mat-form-field>
-
-            <!-- GENRE (genre)-->
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Genre</mat-label>
-                <mat-select matNativeControl formControlName="genre">
-                  <mat-option value="horror">Horror</mat-option>
-                  <mat-option value="comedy">Comedy</mat-option>
-                  <mat-option value="Sci-Fi">Sci-Fi</mat-option>
-                </mat-select>
-                <mat-error>Please enter a genre for the film.</mat-error>
-            </mat-form-field>
-
-            <!-- SUMMARY (summary)-->
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Summary</mat-label>
-                <textarea matInput rows="10" FormControlName="summary"></textarea>
-                <mat-error>Please enter a short summary of the film.</mat-error>
-            </mat-form-field>
-
-        </mat-card-content>
-
-        <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit">Add Film</button>
-        </mat-card-actions>
-
-    </mat-card>
-
+      <mat-card-actions class="card-actions">
+         <button mat-flat-button type="submit">Add Film</button>
+         <button mat-flat-button type="button">Clear</button>
+      </mat-card-actions>
+   </mat-card>
 </form>

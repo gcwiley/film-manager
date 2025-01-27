@@ -1,3 +1,4 @@
+@if (showPrevArrow) {
 <button
    (click)="previous()"
    *ngIf="this.showPrevArrow"
@@ -8,6 +9,7 @@
    aria-label="previous">
    <mat-icon>navigate_before</mat-icon>
 </button>
+}
 
 <div #contentWrapper (keyup)="onKeydown($event)" class="docs-carousel-content-wrapper" role="region">
    <div class="docs-carousel-content" role="list" tabindex="0" #list>
@@ -15,6 +17,7 @@
    </div>
 </div>
 
+@if (showNextArrow) {
 <button
    (click)="next()"
    *ngIf="this.showNextArrow"
@@ -25,3 +28,4 @@
    aria-label="next">
    <mat-icon>navigate_next</mat-icon>
 </button>
+}
