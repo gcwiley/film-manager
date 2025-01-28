@@ -7,14 +7,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../../components';
 
 // import the film grid component
-import { FilmGridComponent } from '../../../films';
+import { FilmListComponent } from '../../../films';
 
 @Component({
-    selector: 'app-film-grid-page',
-    templateUrl: './film-grid-page.component.html',
-    styleUrl: './film-grid-page.component.scss',
-    imports: [MatDividerModule, NavbarComponent, AnnouncementBannerComponent, FooterComponent, FilmGridComponent]
+   selector: 'app-film-grid-page',
+   templateUrl: './film-grid-page.component.html',
+   styleUrl: './film-grid-page.component.scss',
+   imports: [MatDividerModule, NavbarComponent, AnnouncementBannerComponent, FooterComponent, FilmListComponent],
 })
-export class FilmGridPageComponent {
-   text = 'this is a test!'
-}
+export class FilmGridPageComponent {}

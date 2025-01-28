@@ -3,6 +3,9 @@ import { Firestore, getDocs, collection } from '@angular/fire/firestore';
 import { Observable, from, map, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { QuerySnapshot, DocumentData,  } from '@angular/fire/firestore';
+
+// import the film interface
 import { FilmDto } from '../types/film.interface';
 
 @Injectable({
@@ -16,7 +19,6 @@ export class ApiService {
    public getFilms(): Observable<FilmDto[]> {
       // creates a reference to film collection within firestore
       const filmsRef = collection(this.firestore, 'films');
-      // comment
       const films = from(getDocs(filmsRef)).pipe(
          map((res) => {
             // initializes an empty array
@@ -34,4 +36,13 @@ export class ApiService {
       );
       return films;
    }
+
+   // test function
+   public getAllFilms(): Observable<QuerySnapshot<DocumentData, DocumentData>> {
+      // create a reference to film collection within firestore
+      const reference = collection(this.firestore, 'films');
+      const films = from(getDocs(reference))
+      return films
+   }
 }
+

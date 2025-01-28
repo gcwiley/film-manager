@@ -38,13 +38,13 @@ export class FilmGridComponent implements OnInit {
    // inject the film service
    constructor(private filmService: ApiService, private breakpointObserver: BreakpointObserver) {}
 
-   ngOnInit(): void {
+   public ngOnInit(): void {
       this.getFilms();
       this.layoutChanges();
    }
 
    // responsive code
-   layoutChanges(): void {
+   public layoutChanges(): void {
       this.breakpointObserver
          .observe([
             Breakpoints.TabletPortrait,
@@ -66,7 +66,7 @@ export class FilmGridComponent implements OnInit {
          });
    }
 
-   getFilms(): void {
+   public getFilms(): void {
       this.filmService.getFilms().subscribe((films) => {
          this.films = films;
       });

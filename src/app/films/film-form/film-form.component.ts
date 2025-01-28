@@ -1,8 +1,7 @@
-import { CdkPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 // import rxjs
 import { first } from 'rxjs';
@@ -19,10 +18,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import the film service
 import { FilmService } from '../../services/film.service';
-import { BreadcrumbsPortalService } from '../../services/breadcrumbs-portal.service';
 
 // import the film interface
-import { FilmInputDto } from '../../types/film.interface';
+import { FilmInputDto, FilmDto } from '../../types/film.interface';
 
 @Component({
    standalone: true,
@@ -44,15 +42,16 @@ import { FilmInputDto } from '../../types/film.interface';
    ],
 })
 export class FilmFormComponent implements OnInit {
-   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
+   public mode = 'create';
+   private id!: string | null;
+   private film!: FilmDto;
 
    constructor(
       private formBuilder: FormBuilder,
       private filmService: FilmService,
-      private breadcrumbsPortalService: BreadcrumbsPortalService,
       private router: Router,
+      public route: ActivatedRoute,
       private snackbar: MatSnackBar,
-      private cdr: ChangeDetectorRef
    ) {}
 
    // create the film form
@@ -64,34 +63,62 @@ export class FilmFormComponent implements OnInit {
       summary: ['', Validators.required],
    });
 
+   // this is the ngOnInit lifecycle hook in angular. it's called once the component has been initialized
    public ngOnInit(): void {
-      setTimeout(() => {
-         this.breadcrumbsPortalService.setPortal(this.portalContent);
-         this.cdr.markForCheck();
+      // find out if we have an 'id' or not
+      this.route.paramMap.subscribe((paramMap: ParamMap) => {
+         // this checks if the paramMap contains a parameter named 'id'
+         if (paramMap.has('id')) {
+            // if a 'id' paramater exists, the component sets its internal mode property to 'edit'. This means its intended to edit an existing film.
+            this.mode = 'edit';
+            // retrieves the value of the 'id' paramater from the paramMap
+            this.id = paramMap.get('id')
+            // 'this.id!' uses the non-null assertion operator to tell Typescript that the 'this.id' is not null.
+            // subscribes to the observable returned by getFilmById - will recieve film data when it's available. 
+            this.filmService.getFilmById(this.id!).subscribe((film) => {
+               this.film = film;
+               // overrides values of initial form controls
+               this.filmForm.setValue({
+                  // set value for every form control
+                  title: this.film.title,
+                  director: this.film.director,
+                  releaseDate: this.film.releaseDate,
+                  genre: this.film.genre,
+                  summary: this.film.summary,
+               });
+            });
+         // if the paramMap does NOT has an 'id' parameter, this else block is executed.
+         } else {
+            // the component sets it mode to 'create', indicating that it's being used to create a new film
+            this.mode = 'create';
+         }
       });
    }
 
-   // save a new film
+   // save a new film to firestore
    public onSaveFilm(): void {
-      this.filmService
-         .addFilm(this.filmForm.value as FilmInputDto)
-         .pipe(first())
-         .subscribe({
-            next: (film) => {
-               this.filmForm.reset(film);
-               this.snackbar.open('Success', 'Close');
-               // navigate user back to homepage
-               this.router.navigateByUrl('/');
-            },
-            error: () => {
-               this.snackbar.open('Error', 'Close');
-            },
+      if (this.mode === 'create') {
+         this.filmService
+            .addFilm(this.filmForm.value as FilmInputDto)
+            .pipe(first())
+            .subscribe({
+               next: (film) => {
+                  // resets the form
+                  this.filmForm.reset(film);
+                  // displays a success message
+                  this.snackbar.open('Success', 'Close');
+                  // navigates user back to homepage
+                  this.router.navigateByUrl('/');
+               },
+               error: () => {
+                  this.snackbar.open('Error', 'Close');
+               },
+            });
+      } else {
+         this.filmService.updateFilmById(this.id!, this.filmForm.value as FilmInputDto).subscribe(() => {
+            // navigates user back to homepage
+            this.router.navigateByUrl('/');
          });
-   }
-
-   // comment
-   public onReset(event: Event): void {
-      event.preventDefault();
-      this.filmForm.reset();
+      }
    }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { sendPasswordResetEmail } from 'firebase/auth'
+
 // import the shared components
 import { NavbarComponent, FooterComponent} from '../../components'
 

@@ -17,7 +17,7 @@ export class FilmDeleteDirective {
    // declares a public property called 'deleted' and creates a new EventEmitter that emits string values. 
    @Output() public deleted = new EventEmitter<string>();
 
-   // constructor initializes the directives dependencies.
+   // initializes the directives dependencies.
    constructor(
       private filmService: FilmService,
       private confirm: CustomConfirmDialogService,

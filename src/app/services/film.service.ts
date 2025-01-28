@@ -99,13 +99,13 @@ export class FilmService {
 
    // fetches a single film from firestore based on the provided id
    public getFilmById(id: string): Observable<FilmDto> {
-      const ref = doc(this.firestore, 'films', id);
-      return from(getDoc(ref)).pipe(map((doc) => ({ id, ...doc.data() } as FilmDto)));
+      const reference = doc(this.firestore, 'films', id);
+      return from(getDoc(reference)).pipe(map((doc) => ({ id, ...doc.data() } as FilmDto)));
    }
 
    // deletes a film from firestore based on the provided id
    public deleteFilmById(id: string): Observable<void> {
-      const ref = doc(this.firestore, 'posts', id);
+      const ref = doc(this.firestore, 'films', id);
       return from(deleteDoc(ref)).pipe(map(() => undefined));
    }
 

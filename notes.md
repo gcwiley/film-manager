@@ -1,0 +1,3 @@
+Edit Mode: When an 'id' parameter is present in the route, it fetches the corresponding film data and populates the form fields with the existing data.
+
+Create Mode: When there's no 'id' parameter, it sets the component to 'create' mode, presumably leaving the form fields empty or with default values for creating a new film. This is a common pattern in Angular applications when building forms that can both edit and create new data.

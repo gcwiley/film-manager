@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { from } from 'rxjs';
 
 import {
    Auth,
@@ -31,8 +32,10 @@ export class AuthService {
       return await signInWithPopup(this.auth, new GoogleAuthProvider)
    }
 
-   // sign out of application
-   async signOut() {
-      return await signOut(this.auth);
+   // signs out the current user - observable
+   public signOutTest(): void {
+      from(
+         signOut(this.auth)
+      )
    }
 }

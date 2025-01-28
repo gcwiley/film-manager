@@ -1,0 +1,16 @@
+<main focusOnNavigation aria-label="Film list" id="film-list" class="film-list-container">
+   <div class="film-list">
+      @for (film of films(); track film) {
+      <a class="film-card-item" routerLink="/films/{{ film.id }}" matRipple>
+         <mat-card class="film-card" appearance="outlined">
+            <mat-card-title>{{ film.title }}</mat-card-title>
+            <mat-card-content class="film-card-summary">
+               {{ film.summary }}
+            </mat-card-content>
+         </mat-card>
+      </a>
+      } @empty {
+         <p>No Films Found</p>
+      }
+   </div>
+</main>

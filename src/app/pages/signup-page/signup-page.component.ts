@@ -34,11 +34,13 @@ import { NavbarComponent, FooterComponent } from '../../components';
    ],
 })
 export class SignupPageComponent {
+   // create the signup with email and password fields
    public form = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
    });
 
+   // inject the form builder, auth service
    constructor(private fb: FormBuilder, private auth: Auth, private router: Router) {}
 
    public onSubmit(): void {
