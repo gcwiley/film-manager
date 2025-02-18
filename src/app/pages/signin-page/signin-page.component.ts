@@ -1,11 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
-import { from } from 'rxjs';
-
-// import firebase auth
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -16,51 +11,43 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // import the shared components
-import { NavbarComponent, FooterComponent } from '../../components';
+import { FooterComponent } from '../../components';
+
+// import the auth service
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-signin-page',
-    templateUrl: './signin-page.component.html',
-    styleUrl: './signin-page.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ReactiveFormsModule,
-        NgIf,
-        MatCardModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatCheckboxModule,
-        MatButtonModule,
-        MatIconModule,
-        NavbarComponent,
-        FooterComponent,
-    ]
+   standalone: true,
+   selector: 'app-signin-page',
+   templateUrl: './signin-page.component.html',
+   styleUrl: './signin-page.component.scss',
+   imports: [
+      FormsModule,
+      ReactiveFormsModule,
+      MatCardModule,
+      MatInputModule,
+      MatFormFieldModule,
+      MatCheckboxModule,
+      MatButtonModule,
+      MatIconModule,
+      FooterComponent,
+   ],
 })
 export class SigninPageComponent {
+   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+
    // create the signin form with email and password fields
-   public signinForm = this.formBuilder.nonNullable.group({
+   public signinForm = this.formBuilder.group({
       email: ['', Validators.required, Validators.email],
       password: ['', Validators.required],
    });
 
-   // inject the router, form builder, and the auth service
-   constructor(private router: Router, private formBuilder: FormBuilder, private auth: Auth) {}
-
-   // Sign in with email and password, if successful, navigates admin to the main page
    public onSubmitSignIn(): void {
-      // error checking code
-      if (this.signinForm.invalid) {
-         return;
-      }
-
-      from(
-         signInWithEmailAndPassword(
-            this.auth,
-            this.signinForm.controls.email.value,
-            this.signinForm.controls.password.value
-         )
-      ).subscribe(() => {
-         this.router.navigateByUrl('/');
-      });
+      this.authService
+         .signInWithEmailAndPassword(this.signinForm.value.email!, this.signinForm.value.password!)
+         .subscribe(() => {
+            // redirects user to homepage
+            this.router.navigateByUrl('/');
+         });
    }
 }

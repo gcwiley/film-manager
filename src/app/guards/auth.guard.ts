@@ -17,6 +17,7 @@ export type AuthPipe = UnaryFunction<Observable<User | null>, Observable<boolean
 // this is a pre-built AuthPipe that checks if a user is logged in. it uses the map operator to transform the user obserable into an observable of a boolean. it returns true if the user exists (is logged in), and false otherwise.
 export const loggedIn: AuthPipe = map((user) => !!user);
 
+// makes the AuthGuard injectable in the application
 @Injectable({
    providedIn: 'any',
 })

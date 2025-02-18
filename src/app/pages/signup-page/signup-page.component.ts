@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -14,13 +11,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // import the shared components
-import { NavbarComponent, FooterComponent } from '../../components';
+import { FooterComponent } from '../../components';
+
+// import the auth service
+import { AuthService } from '../../services/auth.service';
 
 @Component({
+   standalone: true,
    selector: 'app-signup-page',
    templateUrl: './signup-page.component.html',
    styleUrl: './signup-page.component.scss',
-   changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
       ReactiveFormsModule,
       MatCardModule,
@@ -28,30 +28,25 @@ import { NavbarComponent, FooterComponent } from '../../components';
       MatFormFieldModule,
       MatCheckboxModule,
       MatButtonModule,
-      MatIconModule,
-      NavbarComponent,
       FooterComponent,
+      MatIconModule,
    ],
 })
 export class SignupPageComponent {
+   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+
    // create the signup with email and password fields
-   public form = this.fb.nonNullable.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+   public signUpForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
    });
 
-   // inject the form builder, auth service
-   constructor(private fb: FormBuilder, private auth: Auth, private router: Router) {}
-
-   public onSubmit(): void {
-      if (this.form.invalid) {
-         return;
-      }
-
-      from(
-         createUserWithEmailAndPassword(this.auth, this.form.controls.email.value, this.form.controls.password.value)
-      ).subscribe(() => {
-         this.router.navigateByUrl('/');
-      });
+   public onSubmitSignUp() {
+      this.authService
+         .createUserWithEmailAndPassword(this.signUpForm.value.email!, this.signUpForm.value.password!)
+         .subscribe(() => {
+            // redirects user to homepage
+            this.router.navigateByUrl('/');
+         });
    }
 }

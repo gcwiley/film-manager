@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from 'rxjs';
 
 import {
    Auth,
@@ -8,6 +8,7 @@ import {
    signInWithPopup,
    GoogleAuthProvider,
    signOut,
+   UserCredential,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -15,27 +16,25 @@ import {
 })
 export class AuthService {
    // injects the auth object
-   constructor(private auth: Auth) {}
-
-   // signs in the user with email and password
-   async signInWithEmailAndPassword(email: string, password: string) {
-      return await signInWithEmailAndPassword(this.auth, email, password);
-   }
+   private readonly auth = inject(Auth)
 
    // Creates a new user account associated with the specified email address and password.
-   async createUserWithEmailAndPassword(email: string, password: string) {
-      return await createUserWithEmailAndPassword(this.auth, email, password);
+   public createUserWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
+      return from(createUserWithEmailAndPassword(this.auth, email, password));
+   }
+
+   // Asynchronously signs in using an email and password.
+   public signInWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
+      return from(signInWithEmailAndPassword(this.auth, email, password))
    }
 
    // Authenticates a Firebase client using a popup-based OAuth authentication flow.
-   async signInWithPopup() {
-      return await signInWithPopup(this.auth, new GoogleAuthProvider)
+   public signInWithGoogle(): Observable<UserCredential> {
+      return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
    }
 
-   // signs out the current user - observable
-   public signOutTest(): void {
-      from(
-         signOut(this.auth)
-      )
+   // Signs out the current user.
+   public signOut(): Observable<void> {
+      return from(signOut(this.auth))
    }
 }

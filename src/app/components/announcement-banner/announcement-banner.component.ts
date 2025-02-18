@@ -8,6 +8,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [],
 })
-export class AnnouncementBannerComponent {
-  text = "this site is currently in development."
-}
+export class AnnouncementBannerComponent {}
