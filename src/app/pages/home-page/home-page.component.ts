@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // import angular modules
@@ -11,9 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../components';
 
 @Component({
+    standalone: true,
     selector: 'app-home-page',
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         RouterModule,
         MatCardModule,

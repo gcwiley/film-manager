@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,7 @@ import { AuthService } from '../../services/auth.service';
    selector: 'app-signin-page',
    templateUrl: './signin-page.component.html',
    styleUrl: './signin-page.component.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
       FormsModule,
       ReactiveFormsModule,

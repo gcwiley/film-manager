@@ -8,6 +8,7 @@ import { NavbarComponent, FooterComponent } from '../../components';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+    standalone: true,
     selector: 'app-not-found-page',
     templateUrl: './not-found-page.component.html',
     styleUrl: './not-found-page.component.scss',

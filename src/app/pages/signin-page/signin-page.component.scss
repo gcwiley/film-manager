@@ -1,0 +1,22 @@
+.signin-page-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+.signin-form {
+    width: 400px;
+    border: 0px;
+    padding: 2rem;
+}
+
+.full-width {
+    width: 100%;
+    margin: 0.4rem 0;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: row;
+}
