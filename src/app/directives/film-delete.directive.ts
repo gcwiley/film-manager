@@ -2,6 +2,7 @@ import { Directive, EventEmitter, HostListener, Output, input } from '@angular/c
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, first, switchMap } from 'rxjs';
 
+// import the film service
 import { FilmService } from '../services/film.service';
 
 import { CustomConfirmDialog, CustomConfirmDialogService } from '../services/custom-confirm-dialog.service';
