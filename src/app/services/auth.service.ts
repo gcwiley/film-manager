@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, catchError, from } from 'rxjs';
 
 import {
    Auth,
@@ -16,25 +16,45 @@ import {
 })
 export class AuthService {
    // injects the auth object
-   private readonly auth = inject(Auth)
+   private readonly auth = inject(Auth);
 
-   // Creates a new user account associated with the specified email address and password.
+   // creates a new user account associated with the specified email address and password.
    public createUserWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
-      return from(createUserWithEmailAndPassword(this.auth, email, password));
+      return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
+         catchError((error) => {
+            console.error('There was an error', error);
+            throw error;
+         })
+      );
    }
 
-   // Asynchronously signs in using an email and password.
+   // asynchronously signs in using an email and password.
    public signInWithEmailAndPassword(email: string, password: string): Observable<UserCredential> {
-      return from(signInWithEmailAndPassword(this.auth, email, password))
+      return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+         catchError((error) => {
+            console.error('There was an error', error);
+            throw error;
+         })
+      );
    }
 
-   // Authenticates a Firebase client using a popup-based OAuth authentication flow.
+   // authenticates a Firebase client using a popup-based OAuth authentication flow.
    public signInWithGoogle(): Observable<UserCredential> {
-      return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
+      return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+         catchError((error) => {
+            console.error('There was an error', error);
+            throw error;
+         })
+      );
    }
 
    // Signs out the current user.
    public signOut(): Observable<void> {
-      return from(signOut(this.auth))
+      return from(signOut(this.auth)).pipe(
+         catchError((error) => {
+            console.error('There was an error', error);
+            throw error;
+         })
+      );
    }
 }

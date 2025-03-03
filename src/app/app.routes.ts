@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-// comment
+import { CanDeactivateGuardService } from './guards/can-deactivate.guard';
 
 export const routes: Routes = [
    // homepage
@@ -13,8 +13,8 @@ export const routes: Routes = [
    // about page
    {
       path: 'about',
+      title: 'About',
       loadComponent: () => import('./pages/about-page/about-page.component').then((m) => m.AboutPageComponent),
-      title: 'About'
    },
    // list film page
    {
@@ -27,27 +27,30 @@ export const routes: Routes = [
    {
       path: 'create',
       title: 'Create Film',
+      canDeactivate: [CanDeactivateGuardService],
       loadComponent: () =>
          import('./pages/film-pages/film-create-page/film-create-page.component').then(
             (m) => m.FilmCreatePageComponent
          ),
-      
    },
+   // signin page
    {
       path: 'signin',
+      title: 'Sign In',
       loadComponent: () => import('./pages/signin-page/signin-page.component').then((m) => m.SigninPageComponent),
-      title: 'Sign In'
    },
+   // signup page
    {
       path: 'signup',
+      title: 'Sign Up',
       loadComponent: () => import('./pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
-      title: 'Sign Up'
    },
+   // page not found
    {
       path: '404',
+      title: 'Page Not Found',
       loadComponent: () =>
          import('./pages/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
-      title: 'Page Not Found'
    },
    {
       path: '**',
