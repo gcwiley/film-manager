@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+   FormBuilder,
+   Validators,
+   FormsModule,
+   ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 // import rxjs
@@ -51,7 +56,7 @@ export class FilmFormComponent implements OnInit {
       private filmService: FilmService,
       private router: Router,
       public route: ActivatedRoute,
-      private snackbar: MatSnackBar,
+      private snackbar: MatSnackBar
    ) {}
 
    // create the film form
@@ -72,9 +77,9 @@ export class FilmFormComponent implements OnInit {
             // if a 'id' paramater exists, the component sets its internal mode property to 'edit'. This means its intended to edit an existing film.
             this.mode = 'edit';
             // retrieves the value of the 'id' paramater from the paramMap
-            this.id = paramMap.get('id')
+            this.id = paramMap.get('id');
             // 'this.id!' uses the non-null assertion operator to tell Typescript that the 'this.id' is not null.
-            // subscribes to the observable returned by getFilmById - will recieve film data when it's available. 
+            // subscribes to the observable returned by getFilmById - will recieve film data when it's available.
             this.filmService.getFilmById(this.id!).subscribe((film) => {
                this.film = film;
                // overrides values of initial form controls
@@ -87,7 +92,7 @@ export class FilmFormComponent implements OnInit {
                   summary: this.film.summary,
                });
             });
-         // if the paramMap does NOT has an 'id' parameter, this else block is executed.
+            // if the paramMap does NOT has an 'id' parameter, this else block is executed.
          } else {
             // the component sets it mode to 'create', indicating that it's being used to create a new film
             this.mode = 'create';
@@ -106,19 +111,21 @@ export class FilmFormComponent implements OnInit {
                   // resets the form
                   this.filmForm.reset(film);
                   // displays a success message
-                  this.snackbar.open('Success', 'Close');
+                  this.snackbar.open('Film added', 'Close', { duration: 30000 });
                   // navigates user back to homepage
                   this.router.navigateByUrl('/');
                },
                error: () => {
-                  this.snackbar.open('Error', 'Close');
+                  this.snackbar.open('Error', 'Close', { duration: 30000 });
                },
             });
       } else {
-         this.filmService.updateFilmById(this.id!, this.filmForm.value as FilmInputDto).subscribe(() => {
-            // navigates user back to homepage
-            this.router.navigateByUrl('/');
-         });
+         this.filmService
+            .updateFilmById(this.id!, this.filmForm.value as FilmInputDto)
+            .subscribe(() => {
+               // navigates user back to homepage
+               this.router.navigateByUrl('/');
+            });
       }
    }
 }

@@ -6,6 +6,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
    templateUrl: './error-page.component.html',
    styleUrl: './error-page.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
-   imports: [],
 })
 export class ErrorPageComponent {}

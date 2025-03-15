@@ -42,7 +42,10 @@ export class FilmService {
       // this code is constructing an array of constraints to be used in a firestore query.
       // - sort: order the results based on a field (input.sort), in ascending or descending order (input.order)
       // - limit: restrict the number of results to a certain maximum (input.limit)
-      const queryConstraints: QueryConstraint[] = [orderBy(input.sort, input.order), limit(input.limit)];
+      const queryConstraints: QueryConstraint[] = [
+         orderBy(input.sort, input.order),
+         limit(input.limit),
+      ];
 
       if (input.query) {
          queryConstraints.push(
@@ -100,7 +103,9 @@ export class FilmService {
    // fetches a single film from firestore based on the provided id
    public getFilmById(id: string): Observable<FilmDto> {
       const reference = doc(this.firestore, 'films', id);
-      return from(getDoc(reference)).pipe(map((doc) => ({ id, ...doc.data() } as FilmDto)));
+      return from(getDoc(reference)).pipe(
+         map((doc) => ({ id, ...doc.data() } as FilmDto))
+      );
    }
 
    // deletes a film from firestore based on the provided id
@@ -110,8 +115,13 @@ export class FilmService {
    }
 
    // updates an existing film in firestore based on the provided id and a partial FilmDto
-   public updateFilmById(id: string, body: Partial<FilmDto>): Observable<FilmDto> {
+   public updateFilmById(
+      id: string,
+      body: Partial<FilmDto>
+   ): Observable<FilmDto> {
       const ref = doc(this.firestore, 'films', id);
-      return from(updateDoc(ref, { ...body })).pipe(switchMap(() => this.getFilmById(id)));
+      return from(updateDoc(ref, { ...body })).pipe(
+         switchMap(() => this.getFilmById(id))
+      );
    }
 }
