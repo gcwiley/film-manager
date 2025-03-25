@@ -11,9 +11,9 @@
                <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Title</mat-label>
                   <input matInput type="text" FormControlName="title" />
-                  <mat-error *ngIf="filmForm.controls['title'].hasError('required')"
-                     >Please enter a film title.</mat-error
-                  >
+                  @if (filmForm.controls['title'].hasError('required')) {
+                  <mat-error>Please enter the film's director</mat-error>
+                  }
                </mat-form-field>
             </div>
          </div>
@@ -24,7 +24,9 @@
                <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Director</mat-label>
                   <input matInput type="text" FormControlName="director" />
-                  <mat-error *ngIf="filmForm.controls['director'].hasError('required')">Please enter the film's director.</mat-error>
+                  @if (filmForm.controls['director'].hasError('required')) {
+                  <mat-error>Please enter the film's director</mat-error>
+                  }
                </mat-form-field>
             </div>
          </div>
@@ -35,7 +37,9 @@
                <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Release Date</mat-label>
                   <input matInput type="text" FormControlName="releaseDate" />
-                  <mat-error *ngIf="filmForm.controls['releaseDate'].hasError('required')">Please enter the release date of the film.</mat-error>
+                  @if (filmForm.controls['releaseDate'].hasError('required')) {
+                  <mat-error>Please enter the film's director</mat-error>
+                  }
                </mat-form-field>
             </div>
 
@@ -48,7 +52,9 @@
                      <mat-option value="comedy">Comedy</mat-option>
                      <mat-option value="Sci-Fi">Sci-Fi</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="filmForm.controls['genre'].hasError('required')">Please enter a genre for the film.</mat-error>
+                  @if (filmForm.controls['genre'].hasError('required')) {
+                  <mat-error>Please enter the film's director</mat-error>
+                  }
                </mat-form-field>
             </div>
          </div>
@@ -58,8 +64,13 @@
                <!-- SUMMARY (summary)-->
                <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Summary</mat-label>
-                  <textarea matInput rows="10" FormControlName="summary"></textarea>
-                  <mat-error *ngIf="filmForm.controls['summary'].hasError('required')">Please enter a short summary of the film.</mat-error>
+                  <textarea
+                     matInput
+                     rows="10"
+                     FormControlName="summary"></textarea>
+                  @if (filmForm.controls['summary'].hasError('required')) {
+                  <mat-error>Please enter the film's director</mat-error>
+                  }
                </mat-form-field>
             </div>
          </div>
