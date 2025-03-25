@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import {
+   FormsModule,
+   FormBuilder,
+   ReactiveFormsModule,
+   Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 // import the angular material modules
@@ -24,6 +30,7 @@ import { AuthService } from '../../services/auth.service';
    styleUrl: './signup-page.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
+      RouterModule,
       ReactiveFormsModule,
       MatCardModule,
       MatInputModule,
@@ -32,6 +39,7 @@ import { AuthService } from '../../services/auth.service';
       MatButtonModule,
       FooterComponent,
       MatIconModule,
+      FormsModule
    ],
 })
 export class SignupPageComponent {

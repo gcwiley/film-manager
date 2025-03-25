@@ -10,21 +10,36 @@
          <!-- EMAIL (email) -->
          <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email address</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="name@example.com" />
+            <input
+               matInput
+               type="email"
+               formControlName="email"
+               placeholder="name@example.com"
+               autocomplete="email" />
             <mat-icon matSuffix>person</mat-icon>
+            @if (this.signinForm.controls['email'].hasError('required')) {
+            <mat-error>Please enter your email address.</mat-error>
+            }
          </mat-form-field>
 
          <!-- PASSWORD (password) -->
          <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" />
+            <input
+               matInput
+               type="password"
+               formControlName="password"
+               autocomplete="current-password" />
             <mat-icon matSuffix>lock</mat-icon>
+            @if (this.signinForm.controls['password'].hasError('required')) {
+            <mat-error>Please enter your password.</mat-error>
+            }
          </mat-form-field>
 
-         <!-- SIGN IN BUTTON -->
+         <!-- BUTTONS -->
          <div class="card-actions">
             <button mat-flat-button type="submit">Sign In</button>
-            <a mat-flat-button routerLink="/signup">Create Account</a>
+            <a mat-button routerLink="/signup">Create Account</a>
          </div>
       </mat-card>
    </form>

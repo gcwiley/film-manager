@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import {
    FormsModule,
    FormBuilder,
@@ -29,6 +30,7 @@ import { AuthService } from '../../services/auth.service';
    styleUrl: './signin-page.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
    imports: [
+      RouterModule,
       FormsModule,
       ReactiveFormsModule,
       MatCardModule,
@@ -78,4 +80,7 @@ export class SigninPageComponent {
             },
          });
    }
+
+   // sign in with google
+   
 }
