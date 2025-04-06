@@ -1,48 +1,52 @@
+<app-navbar />
+<app-announcement-banner />
+<app-auth-status />
+
 <main class="signin-page-container">
-   <form [formGroup]="signinForm" novalidate (ngSubmit)="onSubmitSignIn()">
-      <mat-card appearance="outlined" class="signin-form">
-         <!-- TITLE TEXT -->
-         <div class="title-text">
-            <h3 class="mat-headline-4">Sign In</h3>
-            <h4 class="mat-body-2">Please sign in to your account.</h4>
-         </div>
+  <form [formGroup]="signinForm" novalidate (ngSubmit)="onSubmitSignIn()">
+    <mat-card appearance="outlined" class="signin-form">
+      <!-- TITLE TEXT -->
+      <div class="title-text">
+        <h3 class="mat-headline-4">Sign In</h3>
+        <h4 class="mat-body-2">Please sign in to your account.</h4>
+      </div>
 
-         <!-- EMAIL (email) -->
-         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email address</mat-label>
-            <input
-               matInput
-               type="email"
-               formControlName="email"
-               placeholder="name@example.com"
-               autocomplete="email" />
-            <mat-icon matSuffix>person</mat-icon>
-            @if (this.signinForm.controls['email'].hasError('required')) {
-            <mat-error>Please enter your email address.</mat-error>
-            }
-         </mat-form-field>
+      <!-- EMAIL (email) -->
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Email address</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="name@example.com"
+          autocomplete="email" />
+        <mat-icon matSuffix>person</mat-icon>
+        @if (this.signinForm.controls['email'].hasError('required')) {
+        <mat-error>Please enter your email address.</mat-error>
+        }
+      </mat-form-field>
 
-         <!-- PASSWORD (password) -->
-         <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input
-               matInput
-               type="password"
-               formControlName="password"
-               autocomplete="current-password" />
-            <mat-icon matSuffix>lock</mat-icon>
-            @if (this.signinForm.controls['password'].hasError('required')) {
-            <mat-error>Please enter your password.</mat-error>
-            }
-         </mat-form-field>
+      <!-- PASSWORD (password) -->
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          autocomplete="current-password" />
+        <mat-icon matSuffix>lock</mat-icon>
+        @if (this.signinForm.controls['password'].hasError('required')) {
+        <mat-error>Please enter your password.</mat-error>
+        }
+      </mat-form-field>
 
-         <!-- BUTTONS -->
-         <div class="card-actions">
-            <button mat-flat-button type="submit">Sign In</button>
-            <a mat-button routerLink="/signup">Create Account</a>
-         </div>
-      </mat-card>
-   </form>
+      <!-- BUTTONS -->
+      <div class="card-actions">
+        <button mat-flat-button type="submit">Sign In</button>
+        <a mat-button routerLink="/signup">Create Account</a>
+      </div>
+    </mat-card>
+  </form>
 </main>
 
 <app-footer />
