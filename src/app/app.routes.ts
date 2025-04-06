@@ -1,15 +1,6 @@
-import {
-   // redirectLoggedInTo,
-   redirectUnauthorizedTo,
-} from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CanDeactivateGuardService } from './guards/can-deactivate.guard';
-
-// this is a helper function that returns a function that redirects unauthenicated users to the signin page
-const redirectUnauthorizedToSignIn = () => redirectUnauthorizedTo('/signin');
-// this is a helper function that redirects authenticated users to film section
-// const redirectAuthorizedToFilms = () => redirectLoggedInTo('/films');
 
 export const routes: Routes = [
    // homepage
@@ -18,7 +9,6 @@ export const routes: Routes = [
       pathMatch: 'full',
       title: 'My Film App',
       canActivate: [AuthGuard],
-      data: { authGuardPipe: redirectUnauthorizedToSignIn },
       loadComponent: () =>
          import('./pages/home-page/home-page.component').then(
             (m) => m.HomePageComponent
@@ -29,7 +19,6 @@ export const routes: Routes = [
       path: 'about',
       title: 'About',
       canActivate: [AuthGuard],
-      data: { authGuardPipe: redirectUnauthorizedToSignIn },
       loadComponent: () =>
          import('./pages/about-page/about-page.component').then(
             (m) => m.AboutPageComponent
@@ -40,7 +29,6 @@ export const routes: Routes = [
       path: 'films',
       title: 'My Films',
       canActivate: [AuthGuard],
-      data: { authGuardPipe: redirectUnauthorizedToSignIn },
       loadComponent: () =>
          import(
             './pages/film-pages/film-grid-page/film-grid-page.component'
@@ -52,7 +40,6 @@ export const routes: Routes = [
       title: 'Create Film',
       canDeactivate: [CanDeactivateGuardService],
       canActivate: [AuthGuard],
-      data: { authGuardPipe: redirectUnauthorizedToSignIn },
       loadComponent: () =>
          import(
             './pages/film-pages/film-create-page/film-create-page.component'
