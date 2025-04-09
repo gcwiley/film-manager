@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // import angular fire auth
@@ -23,10 +29,13 @@ export class AuthStatusComponent implements OnInit, OnDestroy {
   private auth: Auth = inject(Auth);
 
   public ngOnInit(): void {
-    this.unsubscribeAuthListener = onAuthStateChanged(this.auth, (user: User | null) => {
-      this.isLoggedIn = !!user;
-      this.userEmail = user?.displayName ?? null;
-    });
+    this.unsubscribeAuthListener = onAuthStateChanged(
+      this.auth,
+      (user: User | null) => {
+        this.isLoggedIn = !!user;
+        this.userEmail = user?.displayName ?? null;
+      }
+    );
   }
 
   ngOnDestroy(): void {
