@@ -1,11 +1,13 @@
 <mat-toolbar class="navbar" role="heading" aria-label="Navigation Toolbar">
-   <!-- app logo -->
-   <a mat-button routerLink="/"> Film Manager </a>
+  <!-- app logo -->
+  <a mat-button routerLink="/"> Film Manager </a>
 
-   <span class="spacer"></span>
+  <span class="spacer"></span>
 
-   <a mat-stroked-button routerLink="/films">My Films</a>
-   <a mat-stroked-button routerLink="/create">Add Film</a>
-   <a mat-stroked-button routerLink="/signin">Sign In</a>
-   <a mat-stroked-button routerLink="/signup">Sign Up</a>
+  <button mat-flat-button (click)="onClickSignOut()">Sign Out</button>
+
+  <a mat-stroked-button routerLink="/films">My Films</a>
+  <a mat-stroked-button routerLink="/create">Add Film</a>
+  <a mat-stroked-button routerLink="/signin">Sign In</a>
+  <a mat-stroked-button routerLink="/signup">Sign Up</a>
 </mat-toolbar>

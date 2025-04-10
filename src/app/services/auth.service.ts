@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, from, throwError } from 'rxjs';
+import { Observable, catchError, from, throwError, map } from 'rxjs';
 
 import {
   Auth,
@@ -9,6 +9,8 @@ import {
   GoogleAuthProvider,
   signOut,
   UserCredential,
+  user,
+  User,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -17,6 +19,14 @@ import {
 export class AuthService {
   // injects the auth object
   private readonly auth = inject(Auth);
+
+  // observable for the current user state (emits User object or null)
+  public readonly user$: Observable<User | null> = user(this.auth);
+
+  // observable for the authentication status (emits true if logged in, false otherwise)
+  public readonly isAuthenticated$: Observable<boolean> = this.user$.pipe(
+    map((user) => !!user) // User|null to boolean
+  );
 
   // creates a new user account associated with the specified email address and password.
   public createUserWithEmailAndPassword(

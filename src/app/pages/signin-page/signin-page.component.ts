@@ -1,7 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 // import the angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -13,17 +20,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import the shared components
-import { NavbarComponent, AnnouncementBannerComponent, AuthStatusComponent, FooterComponent } from '../../components';
+import {
+  NavbarComponent,
+  AnnouncementBannerComponent,
+  AuthStatusComponent,
+  FooterComponent,
+} from '../../components';
 
 // import the auth service
 import { AuthService } from '../../services/auth.service';
 
 // define constants for error messages
 const ERROR_MESSAGES = {
-   INVALID_CREDENTIALS: 'Incorrect email or password',
-   NETWORK_ERROR: 'A network error occured. Please try again later.',
-   UNKNOWN_ERROR: 'An unxpected error occurred.'
-}
+  INVALID_CREDENTIALS: 'Incorrect email or password',
+  NETWORK_ERROR: 'A network error occured. Please try again later.',
+  UNKNOWN_ERROR: 'An unxpected error occurred.',
+};
 
 @Component({
   standalone: true,
@@ -32,9 +44,8 @@ const ERROR_MESSAGES = {
   styleUrl: './signin-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    RouterModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
@@ -47,7 +58,11 @@ const ERROR_MESSAGES = {
     FooterComponent,
   ],
 })
-export class SigninPageComponent {
+export class SigninPageComponent implements OnInit {
+  public signinForm!: FormGroup;
+  public isLoading = false;
+  public errorMessage: string | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -55,33 +70,64 @@ export class SigninPageComponent {
     private snackbar: MatSnackBar
   ) {}
 
+  ngOnInit(): void {
+    this.initializeForm();
+  }
+
   // create the signin form with email and password fields
-  public signinForm = this.formBuilder.group({
-    email: ['', Validators.required, Validators.email],
-    password: ['', Validators.required],
-  });
+  private initializeForm(): void {
+    this.signinForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
 
   // sign in with email and password, if successfull, navigate authenticated user to the home page
   public onSubmitSignIn(): void {
-    // if the form has validation errors, it returns early without doing anything
+    this.errorMessage = null;
     if (this.signinForm.invalid) {
       return;
     }
 
+    this.isLoading = true;
+    const { email, password } = this.signinForm.value;
+
     this.authService
-      .signInWithEmailAndPassword(this.signinForm.value.email!, this.signinForm.value.password!)
+      .signInWithEmailAndPassword(email, password)
+      .pipe(
+        catchError((error) => {
+          let message = ERROR_MESSAGES.UNKNOWN_ERROR;
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            message = ERROR_MESSAGES.INVALID_CREDENTIALS;
+          } else if (error.code === 'auth/network-request-failed') {
+            message = ERROR_MESSAGES.UNKNOWN_ERROR;
+          }
+          this.errorMessage = message;
+          return of(null); // return an observable of null to continue the stream.
+        })
+      )
       .subscribe({
-        next: () => {
-          // navigates user to homepage
-          this.router.navigateByUrl('/');
+        next: (user) => {
+          this.isLoading = false;
+          if (user) {
+            this.router.navigateByUrl('/');
+          } else {
+            this.snackbar.open(this.errorMessage!, 'CLOSE', {
+              duration: 5000,
+            });
+          }
         },
         error: () => {
-          this.snackbar.open('Unable to sign in', 'CLOSE', {
-            duration: 3000,
+          this.isLoading = false;
+          this.snackbar.open(ERROR_MESSAGES.UNKNOWN_ERROR, 'CLOSE', {
+            duration: 5000,
           });
         },
       });
   }
 
-  // sign in with google
+  // getter for easy access to form controls in the template
+  get formControls(): { [key: string]: AbstractControl } {
+    return this.signinForm.controls;
+  }
 }

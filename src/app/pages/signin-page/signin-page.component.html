@@ -3,50 +3,64 @@
 <app-auth-status />
 
 <main class="signin-page-container">
-  <form [formGroup]="signinForm" novalidate (ngSubmit)="onSubmitSignIn()">
-    <mat-card appearance="outlined" class="signin-form">
-      <!-- TITLE TEXT -->
-      <div class="title-text">
-        <h3 class="mat-headline-4">Sign In</h3>
-        <h4 class="mat-body-2">Please sign in to your account.</h4>
+  <mat-card appearance="raised" class="signin-form">
+    <!-- TITLE TEXT -->
+    <div class="title-text">
+      <h3 class="mat-headline-4">Sign In</h3>
+      <h4 class="mat-body-2">Please sign in to your account.</h4>
+    </div>
+    <!-- CONTENT -->
+    <mat-card-content>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmitSignIn()">
+        <!-- EMAIL (email) -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            required
+            placeholder="name@example.com" />
+          @if (formControls['email'].hasError('required')) {
+          <mat-error>Email is required.</mat-error>
+          } @if (formControls['email'].hasError('email')) {
+          <mat-error>Invalid email format.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            required
+            placeholder="password" />
+
+          @if (formControls['password'].hasError('required')) {
+          <mat-error>Password is required</mat-error>
+          } @if (formControls['password'].hasError('minlength')) {
+          <mat-error>Password must be at least 6 characters.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- BUTTONS -->
+        <div class="card-actions">
+          <button mat-raised-button type="submit" [disabled]="signinForm.invalid || isLoading">
+            @if (isLoading) {
+            <mat-icon>hourglass_empty</mat-icon>
+            } Sign In
+          </button>
+          <a mat-button routerLink="/signup">Create an account.</a>
+        </div>
+      </form>
+      @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
       </div>
-
-      <!-- EMAIL (email) -->
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Email address</mat-label>
-        <input
-          matInput
-          type="email"
-          formControlName="email"
-          placeholder="name@example.com"
-          autocomplete="email" />
-        <mat-icon matSuffix>person</mat-icon>
-        @if (this.signinForm.controls['email'].hasError('required')) {
-        <mat-error>Please enter your email address.</mat-error>
-        }
-      </mat-form-field>
-
-      <!-- PASSWORD (password) -->
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          type="password"
-          formControlName="password"
-          autocomplete="current-password" />
-        <mat-icon matSuffix>lock</mat-icon>
-        @if (this.signinForm.controls['password'].hasError('required')) {
-        <mat-error>Please enter your password.</mat-error>
-        }
-      </mat-form-field>
-
-      <!-- BUTTONS -->
-      <div class="card-actions">
-        <button mat-flat-button type="submit">Sign In</button>
-        <a mat-button routerLink="/signup">Create Account</a>
-      </div>
-    </mat-card>
-  </form>
+      }
+    </mat-card-content>
+  </mat-card>
 </main>
 
 <app-footer />
