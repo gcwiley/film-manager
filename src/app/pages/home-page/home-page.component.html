@@ -3,10 +3,23 @@
   <app-announcement-banner aria-label="Announcement Banner" />
 </header>
 
-<app-auth-status />
+<section>
+  <app-auth-status aria-label="auth status" />
+  <app-action-bar aria-label="user action bar" />
+</section>
 
 <main class="home-page-container">
-  <p>Under contruction</p>
+  <!-- film grid section -->
+  <article class="film-grid">
+    <h2>Current Films</h2>
+    <app-film-grid aria-label="film grid" />
+  </article>
+
+  <!-- recent films section -->
+  <aside class="recent-films">
+    <h2>Recent Films</h2>
+    <app-recent-films />
+  </aside>
 </main>
 
 <app-footer aria-label="Site Footer" />

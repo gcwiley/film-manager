@@ -1,5 +1,5 @@
 // import the config function
-import { ApplicationConfig, inject } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 
 // import the router helper function
 import { provideRouter } from '@angular/router';
@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // import the firebase libraries
-import { FirebaseApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
@@ -34,10 +34,7 @@ export const appConfig: ApplicationConfig = {
     // creates and initializes a firestore instance
     provideFirestore(() => getFirestore()),
     // creates and initializes an auth instance
-    provideAuth(() => {
-      const auth = getAuth(inject(FirebaseApp));
-      return auth;
-    }),
+    provideAuth(() => getAuth()),
     // registers a set of functions obtained by 'getFunctions' to be available for dependency injection.
     provideFunctions(() => getFunctions()),
     // creates and initializes a firebase storage instance
@@ -46,8 +43,7 @@ export const appConfig: ApplicationConfig = {
     provideMessaging(() => getMessaging()),
     // comment
     provideDatabase(() => getDatabase()),
-    // Check if we are in development mode
-    // comment
+    // sets up the necessary providers to get all angular firebase functionalities up and running.
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
   ],
 };

@@ -1,19 +1,20 @@
+@use '../../../styles/helpers/constants';
 
-
-// controls the header background size
-.header-background {
-    overflow: hidden;
-    position: relative;
-    height: 420px;
+.home-page-container {
+  max-width: constants.$max-width; // contrains the width to 1300 pixels
+  margin: auto; // centers the content on the page
+  display: flex; // set up flexbox layout for the container
+  flex-direction: row;
+  min-height: 100vh;
 }
 
-// controls the size of the header section
-.header-section {
-    width: 90%;
-    position: absolute;
-    z-index: 0;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.film-grid {
+  flex-basis: 70%;
+  max-width: 70%;
+  margin-right: 2rem;
+}
+
+.recent-films {
+  flex-basis: 30%;
+  max-width: 30%;
 }

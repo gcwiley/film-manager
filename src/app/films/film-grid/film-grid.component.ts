@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-// api interface
+// film service and interface
 import { ApiService } from '../../services/api.service';
 import { FilmDto } from '../../types/film.interface';
 

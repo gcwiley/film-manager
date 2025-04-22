@@ -1,0 +1,14 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+// angular material
+import { MatButtonModule } from '@angular/material/button';
+
+@Component({
+  selector: 'app-action-bar',
+  templateUrl: './action-bar.component.html',
+  styleUrl: './action-bar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatButtonModule, RouterModule],
+})
+export class ActionBarComponent {}

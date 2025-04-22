@@ -1,8 +1,18 @@
-<mat-toolbar class="navbar" role="heading" aria-label="Navigation Toolbar">
-  <!-- app logo -->
-  <a mat-button routerLink="/"> Film Manager </a>
+<mat-toolbar class="navbar" role="heading" aria-label="Navigation Toolbar" aria-level="1">
+  <a routerLink="/" mat-icon-button aria-label="My Film App">
+    <app-logo/>
+  </a>
+
+  <h6>Film Manager</h6>
 
   <span class="spacer"></span>
 
-  <button mat-flat-button (click)="onClickSignOut()">Sign Out</button>
+  <!-- nav bar menu -->
+   <button mat-icon-button class="icon" [matMenuTriggerFor]="menu" aria-label="Navigation Button">
+    <mat-icon>person</mat-icon>
+   </button>
+
+   <mat-menu #menu="matMenu">
+    <button mat-button (click)="onClickSignOut()">Sign Out</button>
+   </mat-menu>
 </mat-toolbar>

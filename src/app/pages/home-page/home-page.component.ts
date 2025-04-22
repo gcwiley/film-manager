@@ -1,19 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-// import angular modules
+// angular material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
-// import the shared components
+// shared components
 import {
   NavbarComponent,
   AnnouncementBannerComponent,
   AuthStatusComponent,
+  ActionBarComponent,
   FooterComponent,
 } from '../../components';
+
+// film components
+import { FilmGridComponent, RecentFilmsComponent} from '../../films'
 
 @Component({
   standalone: true,
@@ -31,6 +35,9 @@ import {
     AnnouncementBannerComponent,
     AuthStatusComponent,
     FooterComponent,
+    ActionBarComponent,
+    FilmGridComponent,
+    RecentFilmsComponent,
   ],
 })
 export class HomePageComponent {}

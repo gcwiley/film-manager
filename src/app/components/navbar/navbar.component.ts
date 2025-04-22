@@ -2,12 +2,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
-// import angular material
+// angular material
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
-// import auth service
+// shared components
+import { LogoComponent } from '../logo/logo.component';
+
+// auth service
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -22,7 +26,9 @@ import { AuthService } from '../../services/auth.service';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
+    MatMenuModule,
     RouterModule,
+    LogoComponent,
   ],
 })
 export class NavbarComponent {
