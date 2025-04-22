@@ -1,34 +1,12 @@
-<app-navbar/>
-<app-announcement-banner/>
-<app-auth-status/>
-<header focusOnNavigation class="header-background" aria-label="home-page-header">
-   <!-- header section-->
-   <div class="header-section">
-      <div class="header-headline">
-         <h1>Film App</h1>
-         <h2>All the movies</h2>
-      </div>
-      <div class="header-start">
-         <a mat-raised-button class="header-button" routerLink="create">Add Film</a>
-      </div>
-   </div>
+<header>
+  <app-navbar aria-label="Navigation Menu" />
+  <app-announcement-banner aria-label="Announcement Banner" />
 </header>
 
-<mat-divider/>
+<app-auth-status />
 
 <main class="home-page-container">
-
-   <div class="project-carousel">
-      <!-- project carousel header -->
-      <div class="project-carousel-header">
-         <h2>Recent Films</h2>
-
-         <a mat-button routerLink="/projects">
-            View all Films
-            <mat-icon matButtonIcon iconPositionEnd>chevron_right</mat-icon>
-         </a>
-      </div>
-   </div>
+  <p>Under contruction</p>
 </main>
 
-<app-footer />
+<app-footer aria-label="Site Footer" />

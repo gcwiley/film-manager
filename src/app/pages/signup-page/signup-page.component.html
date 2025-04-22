@@ -1,6 +1,7 @@
-<app-navbar />
-<app-announcement-banner />
-<app-auth-status />
+<header role="navigation">
+  <app-navbar aria-label="Navigation Menu"/>
+  <app-announcement-banner aria-label="Announcement Banner"/>
+</header>
 
 <main class="signup-page-container">
   <form [formGroup]="signUpForm" novalidate (ngSubmit)="onSubmitSignUp()">
@@ -50,4 +51,4 @@
   </form>
 </main>
 
-<app-footer />
+<app-footer aria-label="Site Footer"/>

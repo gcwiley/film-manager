@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-// import the angular material modules
+// angular material
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,11 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// import the shared components
+// shared components
 import {
   NavbarComponent,
   AnnouncementBannerComponent,
-  AuthStatusComponent,
   FooterComponent,
 } from '../../components';
 
@@ -41,7 +40,6 @@ import { AuthService } from '../../services/auth.service';
     MatIconModule,
     NavbarComponent,
     AnnouncementBannerComponent,
-    AuthStatusComponent,
     FooterComponent,
   ],
 })

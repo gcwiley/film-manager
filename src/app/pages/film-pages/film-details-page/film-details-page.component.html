@@ -1,13 +1,16 @@
-<app-navbar />
-<app-announcement-banner />
+<header role="navigation">
+  <app-navbar aria-label="Navigation Menu" />
+  <app-announcement-banner aria-label="Announcement Banner" />
+</header>
 
 <main class="film-details-page-container">
-   <article class="film-description">
-      <app-film-description />
-   </article>
+  <article class="film-description">
+    <app-film-description />
+  </article>
 
-   <aside class="film-details">
-      <app-film-details />
-   </aside>
+  <aside class="film-details">
+    <app-film-details />
+  </aside>
 </main>
-<app-footer />
+
+<app-footer aria-label="Site Footer" />

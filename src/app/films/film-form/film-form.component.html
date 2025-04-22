@@ -1,84 +1,81 @@
 <form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
-   <mat-card class="film-form" appearance="outlined">
-      <mat-card-header>
-         <mat-card-title>Add Film</mat-card-title>
-      </mat-card-header>
+  <mat-card class="film-form" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Add Film</mat-card-title>
+    </mat-card-header>
 
-      <mat-card-content>
-         <div class="row">
-            <div class="column">
-               <!-- TITLE (title)-->
-               <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Title</mat-label>
-                  <input matInput type="text" FormControlName="title" />
-                  @if (filmForm.controls['title'].hasError('required')) {
-                  <mat-error>Please enter the film's director</mat-error>
-                  }
-               </mat-form-field>
-            </div>
-         </div>
+    <mat-card-content>
+      <div class="row">
+        <div class="column">
+          <!-- TITLE (title)-->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" FormControlName="title" />
+            @if (filmForm.controls['title'].hasError('required')) {
+            <mat-error>Please enter the film's director</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
 
-         <div class="row">
-            <div class="column">
-               <!-- DIRECTOR (director)-->
-               <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Director</mat-label>
-                  <input matInput type="text" FormControlName="director" />
-                  @if (filmForm.controls['director'].hasError('required')) {
-                  <mat-error>Please enter the film's director</mat-error>
-                  }
-               </mat-form-field>
-            </div>
-         </div>
+      <div class="row">
+        <div class="column">
+          <!-- DIRECTOR (director)-->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Director</mat-label>
+            <input matInput type="text" FormControlName="director" />
+            @if (filmForm.controls['director'].hasError('required')) {
+            <mat-error>Please enter the film's director</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
 
-         <div class="row">
-            <div class="column">
-               <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
-               <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Release Date</mat-label>
-                  <input matInput type="text" FormControlName="releaseDate" />
-                  @if (filmForm.controls['releaseDate'].hasError('required')) {
-                  <mat-error>Please enter the film's director</mat-error>
-                  }
-               </mat-form-field>
-            </div>
+      <div class="row">
+        <div class="column">
+          <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Release Date</mat-label>
+            <input matInput type="text" FormControlName="releaseDate" />
+            @if (filmForm.controls['releaseDate'].hasError('required')) {
+            <mat-error>Please enter the film's director</mat-error>
+            }
+          </mat-form-field>
+        </div>
 
-            <div class="column">
-               <!-- GENRE (genre)-->
-               <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Genre</mat-label>
-                  <mat-select matNativeControl formControlName="genre">
-                     <mat-option value="horror">Horror</mat-option>
-                     <mat-option value="comedy">Comedy</mat-option>
-                     <mat-option value="Sci-Fi">Sci-Fi</mat-option>
-                  </mat-select>
-                  @if (filmForm.controls['genre'].hasError('required')) {
-                  <mat-error>Please enter the film's director</mat-error>
-                  }
-               </mat-form-field>
-            </div>
-         </div>
+        <div class="column">
+          <!-- GENRE (genre)-->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Genre</mat-label>
+            <mat-select matNativeControl formControlName="genre">
+              <mat-option value="horror">Horror</mat-option>
+              <mat-option value="comedy">Comedy</mat-option>
+              <mat-option value="Sci-Fi">Sci-Fi</mat-option>
+            </mat-select>
+            @if (filmForm.controls['genre'].hasError('required')) {
+            <mat-error>Please enter the film's director</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
 
-         <div class="row">
-            <div class="column">
-               <!-- SUMMARY (summary)-->
-               <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Summary</mat-label>
-                  <textarea
-                     matInput
-                     rows="10"
-                     FormControlName="summary"></textarea>
-                  @if (filmForm.controls['summary'].hasError('required')) {
-                  <mat-error>Please enter the film's director</mat-error>
-                  }
-               </mat-form-field>
-            </div>
-         </div>
-      </mat-card-content>
+      <div class="row">
+        <div class="column">
+          <!-- SUMMARY (summary)-->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Summary</mat-label>
+            <textarea matInput rows="10" FormControlName="summary"></textarea>
+            @if (filmForm.controls['summary'].hasError('required')) {
+            <mat-error>Please enter the film's director</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
 
-      <mat-card-actions class="card-actions">
-         <button mat-flat-button type="submit">Add Film</button>
-         <button mat-flat-button type="reset">Clear</button>
-      </mat-card-actions>
-   </mat-card>
+    <mat-card-actions class="card-actions">
+      <button mat-flat-button type="submit">Add Film</button>
+      <button mat-flat-button type="reset">Clear</button>
+    </mat-card-actions>
+  </mat-card>
 </form>

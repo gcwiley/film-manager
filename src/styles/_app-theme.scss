@@ -6,7 +6,6 @@
 @use '../app/films/film-form/film-form-theme';
 @use '../app/films/film-grid/film-grid-theme';
 @use '../app/films/film-table/film-table-theme';
-@use '../app/films/film-search/film-search-theme';
 @use '../app/films/recent-films/recent-films-theme';
 
 // PAGE COMPONENT THEMES
@@ -39,7 +38,6 @@
    @include film-form-theme.theme($theme);
    @include film-grid-theme.theme($theme);
    @include film-table-theme.theme($theme);
-   @include film-search-theme.theme($theme);
    @include recent-films-theme.theme($theme);
 
    // page themes

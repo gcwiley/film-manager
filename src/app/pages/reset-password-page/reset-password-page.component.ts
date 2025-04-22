@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
-// import the shared components
-import { NavbarComponent, FooterComponent} from '../../components'
-
+// shared components
+import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../components';
 
 @Component({
-    standalone: true,
-    selector: 'app-reset-password-page',
-    templateUrl: './reset-password-page.component.html',
-    styleUrl: './reset-password-page.component.scss',
-    imports: [NavbarComponent, FooterComponent]
+  standalone: true,
+  selector: 'app-reset-password-page',
+  templateUrl: './reset-password-page.component.html',
+  styleUrl: './reset-password-page.component.scss',
+  imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent],
 })
 export class ResetPasswordPageComponent {}
