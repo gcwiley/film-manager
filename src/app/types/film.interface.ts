@@ -1,4 +1,4 @@
-// define the film interface data transfer object
+// define the film interface
 export interface FilmDto {
     id: string;
     title: string;

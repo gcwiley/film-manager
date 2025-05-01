@@ -10,6 +10,7 @@ import { FilmService } from '../../services/film.service';
 import { FilmDto } from '../../types/film.interface';
 
 @Component({
+  standalone: true,
   selector: 'app-recent-films',
   templateUrl: './recent-films.component.html',
   styleUrl: './recent-films.component.scss',
