@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 // film service and interface
 import { ApiService } from '../../services/api.service';
-import { FilmDto } from '../../types/film.interface';
+import { Film } from '../../types/film.interface';
 
 @Component({
   selector: 'app-film-grid',
@@ -27,7 +27,7 @@ import { FilmDto } from '../../types/film.interface';
   ],
 })
 export class FilmGridComponent implements OnInit {
-  films: FilmDto[] = [];
+  films: Film[] = [];
 
   cols = 5;
   rowHeight = '1:1';

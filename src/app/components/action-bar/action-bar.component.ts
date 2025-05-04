@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
   selector: 'app-action-bar',
   templateUrl: './action-bar.component.html',
   styleUrl: './action-bar.component.scss',
