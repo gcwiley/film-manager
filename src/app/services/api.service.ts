@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { QuerySnapshot, DocumentData,  } from '@angular/fire/firestore';
 
-// import the film interface
+// film interface
 import { Film } from '../types/film.interface';
 
 @Injectable({
