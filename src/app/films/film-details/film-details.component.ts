@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
@@ -30,10 +25,7 @@ export class FilmDetailsComponent implements OnInit, OnDestroy {
   public hasError = false;
   public isLoading = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private filmService: FilmService
-  ) {}
+  constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 
   public ngOnInit(): void {
     this.getFilmById();
@@ -60,8 +52,7 @@ export class FilmDetailsComponent implements OnInit, OnDestroy {
           this.film = film;
         },
         error: (error) => {
-          this.hasError = true,
-          console.error('Error fetching film details:', error);
+          (this.hasError = true), console.error('Error fetching film details:', error);
         },
       });
   }

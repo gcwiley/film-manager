@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs';
@@ -26,10 +21,7 @@ export class FilmDescriptionComponent implements OnInit, OnDestroy {
   public hasError = false;
   public isLoading = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private filmService: FilmService
-  ) {}
+  constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 
   public ngOnInit(): void {
     this.getFilmById();

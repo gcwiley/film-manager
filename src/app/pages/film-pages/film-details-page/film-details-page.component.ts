@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-// import the shared components
-import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../../components';
+// shared components
+import { NavbarComponent, AnnouncementBarComponent, FooterComponent } from '../../../components';
 
-// import the film components
+// film components
 import { FilmDetailsComponent, FilmDescriptionComponent } from '../../../films';
 
 @Component({
@@ -14,7 +14,7 @@ import { FilmDetailsComponent, FilmDescriptionComponent } from '../../../films';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         NavbarComponent,
-        AnnouncementBannerComponent,
+        AnnouncementBarComponent,
         FooterComponent,
         FilmDetailsComponent,
         FilmDescriptionComponent,

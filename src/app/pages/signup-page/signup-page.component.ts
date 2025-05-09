@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 // angular material
@@ -15,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 // shared components
 import {
   NavbarComponent,
-  AnnouncementBannerComponent,
+  AnnouncementBarComponent,
   FooterComponent,
 } from '../../components';
 
@@ -39,7 +44,7 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatIconModule,
     NavbarComponent,
-    AnnouncementBannerComponent,
+    AnnouncementBarComponent,
     FooterComponent,
   ],
 })
@@ -65,7 +70,10 @@ export class SignupPageComponent {
     }
 
     this.authService
-      .createUserWithEmailAndPassword(this.signUpForm.value.email!, this.signUpForm.value.password!)
+      .createUserWithEmailAndPassword(
+        this.signUpForm.value.email!,
+        this.signUpForm.value.password!
+      )
       .subscribe({
         next: () => {
           // navigates user to homepage
@@ -73,7 +81,7 @@ export class SignupPageComponent {
         },
         error: () => {
           this.snackbar.open('Unable to create new account', 'CLOSE', {
-            duration: 3000,
+            duration: 5000,
           });
         },
       });

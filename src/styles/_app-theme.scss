@@ -21,7 +21,7 @@
 @use '../app/pages/signup-page/signup-page-theme';
 
 // COMPONENT THEMES
-@use '../app//components/announcement-banner/announcement-banner-theme';
+@use '../app//components/announcement-bar/announcement-bar-theme';
 @use '../app/components/carousel/carousel-theme';
 @use '../app/components/carousel-container/carousel-container-theme';
 @use '../app/components/confirm-dialog/confirm-dialog-theme';
@@ -53,7 +53,7 @@
    @include signup-page-theme.theme($theme);
 
    // components themes
-   @include announcement-banner-theme.theme($theme);
+   @include announcement-bar-theme.theme($theme);
    @include carousel-theme.theme($theme);
    @include carousel-container-theme.theme($theme);
    @include confirm-dialog-theme.theme($theme);

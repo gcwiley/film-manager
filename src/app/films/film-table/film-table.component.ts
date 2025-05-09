@@ -1,27 +1,9 @@
-
-
 @Component({
-   standalone: true,
-   selector: 'app-film-table',
-   templateUrl: './film-table.component.html',
-   styleUrl: './film-table.component.scss',
-   changeDetection: ChangeDetectionStrategy.OnPush,
-   imports: [
-      FormsModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatIconModule,
-      MatInputModule,
-      MatMenuModule,
-      MatPaginatorModule,
-      MatSortModule,
-      MatTableModule,
-      MatTooltipModule,
-      PortalModule,
-      RouterLink,
-      FilmDeleteDirective,
-   ],
+  standalone: true,
+  selector: 'app-film-table',
+  templateUrl: './film-table.component.html',
+  styleUrl: './film-table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [],
 })
-export class FilmTableComponent implements OnInit, OnDestroy {
- 
-}
+export class FilmTableComponent implements OnInit, OnDestroy {}

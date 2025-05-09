@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 // import the shared components
 import {
    NavbarComponent,
-   AnnouncementBannerComponent,
+   AnnouncementBarComponent,
    FooterComponent,
 } from '../../../components';
 
@@ -22,7 +22,7 @@ import { FilmListComponent } from '../../../films';
    imports: [
       MatDividerModule,
       NavbarComponent,
-      AnnouncementBannerComponent,
+      AnnouncementBarComponent,
       FooterComponent,
       FilmListComponent,
    ],
