@@ -2,8 +2,9 @@
 { pkgs, ... }: {
   channel = "stable-23.11"; # "stable-23.11" or "unstable"
   packages = [
-    pkgs.nodejs
+    pkgs.nodejs_latest
     pkgs.nodePackages.firebase-tools
+    pkgs.nodejs_latest
   ];
   idx.extensions = [
     "angular.ng-template"
