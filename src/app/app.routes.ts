@@ -72,6 +72,7 @@ export const routes: Routes = [
         (m) => m.NotFoundPageComponent
       ),
   },
+  // fix this!
   {
     path: '**',
     redirectTo: '/404',
