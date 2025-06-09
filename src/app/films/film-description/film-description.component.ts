@@ -18,9 +18,7 @@ import { Film } from '../../types/film.interface';
 export class FilmDescriptionComponent implements OnInit, OnDestroy {
   film!: Film; // initialize explicitly
   private destroy$ = new Subject<void>(); // subject to signal destruction
-  public hasError = false;
-  public isLoading = false;
-
+  
   constructor(private route: ActivatedRoute, private filmService: FilmService) {}
 
   public ngOnInit(): void {
@@ -36,8 +34,6 @@ export class FilmDescriptionComponent implements OnInit, OnDestroy {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
       console.error('Film ID not found in route parameters.');
-      this.hasError = true;
-      this.isLoading = false;
       return;
     }
     this.filmService

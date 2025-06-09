@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 // shared components
 import {
    NavbarComponent,
-   AnnouncementBarComponent,
    FooterComponent,
 } from '../../components/index';
 
@@ -13,6 +12,6 @@ import {
    templateUrl: './about-page.component.html',
    styleUrl: './about-page.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
-   imports: [NavbarComponent, AnnouncementBarComponent, FooterComponent],
+   imports: [NavbarComponent, FooterComponent],
 })
 export class AboutPageComponent {}

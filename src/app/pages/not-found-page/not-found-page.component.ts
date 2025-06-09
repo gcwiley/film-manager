@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // shared components
-import { NavbarComponent, AnnouncementBarComponent, FooterComponent } from '../../components';
+import { NavbarComponent, FooterComponent } from '../../components';
 
 // angular material
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     RouterModule,
     NavbarComponent,
-    AnnouncementBarComponent,
     FooterComponent,
     MatButtonModule,
   ],

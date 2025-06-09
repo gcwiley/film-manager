@@ -1,17 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-// import angular material
+// angular material
 import { MatDividerModule } from '@angular/material/divider';
 
-// import the shared components
+// shared components
 import {
    NavbarComponent,
    AnnouncementBarComponent,
    FooterComponent,
 } from '../../../components';
-
-// import the film grid component
-import { FilmListComponent } from '../../../films';
 
 @Component({
    standalone: true,
@@ -24,7 +21,6 @@ import { FilmListComponent } from '../../../films';
       NavbarComponent,
       AnnouncementBarComponent,
       FooterComponent,
-      FilmListComponent,
    ],
 })
 export class FilmGridPageComponent {}

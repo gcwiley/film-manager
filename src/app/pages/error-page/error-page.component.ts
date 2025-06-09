@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 // shared components
-import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '../../components';
+import { FooterComponent } from '../../components';
 
 @Component({
   standalone: true,
@@ -9,6 +9,6 @@ import { NavbarComponent, AnnouncementBannerComponent, FooterComponent } from '.
   templateUrl: './error-page.component.html',
   styleUrl: './error-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavbarComponent, AnnouncementBannerComponent, FooterComponent],
+  imports: [FooterComponent],
 })
 export class ErrorPageComponent {}
