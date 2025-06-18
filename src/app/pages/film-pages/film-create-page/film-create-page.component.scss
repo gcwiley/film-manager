@@ -8,12 +8,14 @@
     flex-direction: row;
 }
 
-.film-form-container {
-    flex-basis: 70%;
-    max-width: 70%;
+// fix this!
+.main-content {
+    flex-basis: constants.$flex-basis;
+    max-width: constants.$max-width;
 }
 
-.recent-films-container {
+// fix this
+.side-content {
     flex-basis: 30%;
     max-width: 30%;
 }

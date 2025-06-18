@@ -44,7 +44,6 @@ export class FilmDescriptionComponent implements OnInit, OnDestroy {
           this.film = film;
         },
         error: (error) => {
-          this.hasError = true;
           console.error('Error fetching film description:', error);
         },
       });
