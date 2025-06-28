@@ -6,7 +6,6 @@ import { MatDividerModule } from '@angular/material/divider';
 // shared components
 import {
    NavbarComponent,
-   AnnouncementBarComponent,
    FooterComponent,
 } from '../../../components';
 
@@ -19,7 +18,6 @@ import {
    imports: [
       MatDividerModule,
       NavbarComponent,
-      AnnouncementBarComponent,
       FooterComponent,
    ],
 })

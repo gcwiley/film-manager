@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 // shared components
 import {
   NavbarComponent,
-  AnnouncementBarComponent,
   AuthStatusComponent,
   ActionBarComponent,
   FooterComponent,
@@ -32,7 +31,6 @@ import { FilmGridComponent, RecentFilmsComponent} from '../../films'
     MatDividerModule,
     MatIconModule,
     NavbarComponent,
-    AnnouncementBarComponent,
     AuthStatusComponent,
     FooterComponent,
     ActionBarComponent,

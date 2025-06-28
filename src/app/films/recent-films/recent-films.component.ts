@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, catchError, of } from 'rxjs';
 
@@ -21,7 +22,8 @@ import { Film } from '../../types/film.interface';
 export class RecentFilmsComponent implements OnInit {
   public recentFilms$!: Observable<Film[]>;
 
-  constructor(private filmService: FilmService) {}
+  // switch to inject method
+  private filmService = inject(FilmService);
 
   public ngOnInit(): void {
     // get the observable stream of recently added films

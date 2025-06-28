@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/prefer-inject */
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -20,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // shared components
-import { NavbarComponent, FooterComponent } from '../../components';
+import { FooterComponent } from '../../components';
 
 // auth service
 import { AuthService } from '../../services/auth.service';
@@ -47,7 +48,6 @@ const ERROR_MESSAGES = {
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    NavbarComponent,
     FooterComponent,
   ],
 })

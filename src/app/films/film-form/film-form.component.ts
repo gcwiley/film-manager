@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -16,9 +16,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// film service
+// film service and interface
 import { FilmService } from '../../services/film.service';
-import { FilmInputDto, FilmDto } from '../../types/film.interface';
+import { FilmInput, Film } from '../../types/film.interface';
 
 @Component({
   standalone: true,
@@ -42,15 +42,14 @@ import { FilmInputDto, FilmDto } from '../../types/film.interface';
 export class FilmFormComponent implements OnInit {
   public mode = 'create';
   private id!: string | null;
-  private film!: FilmDto;
+  private film!: Film;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private filmService: FilmService,
-    private router: Router,
-    public route: ActivatedRoute,
-    private snackbar: MatSnackBar
-  ) {}
+  // inject dependencies
+  private formBuilder = inject(FormBuilder);
+  private filmService = inject(FilmService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private snackBar = inject(MatSnackBar);
 
   // create the film form
   filmForm = this.formBuilder.group({
@@ -71,13 +70,10 @@ export class FilmFormComponent implements OnInit {
         this.mode = 'edit';
         // retrieves the value of the 'id' paramater from the paramMap
         this.id = paramMap.get('id');
-        // 'this.id!' uses the non-null assertion operator to tell Typescript that the 'this.id' is not null.
-        // subscribes to the observable returned by getFilmById - will recieve film data when it's available.
         this.filmService.getFilmById(this.id!).subscribe((film) => {
           this.film = film;
-          // overrides values of initial form controls
           this.filmForm.setValue({
-            // set value for every form control
+        
             title: this.film.title,
             director: this.film.director,
             releaseDate: this.film.releaseDate,
@@ -85,9 +81,9 @@ export class FilmFormComponent implements OnInit {
             summary: this.film.summary,
           });
         });
-        // if the paramMap does NOT has an 'id' parameter, this else block is executed.
+        // if the paramMap does NOT ha block is executed.
       } else {
-        // the component sets it mode to 'create', indicating that it's being used to create a new film
+
         this.mode = 'create';
       }
     });
@@ -97,24 +93,24 @@ export class FilmFormComponent implements OnInit {
   public onSaveFilm(): void {
     if (this.mode === 'create') {
       this.filmService
-        .addFilm(this.filmForm.value as FilmInputDto)
+        .addFilm(this.filmForm.value as FilmInput)
         .pipe(first())
         .subscribe({
           next: (film) => {
             // resets the form
             this.filmForm.reset(film);
             // displays a success message
-            this.snackbar.open('Film added', 'Close', { duration: 30000 });
+            this.snackBar.open('Film added', 'Close', { duration: 30000 });
             // navigates user back to homepage
             this.router.navigateByUrl('/');
           },
           error: () => {
-            this.snackbar.open('Error', 'Close', { duration: 30000 });
+            this.snackBar.open('Error', 'Close', { duration: 30000 });
           },
         });
     } else {
       this.filmService
-        .updateFilmById(this.id!, this.filmForm.value as FilmInputDto)
+        .updateFilmById(this.id!, this.filmForm.value as FilmInput)
         .subscribe(() => {
           // navigates user back to homepage
           this.router.navigateByUrl('/');

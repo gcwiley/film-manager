@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/prefer-inject */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
@@ -19,12 +20,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // shared components
 import {
-  NavbarComponent,
-  AnnouncementBarComponent,
   FooterComponent,
 } from '../../components';
 
-// import the auth service
+// auth service
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -43,8 +42,6 @@ import { AuthService } from '../../services/auth.service';
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    NavbarComponent,
-    AnnouncementBarComponent,
     FooterComponent,
   ],
 })

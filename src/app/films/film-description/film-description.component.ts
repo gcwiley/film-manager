@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs';
+
+// rxjs
+import { Subject, takeUntil } from 'rxjs';
 
 // film service and interface
 import { FilmService } from '../../services/film.service';
@@ -19,7 +20,9 @@ export class FilmDescriptionComponent implements OnInit, OnDestroy {
   film!: Film; // initialize explicitly
   private destroy$ = new Subject<void>(); // subject to signal destruction
   
-  constructor(private route: ActivatedRoute, private filmService: FilmService) {}
+  // inject dependencies 
+  private route = inject(ActivatedRoute);
+  private filmService = inject(FilmService);
 
   public ngOnInit(): void {
     this.getFilmById();
