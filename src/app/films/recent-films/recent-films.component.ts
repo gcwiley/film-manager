@@ -1,6 +1,8 @@
 
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// rxjs
 import { Observable, catchError, of } from 'rxjs';
 
 // angular material
@@ -27,7 +29,7 @@ export class RecentFilmsComponent implements OnInit {
 
   public ngOnInit(): void {
     // get the observable stream of recently added films
-    this.recentFilms$ = this.filmService.getRecentlyAddedFilms().pipe(
+    this.recentFilms$ = this.filmService.getFilms().pipe(
       catchError((error) => {
         console.error('Error getting recent films.', error);
         return of([]);

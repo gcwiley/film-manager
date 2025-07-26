@@ -1,86 +1,54 @@
 import { Injectable, inject } from '@angular/core';
+
+// firestore
 import {
   Firestore,
-  QueryConstraint,
   addDoc,
   collection,
   doc,
   getDoc,
   getDocs,
-  limit,
-  orderBy,
-  query,
   updateDoc,
-  where,
 } from '@angular/fire/firestore';
-import { deleteDoc, DocumentData, QuerySnapshot } from 'firebase/firestore';
-import { Observable, combineLatest, from, map, switchMap, of } from 'rxjs';
-import { catchError } from 'rxjs';
-import { Pagination } from '../types/pageination.interface';
-import { Film, FilmInput } from '../types/film.interface';
+import { deleteDoc } from 'firebase/firestore';
 
-interface FilmListInput {
-  page: number;
-  limit: number;
-  sort: keyof Film;
-  order: 'asc' | 'desc';
-  query: string;
-}
+// rxjs
+import { Observable, from, map, switchMap, of, catchError } from 'rxjs';
+
+// film interface
+import { Film, FilmInput } from '../types/film.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilmService {
+  // inject dependencies
   private firestore: Firestore = inject(Firestore);
 
-  // fetches a paginated list of films from firestore based on the provided 'input'
-  // it supports sorting, ordering, and filtering, returning the films as an Observable stream.
-  public getFilms(input: FilmListInput): Observable<Pagination<Film>> {
-    // creates a reference to the films collection within firestore
+  // FETCH ALL FILM FROM FIRESTORE DATABASE - FETCH ALL FILMS
+  // fetches all documents from the 'films' collection in Firestore
+  // returns an observable that emits an array of film objects
+  public getFilms(): Observable<Film[]> {
+    // create a reference to the 'films' collection
     const filmsRef = collection(this.firestore, 'films');
 
-    // this code is constructing an array of constraints to be used in a firestore query.
-    // - sort: order the results based on a field (input.sort), in ascending or descending order (input.order)
-    // - limit: restrict the number of results to a certain maximum (input.limit)
-    const queryConstraints: QueryConstraint[] = [
-      orderBy(input.sort, input.order),
-      limit(input.limit),
-    ];
-
-    if (input.query) {
-      queryConstraints.push(
-        where(input.sort, '>=', input.query.toLowerCase()),
-        where(input.sort, '<=', input.query.toLowerCase() + '\uf8ff')
-      );
-    }
-
-    const queryRef = query(filmsRef, ...queryConstraints);
-
-    // fetches all the docs in the collection, then counts how many - res.size returns the number of items in the collection
-    const totalCounts$ = from(getDocs(filmsRef)).pipe(map((res) => res.size));
-    // fetches the documents that match the constraints previously provided, then maps to the doc.data() adding an id to them.
-    const items$ = from(getDocs(queryRef)).pipe(
-      map((res) => {
-        // initializes an empty array
-        const array: Film[] = [];
-        res.forEach((doc) => {
+    // getDocs() returns a promise, so we use from() to convert it into an observable
+    return from(getDocs(filmsRef)).pipe(
+      map((querySnapshot) => {
+        // create an empty array of film type
+        const films: Film[] = [];
+        // map the document to an array of film objects
+        querySnapshot.forEach((doc) => {
           const data = doc.data() as Omit<Film, 'id'>;
-          // creates a new object of type FilmDto, adding the id property to it
-          array.push({ id: doc.id, ...data });
+          films.push({ id: doc.id, ...data });
         });
-        return array;
+        return films;
       }),
-      // if there is an error, it will return an observabled with that error
-      catchError((error) => of(error))
-    );
-
-    // combines the count and the items into a single object.
-    return combineLatest([totalCounts$, items$]).pipe(
-      map(([totalCount, items]) => {
-        return {
-          items,
-          totalCount,
-        };
+      // a catchError block is included to log any potential errors during the fetch operation and return an empty array, preventing your application from crashing.
+      catchError((error) => {
+        // log the error and return an empty array as a safe fallback
+        console.error('Error fetching films:', error);
+        return of([]);
       })
     );
   }
@@ -102,8 +70,8 @@ export class FilmService {
 
   // fetches a single film from firestore based on the provided id
   public getFilmById(id: string): Observable<Film> {
-    const reference = doc(this.firestore, 'films', id);
-    return from(getDoc(reference)).pipe(map((doc) => ({ id, ...doc.data() } as Film)));
+    const docReference = doc(this.firestore, 'films', id);
+    return from(getDoc(docReference)).pipe(map((doc) => ({ id, ...doc.data() } as Film)));
   }
 
   // deletes a film from firestore based on the provided id
@@ -116,13 +84,5 @@ export class FilmService {
   public updateFilmById(id: string, body: Partial<Film>): Observable<Film> {
     const ref = doc(this.firestore, 'films', id);
     return from(updateDoc(ref, { ...body })).pipe(switchMap(() => this.getFilmById(id)));
-  }
-
-  // get recent films
-  public getRecentlyAddedFilms(): Observable<any> {
-    // create a reference to film collection within firestore
-    const reference = collection(this.firestore, 'films');
-    const films = from(getDocs(reference));
-    return films;
   }
 }

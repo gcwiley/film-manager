@@ -50,9 +50,8 @@ export class FilmDetailsComponent implements OnInit, OnDestroy {
         next: (film) => {
           this.film = film;
         },
-        // fix this!
         error: (error) => {
-          (this.hasError = true), console.error('Error fetching film details:', error);
+          console.error('Error fetching film details:', error);
         },
       });
   }

@@ -1,50 +1,55 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+
+// rxdb
 import { first, map, Observable } from 'rxjs';
+
+// confirm service
 import { ConfirmDialogService } from './confirm-dialog.service';
 
 export enum CustomConfirmDialog {
-   Delete,
-   UnsavedWork,
+  Delete,
+  UnsavedWork,
 }
 
 @Injectable({
-   providedIn: 'root',
+  providedIn: 'root',
 })
 export class CustomConfirmDialogService {
-   constructor(private confirm: ConfirmDialogService) {}
+  // independencies
+  private confirm = inject(ConfirmDialogService);
 
-   public openCustomConfirmDialog(type: CustomConfirmDialog): Observable<boolean> {
-      const title = this.getTitle(type);
-      const content = this.getContent(type);
-      return this.open(title, content);
-   }
+  public openCustomConfirmDialog(type: CustomConfirmDialog): Observable<boolean> {
+    const title = this.getTitle(type);
+    const content = this.getContent(type);
+    return this.open(title, content);
+  }
 
-   private getTitle(type: CustomConfirmDialog) {
-      switch (type) {
-         case CustomConfirmDialog.Delete:
-            return 'custom-confirm-dialog.delelte-post.content - fix this!';
-         case CustomConfirmDialog.UnsavedWork:
-            return 'fix-this!';
-         default:
-            return 'fix-this!';
-      }
-   }
+  private getTitle(type: CustomConfirmDialog) {
+    switch (type) {
+      case CustomConfirmDialog.Delete:
+        return 'custom-confirm-dialog.delelte-post.content - fix this!';
+      case CustomConfirmDialog.UnsavedWork:
+        return 'fix-this!';
+      default:
+        return 'fix-this!';
+    }
+  }
 
-   private getContent(type: CustomConfirmDialog) {
-      switch (type) {
-         case CustomConfirmDialog.Delete:
-            return 'custom-confirm-dialog.delete-post.content';
-         case CustomConfirmDialog.UnsavedWork:
-            return 'fix-this!';
-         default:
-            return 'fix-this!';
-      }
-   }
+  private getContent(type: CustomConfirmDialog) {
+    switch (type) {
+      case CustomConfirmDialog.Delete:
+        return 'custom-confirm-dialog.delete-post.content';
+      case CustomConfirmDialog.UnsavedWork:
+        return 'fix-this!';
+      default:
+        return 'fix-this!';
+    }
+  }
 
-   private open(title: string, content: string): Observable<boolean> {
-      return this.confirm.open(title, content).pipe(
-         first(),
-         map((res) => !!res)
-      );
-   }
+  private open(title: string, content: string): Observable<boolean> {
+    return this.confirm.open(title, content).pipe(
+      first(),
+      map((res) => !!res)
+    );
+  }
 }

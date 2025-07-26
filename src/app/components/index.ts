@@ -1,8 +1,6 @@
 export { ActionBarComponent } from "./action-bar/action-bar.component";
 export { AnnouncementBarComponent } from "./announcement-bar/announcement-bar.component";
 export { AuthStatusComponent } from "./auth-status/auth-status.component";
-export { CarouselComponent } from "./carousel/carousel.component";
-export { CarouselContainerComponent } from "./carousel-container/carousel-container.component";
 export { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";
 export { FooterComponent } from "./footer/footer.component";
 export { HeroComponent } from "./hero/hero.component";

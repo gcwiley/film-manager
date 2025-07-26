@@ -1,5 +1,18 @@
-<mat-list class="film-list" role="list">
-    <span>Film Details</span>
+<mat-list class="film-list" role="list" aria-label="Film Details">
+  <span mat-subheader>Film Details</span>
+  <!-- director -->
+  <mat-list-item lines="2" role="listitem">
+    <span matListItemTitle>Director</span>
+    <span matListItemLine>{{ film.director }}</span>
+  </mat-list-item>
+  <!-- release date -->
+  <mat-list-item lines="2" role="listitem">
+    <span matListItemTitle>Date Released</span>
+    <span matListItemLine>{{ film.releaseDate | date }}</span>
+  </mat-list-item>
+  <!-- genre -->
+  <mat-list-item lines="2" role="listitem">
+    <span matListItemTitle>Genre</span>
+    <span matListItemLine>{{ film.genre }}</span>
+  </mat-list-item>
 </mat-list>
-
-<!-- fix this! -->

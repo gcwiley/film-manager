@@ -1,17 +1,34 @@
-<mat-toolbar>
-  <!-- Use *ngIf with the async pipe -->
-  <ng-container *ngIf="isLoggedIn$ | async as isLoggedIn; else loggedOutContent">
-    <!-- Check if userEmail$ has a value -->
-    <p *ngIf="userEmail$ | async as email; else loggedInNoEmail">Logged in - {{ email }}</p>
-    <ng-template #loggedInNoEmail>
-      <p>Logged in</p>
-    </ng-template>
-    <!-- Add Sign Out button maybe? Or handle in navbar -->
-  </ng-container>
+<div class="auth-status-banner" aria-label="Authentication Banner">
+  <div class="auth-status-banner-content">
+    @if (isUserLoggedIn$ | async) {
+    <!-- user is logged in -->
+    @if (userEmail$ | async; as email) {
+    <mat-chip-set>
+      <mat-chip
+        >Logged in as <span>{{ email }}</span></mat-chip
+      >
+    </mat-chip-set>
+    <p>
+      Logged in as <span>{{ email }}</span>
+    </p>
+    } @else {
+    <mat-chip-set>
+      <mat-chip>Logged in</mat-chip>
+    </mat-chip-set>
+    }
 
-  <ng-template #loggedOutContent>
-    <p>Logged Out</p>
-    <!-- Link to Sign In page -->
-    <a mat-flat-button routerLink="/signin">Sign In</a>
-  </ng-template>
-</mat-toolbar>
+    <span class="flex-spacer"></span>
+
+    <!-- sign out button -->
+    <button mat-flat-button type="button" (click)="onClickSignOut()" aria-label="Sign out">
+      Sign Out
+    </button>
+    } @else {
+    <!-- user is currently logged out -->
+    <p>Signed Out</p>
+
+    <span class="flex-spacer"></span>
+    <a mat-flat-button routerLink="/signin" aria-label="Sign In">Sign In</a>
+    }
+  </div>
+</div>

@@ -1,20 +1,22 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 
-// import angular material modules
+// angular material
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
-   providedIn: 'root',
+  providedIn: 'root',
 })
 export class CustomErrorHandlerService {
-   constructor(private ngZone: NgZone, private snackBar: MatSnackBar) {}
+  // inject dependencies
+  private ngZone = inject(NgZone);
+  private snackBar = inject(MatSnackBar);
 
-   public handleError(error: unknown): void {
-      this.ngZone.run(() => {
-         // opens a snackbar with a message - fix this!
-         this.snackBar.open('error.unexpected-exception', 'danger');
-      });
+  public handleError(error: unknown): void {
+    this.ngZone.run(() => {
+      // opens a snackbar with a message - fix this!
+      this.snackBar.open('error.unexpected-exception', 'danger');
+    });
 
-      throw error;
-   }
+    throw error;
+  }
 }
