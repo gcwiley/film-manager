@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
@@ -32,7 +32,9 @@ import { AuthService } from '../../services/auth.service';
   ],
 })
 export class NavbarComponent {
-  constructor(public authService: AuthService, private router: Router) {}
+  // inject dependencies
+  public authService = inject(AuthService);
+  public router = inject(Router);
 
   // signs out current user
   public onClickSignOut(): void {

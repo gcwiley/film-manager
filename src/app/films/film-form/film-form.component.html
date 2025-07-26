@@ -10,6 +10,7 @@
           <!-- TITLE (title)-->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Title</mat-label>
+            <!-- fix this! -->
             <input matInput type="text" FormControlName="title" />
             @if (filmForm.controls['title'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
@@ -23,6 +24,7 @@
           <!-- DIRECTOR (director)-->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Director</mat-label>
+            <!-- fix this! -->
             <input matInput type="text" FormControlName="director" />
             @if (filmForm.controls['director'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
@@ -44,7 +46,7 @@
         </div>
 
         <div class="column">
-          <!-- GENRE (genre)-->
+          <!-- genre -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Genre</mat-label>
             <mat-select matNativeControl formControlName="genre">
@@ -61,7 +63,7 @@
 
       <div class="row">
         <div class="column">
-          <!-- SUMMARY (summary)-->
+          <!-- summary -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Summary</mat-label>
             <textarea matInput rows="10" FormControlName="summary"></textarea>

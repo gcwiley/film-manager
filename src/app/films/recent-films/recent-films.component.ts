@@ -22,7 +22,7 @@ import { Film } from '../../types/film.interface';
 export class RecentFilmsComponent implements OnInit {
   public recentFilms$!: Observable<Film[]>;
 
-  // switch to inject method
+  // inject dependencies
   private filmService = inject(FilmService);
 
   public ngOnInit(): void {

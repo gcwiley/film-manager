@@ -1,5 +1,21 @@
-// you can add global styles to this file, and also import other style files
+@use '@angular/material' as mat;
 
-@use 'styles/styles.scss';
-// import the custom theme
-@use './styles/theme';
+html {
+  color-scheme: light dark;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$orange-palette,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}

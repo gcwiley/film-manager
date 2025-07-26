@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
@@ -10,10 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 // film service and interface
-import { ApiService } from '../../services/api.service';
+import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
 @Component({
+  standalone: true,
   selector: 'app-film-grid',
   templateUrl: './film-grid.component.html',
   styleUrl: './film-grid.component.scss',
@@ -35,8 +36,9 @@ export class FilmGridComponent implements OnInit {
   colspan = 1;
   rowspan = 1;
 
-  // inject the film service
-  constructor(private filmService: ApiService, private breakpointObserver: BreakpointObserver) {}
+  // inject dependencies
+  private filmService = inject(FilmService);
+  private breakpointObserver = inject(BreakpointObserver);
 
   public ngOnInit(): void {
     this.getFilms();

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; // used for async pipe
-import { Observable } from 'rxjs';
-import { map } from 'rxjs';
+
+// rxjs
+import { Observable, map } from 'rxjs';
 
 // auth service
 import { AuthService } from '../../services/auth.service';
@@ -20,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule],
 })
 export class AuthStatusComponent {
+  // inject dependencies
   private authService = inject(AuthService);
 
   // expose the isAuthenticated observable from the service
