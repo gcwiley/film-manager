@@ -1,4 +1,3 @@
-export { ActionBarComponent } from "./action-bar/action-bar.component";
 export { AnnouncementBarComponent } from "./announcement-bar/announcement-bar.component";
 export { AuthStatusComponent } from "./auth-status/auth-status.component";
 export { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";

@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FilmService } from '../../services/film.service';
 import { Film } from '../../types/film.interface';
 
-@Component({ 
+@Component({
   standalone: true,
   selector: 'app-recent-films',
   templateUrl: './recent-films.component.html',

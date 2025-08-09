@@ -54,7 +54,7 @@ export class SigninPageComponent implements OnInit {
 
   // inject dependencies
   private formBuilder = inject(FormBuilder);
-  private authservice = inject(AuthService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
@@ -100,14 +100,14 @@ export class SigninPageComponent implements OnInit {
           if (user) {
             this.router.navigateByUrl('/');
           } else {
-            this.snackbar.open(this.errorMessage!, 'CLOSE', {
+            this.snackBar.open(this.errorMessage!, 'CLOSE', {
               duration: 5000,
             });
           }
         },
         error: () => {
           this.isLoading = false;
-          this.snackbar.open(ERROR_MESSAGES.UNKNOWN_ERROR, 'CLOSE', {
+          this.snackBar.open(ERROR_MESSAGES.UNKNOWN_ERROR, 'CLOSE', {
             duration: 5000,
           });
         },

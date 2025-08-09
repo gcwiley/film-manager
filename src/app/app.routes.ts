@@ -24,7 +24,7 @@ export const routes: Routes = [
         (m) => m.AboutPageComponent
       ),
   },
-  // list film page
+  // film grid page
   {
     path: 'films',
     title: 'My Films',

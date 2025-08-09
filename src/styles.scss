@@ -1,19 +1,20 @@
 @use '@angular/material' as mat;
 
-// sets up the modern angular material themeing system. 
+// sets up the modern angular material themeing system.
 
 html {
   color-scheme: light dark;
-  @include mat.theme( // this line is key!
+  @include mat.theme(
+    // this line is key!
     (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$orange-palette,
-        theme-type: light,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
+        color: (
+          primary: mat.$azure-palette,
+          tertiary: mat.$orange-palette,
+          theme-type: light,
+        ),
+        typography: Roboto,
+        density: 0
+      )
   );
 }
 

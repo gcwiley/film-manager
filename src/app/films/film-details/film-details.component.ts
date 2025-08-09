@@ -21,8 +21,8 @@ import { Film } from '../../types/film.interface';
   imports: [RouterModule, DatePipe, MatListModule],
 })
 export class FilmDetailsComponent implements OnInit, OnDestroy {
-  film!: Film; // initialize explicitly
-  private destroy$ = new Subject<void>(); // subject to signal destruction
+  film!: Film | undefined; 
+  private destroy$ = new Subject<void>();
   
   // inject dependencies
   private route = inject(ActivatedRoute);

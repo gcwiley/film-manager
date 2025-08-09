@@ -42,7 +42,7 @@ import { FilmInput, Film } from '../../types/film.interface';
 export class FilmFormComponent implements OnInit {
   public mode = 'create';
   private id!: string | null;
-  private film!: Film;
+  private film!: Film | undefined;
 
   // inject dependencies
   private formBuilder = inject(FormBuilder);
@@ -74,11 +74,11 @@ export class FilmFormComponent implements OnInit {
           this.film = film;
           this.filmForm.setValue({
         
-            title: this.film.title,
-            director: this.film.director,
-            releaseDate: this.film.releaseDate,
-            genre: this.film.genre,
-            summary: this.film.summary,
+            title: this.film!.title,
+            director: this.film!.director,
+            releaseDate: this.film!.releaseDate,
+            genre: this.film!.genre,
+            summary: this.film!.summary,
           });
         });
         // if the paramMap does NOT ha block is executed.

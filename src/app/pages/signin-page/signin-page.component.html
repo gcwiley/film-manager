@@ -1,5 +1,5 @@
 <main class="signin-page-container">
-  <mat-card appearance="outline" class="signin-form">
+  <mat-card appearance="outlined" class="signin-form">
     <!-- title text -->
     <div class="title-text">
       <h3>Sign In</h3>
@@ -32,7 +32,6 @@
             formControlName="password"
             required
             placeholder="password" />
-
           @if (formControls['password'].hasError('required')) {
           <mat-error>Password is required</mat-error>
           } @if (formControls['password'].hasError('minlength')) {
@@ -42,19 +41,11 @@
 
         <!-- BUTTONS -->
         <div class="card-actions">
-          <button mat-raised-button type="submit" [disabled]="signinForm.invalid || isLoading">
-            @if (isLoading) {
-            <mat-icon>hourglass_empty</mat-icon>
-            } Sign In
+          <button matButton class="sign-in-button" type="submit" [disabled]="signinForm.invalid">
+            Sign In
           </button>
-          <a mat-button routerLink="/signup">Create an account.</a>
         </div>
       </form>
-      @if (errorMessage) {
-      <div class="error-message">
-        {{ errorMessage }}
-      </div>
-      }
     </mat-card-content>
   </mat-card>
 </main>

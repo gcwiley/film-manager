@@ -6,7 +6,7 @@ import {
   OnDestroy,
   inject,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 // angular cdk
@@ -49,9 +49,9 @@ import { Film } from '../../types/film.interface';
   ],
 })
 export class FilmTableComponent implements AfterViewInit, OnDestroy {
+  selection = new SelectionModel<Film>(true, []);
 
-
-  // setup pagination for table
+  // setup pagination for film table
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   // set up sort in table
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,25 +62,53 @@ export class FilmTableComponent implements AfterViewInit, OnDestroy {
   // set the new data source
   dataSource = new MatTableDataSource<Film>();
 
-  // columns to display
-  columnsToDisplay = ['title', 'director', 'releaseDate', 'genre'];
+  columnsToDisplay = ['title', 'director', 'releaseDate', 'genre', 'openFilm', 'editFilm'];
+
+  // subject to manage component destruction
+  private destroy$ = new Subject<void>();
 
   // inject dependencies
   private filmService = inject(FilmService);
-  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   public ngAfterViewInit(): void {
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.getFilms()
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.getFilms();
   }
 
-  // get all films from the film service
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // get all films from film service
   public getFilms(): void {
     this.filmService.getFilms().subscribe((films) => {
       this.dataSource.data = films;
       // sets the loading results to false
       this.isLoadingResults = false;
-    })
+    });
+  }
+
+  // get all films from film service
+  public getFilmsTest(): void {
+    this.isLoadingResults = true;
+    this.filmService
+      .getFilms()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (films) => {
+          this.dataSource.data = films;
+          this.isLoadingResults = false;
+        },
+        error: (error) => {
+          console.error('Error fetching films:', error);
+          this.isLoadingResults = false; // stop the spinner
+          this.snackBar.open('Error fetching films:', 'Close', {
+            duration: 5000,
+          });
+        },
+      });
   }
 }

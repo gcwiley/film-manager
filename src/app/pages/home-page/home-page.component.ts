@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {
   NavbarComponent,
   AuthStatusComponent,
-  ActionBarComponent,
   FooterComponent,
 } from '../../components';
 
@@ -33,7 +32,6 @@ import { FilmGridComponent, RecentFilmsComponent} from '../../films'
     NavbarComponent,
     AuthStatusComponent,
     FooterComponent,
-    ActionBarComponent,
     FilmGridComponent,
     RecentFilmsComponent,
   ],
