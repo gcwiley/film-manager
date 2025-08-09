@@ -68,11 +68,25 @@ export class FilmService {
     );
   }
 
-  // fetches a single film from firestore based on the provided id
+  // fetches a single film from firestore based on the provided id - fix this!
   public getFilmById(id: string): Observable<Film> {
     const docReference = doc(this.firestore, 'films', id);
     return from(getDoc(docReference)).pipe(map((doc) => ({ id, ...doc.data() } as Film)));
   }
+
+  // fetches a sigle film from firestore based on the provided id
+  public getFilmByIdTest(id: string): Observable<Film | undefined> {
+    const docReference = doc(this.firestore, 'films', id);
+    return from(getDoc(docReference)).pipe(
+      map((doc) => {
+        if (doc.exists()) {
+          return { id, ...doc.data() } as Film;
+        }
+        return undefined
+      })
+    )
+  }
+
 
   // deletes a film from firestore based on the provided id
   public deleteFilmById(id: string): Observable<void> {

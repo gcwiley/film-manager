@@ -3,9 +3,14 @@ import {
   Component,
   ViewChild,
   ChangeDetectionStrategy,
+  OnDestroy,
   inject,
 } from '@angular/core';
-import { Route, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+// angular cdk
+import { SelectionModel } from '@angular/cdk/collections';
 
 // angular material
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -13,8 +18,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// rxjs
+import { Subject, takeUntil } from 'rxjs';
 
 // film service and interface
 import { FilmService } from '../../services/film.service';
@@ -27,16 +37,20 @@ import { Film } from '../../types/film.interface';
   styleUrl: './film-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    CommonModule,
     MatTableModule,
+    MatCheckboxModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatPaginator,
+    MatPaginatorModule,
     RouterModule,
   ],
 })
-export class FilmTableComponent implements AfterViewInit {
+export class FilmTableComponent implements AfterViewInit, OnDestroy {
+
+
   // setup pagination for table
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   // set up sort in table

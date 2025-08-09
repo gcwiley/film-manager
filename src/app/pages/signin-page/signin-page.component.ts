@@ -1,5 +1,4 @@
-/* eslint-disable @angular-eslint/prefer-inject */
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -19,9 +18,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-// shared components
-import { FooterComponent } from '../../components';
 
 // auth service
 import { AuthService } from '../../services/auth.service';
@@ -48,20 +44,19 @@ const ERROR_MESSAGES = {
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    FooterComponent,
   ],
 })
 export class SigninPageComponent implements OnInit {
   public signinForm!: FormGroup;
   public isLoading = false;
   public errorMessage: string | null = null;
+  public showPassword = false; // to toggle password on/off
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private snackbar: MatSnackBar
-  ) {}
+  // inject dependencies
+  private formBuilder = inject(FormBuilder);
+  private authservice = inject(AuthService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     this.initializeForm();
