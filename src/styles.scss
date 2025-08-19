@@ -5,7 +5,6 @@
 html {
   color-scheme: light dark;
   @include mat.theme(
-    // this line is key!
     (
         color: (
           primary: mat.$azure-palette,

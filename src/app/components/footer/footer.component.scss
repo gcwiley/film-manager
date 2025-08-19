@@ -1,7 +1,6 @@
 @use '../../../styles/helpers/constants';
 
 .footer-content {
-  // use theme variables for background and text color
   background: var(--mat-sys-color-surface-container);
   color: var(--mat-sys-color-on-surface-variant);
 

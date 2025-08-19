@@ -4,6 +4,7 @@ export interface Film {
     title: string;
     director: string;
     releaseDate: string;
+    runningTime: string,
     genre: string;
     favorite: boolean;
     summary: string;

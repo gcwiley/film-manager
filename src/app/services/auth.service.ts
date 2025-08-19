@@ -12,6 +12,8 @@ import {
   UserCredential,
   user,
   User,
+  updatePassword,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -26,7 +28,7 @@ export class AuthService {
 
   // observable for the authentication status (emits true if logged in, false otherwise)
   public readonly isAuthenticated$: Observable<boolean> = this.user$.pipe(
-    map((user) => !!user) // User|null to boolean
+    map((user) => !!user) // User | null to boolean
   );
 
   // creates a new user account associated with the specified email address and password.
@@ -56,6 +58,27 @@ export class AuthService {
   // signs out the current user - does not return any specific user data
   public signOutUser(): Observable<void> {
     return from(signOut(this.auth)).pipe(catchError(this.handleError));
+  }
+
+  // add a method to send a password reset email to a user - RESET PASSWORD
+  public sendPasswordResetEmail(email: string): Observable<void> {
+    return from(sendPasswordResetEmail(this.auth, email)).pipe(catchError(this.handleError));
+  }
+
+  // allow authenicated users to change thier password - CHANGE PASSWORD
+  public changePassword(newPassword: string): Observable<void> {
+    // get the current user
+    const currentUser = this.auth.currentUser;
+
+    if (currentUser) {
+      // use the updatePassword function with the current user and new password
+      return from(updatePassword(currentUser, newPassword)).pipe(
+        catchError(this.handleError) // handle error
+      );
+    } else {
+      // if there's no current user, throw an error
+      return throwError(() => new Error('No user is currently logged in.'));
+    }
   }
 
   // private method that centralizes error handling

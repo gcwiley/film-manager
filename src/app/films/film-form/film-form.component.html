@@ -1,5 +1,6 @@
 <form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
   <mat-card class="film-form" appearance="outlined">
+
     <mat-card-header>
       <mat-card-title>Add Film</mat-card-title>
     </mat-card-header>
@@ -7,11 +8,10 @@
     <mat-card-content>
       <div class="row">
         <div class="column">
-          <!-- TITLE (title)-->
+          <!-- title -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Title</mat-label>
-            <!-- fix this! -->
-            <input matInput type="text" FormControlName="title" />
+            <input matInput type="text" FormControlName="title" placeholder="Title" />
             @if (filmForm.controls['title'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
@@ -21,10 +21,9 @@
 
       <div class="row">
         <div class="column">
-          <!-- DIRECTOR (director)-->
+          <!-- director -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Director</mat-label>
-            <!-- fix this! -->
             <input matInput type="text" FormControlName="director" />
             @if (filmForm.controls['director'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
@@ -35,7 +34,7 @@
 
       <div class="row">
         <div class="column">
-          <!-- RELEASE DATE (releaseDate) FOLLOW UP -->
+          <!-- releaseDate -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Release Date</mat-label>
             <input matInput type="text" FormControlName="releaseDate" />
