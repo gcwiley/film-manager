@@ -7,7 +7,8 @@ export interface Film {
     runningTime: string,
     genre: string;
     favorite: boolean;
-    summary: string;
+    description: string;
+    posterUrl: string;
  }
 
 export type FilmInput = Omit<Film, 'id'>

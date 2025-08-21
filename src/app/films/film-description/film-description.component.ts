@@ -17,7 +17,8 @@ import { Film } from '../../types/film.interface';
   imports: [RouterModule],
 })
 export class FilmDescriptionComponent implements OnInit, OnDestroy {
-  film!: Film | undefined
+  film: Film | undefined = undefined;
+
   private destroy$ = new Subject<void>(); 
   
   // inject dependencies 

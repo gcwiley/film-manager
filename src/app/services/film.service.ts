@@ -53,7 +53,7 @@ export class FilmService {
         releaseDate: film.releaseDate,
         genre: film.genre,
         favorite: film.favorite,
-        summary: film.summary,
+        summary: film.description,
       })
     ).pipe(
       switchMap((doc) => from(getDoc(doc))),

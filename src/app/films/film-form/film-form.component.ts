@@ -78,7 +78,7 @@ export class FilmFormComponent implements OnInit {
             director: this.film!.director,
             releaseDate: this.film!.releaseDate,
             genre: this.film!.genre,
-            summary: this.film!.summary,
+            summary: this.film!.description,
           });
         });
         // if the paramMap does NOT ha block is executed.

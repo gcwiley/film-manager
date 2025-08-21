@@ -1,6 +1,5 @@
 <form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
   <mat-card class="film-form" appearance="outlined">
-
     <mat-card-header>
       <mat-card-title>Add Film</mat-card-title>
     </mat-card-header>
@@ -11,7 +10,7 @@
           <!-- title -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Title</mat-label>
-            <input matInput type="text" FormControlName="title" placeholder="Title" />
+            <input matInput type="text" formControlName="title" placeholder="Title" />
             @if (filmForm.controls['title'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
@@ -24,7 +23,7 @@
           <!-- director -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Director</mat-label>
-            <input matInput type="text" FormControlName="director" />
+            <input matInput type="text" formControlName="director" />
             @if (filmForm.controls['director'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
@@ -37,7 +36,7 @@
           <!-- releaseDate -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Release Date</mat-label>
-            <input matInput type="text" FormControlName="releaseDate" />
+            <input matInput type="text" formControlName="releaseDate" />
             @if (filmForm.controls['releaseDate'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
@@ -65,7 +64,7 @@
           <!-- summary -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Summary</mat-label>
-            <textarea matInput rows="10" FormControlName="summary"></textarea>
+            <textarea matInput rows="10" formControlName="summary"></textarea>
             @if (filmForm.controls['summary'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
@@ -74,10 +73,13 @@
       </div>
     </mat-card-content>
 
-    <!-- fix this! -->
     <mat-card-actions class="card-actions">
-      <button mat-flat-button type="submit">Add Film</button>
-      <button mat-flat-button type="reset">Clear</button>
+      @if (this.mode === 'create') {
+      <button matButton="elevated" type="submit" [disabled]="!filmForm.valid" aria-label="Create Film">Create</button>
+      } @else {
+      <button matButton="elevated" type="submit" [disabled]="!filmForm.valid" aria-label="Update Film">Update</button>
+      }
+      <button matButton="outlined" type="button" (click)="filmForm.reset()" aria-label="Clear Form">Clear</button>
     </mat-card-actions>
   </mat-card>
 </form>

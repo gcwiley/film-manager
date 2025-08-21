@@ -2,11 +2,15 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
+// rxjs
+import { Observable, map } from 'rxjs';
+
 // angular material
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 // shared components
 import { LogoComponent } from '../logo/logo.component';
@@ -25,22 +29,38 @@ import { AuthService } from '../../services/auth.service';
     RouterModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule,
     MatMenuModule,
-    RouterModule,
+    MatDividerModule,
     LogoComponent,
   ],
 })
 export class NavbarComponent {
   // inject dependencies
-  public authService = inject(AuthService);
-  public router = inject(Router);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+
+  private readonly snackBarDuration = 5000; // constant for snackbar duration
+
+  // expose authenticated status for template use
+  public isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
+
+  // expose user email for template use
+  public userEmail$: Observable<string | null> = this.authService.user$.pipe(
+    map((user) => user?.email ?? null)
+  )
 
   // signs out current user
   public onClickSignOut(): void {
-    this.authService.signOutUser().subscribe(() => {
-      // redirects user to sign in page
-      this.router.navigateByUrl('/signin');
-    });
+    this.authService.signOutUser().subscribe({
+      next: () => {
+        this.snackBar.open('Successfully signed out.', 'Close', { duration: this.snackBarDuration }); // success feedback
+        this.router.navigateByUrl('/signin'); // redirects user to sign in page
+      },
+      error: (error) => {
+        console.error('Error signing out:', error);
+        this.snackBar.open('Error signing out. Please try again.', 'Close', { duration: this.snackBarDuration }) // error feedback
+      }
+    })
   }
 }

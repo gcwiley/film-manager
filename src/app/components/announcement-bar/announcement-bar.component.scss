@@ -13,9 +13,9 @@
 
 @media (max-width: 600px) {
   .announcement-bar {
-    flex-direction: column; // Stack content vertically on small screens
-    justify-content: center; // Center content vertically when stacked
-    padding: 1rem; // Increase padding on very small screens
-    min-height: auto; // Allow height to adjust to content when stacked
+    flex-direction: column; // stack content vertically on small screens
+    justify-content: center; // center content vertically when stacked
+    padding: 1rem; // increase padding on very small screens
+    min-height: auto; // allow height to adjust to content when stacked
   }
 }

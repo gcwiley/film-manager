@@ -55,12 +55,12 @@ export class AuthService {
     );
   }
 
-  // signs out the current user - does not return any specific user data
+  // signs out the current user - SIGN OUT CURRENT USER
   public signOutUser(): Observable<void> {
     return from(signOut(this.auth)).pipe(catchError(this.handleError));
   }
 
-  // add a method to send a password reset email to a user - RESET PASSWORD
+  // send a password reset email to a user - RESET PASSWORD
   public sendPasswordResetEmail(email: string): Observable<void> {
     return from(sendPasswordResetEmail(this.auth, email)).pipe(catchError(this.handleError));
   }

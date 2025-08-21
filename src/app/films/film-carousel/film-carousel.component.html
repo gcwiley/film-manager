@@ -1,1 +1,31 @@
-<p>film-carousel works!</p>
+<div class="film-carousel-container">
+  <div class="film-carousel-wrapper">
+    <div class="film-carousel-items">
+      @for (film of films(); track film.id) {
+        <div class="film-carousel-item">
+          <!-- Placeholder for film item content -->
+          <mat-card appearance="outlined">
+            <mat-card-header>
+              <mat-card-title>{{ film.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <img [src]="film.posterUrl" alt="Poster for the movie {{ film.title }}" class="film-poster">
+              <p>{{ film.description }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button [routerLink]="['/films', film.id]">View Details</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
+    </div>
+  </div>
+  <!-- Navigation buttons (optional) -->
+  <button mat-icon-button class="carousel-nav-button prev" (click)="previousSlide()">
+    <mat-icon aria-hidden="true">chevron_left</mat-icon>
+  </button>
+  <button mat-icon-button class="carousel-nav-button next" (click)="nextSlide()">
+    <mat-icon aria-hidden="true">chevron_right</mat-icon>
+  </button>
+</div>
+
