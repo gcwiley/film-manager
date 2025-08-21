@@ -13,7 +13,7 @@ export interface ConfirmDialogData {
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, MatDialogModule],
+  imports: [MatDialogModule, MatButtonModule ],
 })
 export class ConfirmDialogComponent {
   // inject dependencies

@@ -1,4 +1,6 @@
 import { Injectable, inject } from '@angular/core';
+
+// rxjs
 import { Observable, catchError, from, throwError, map } from 'rxjs';
 
 // firebase
@@ -81,7 +83,7 @@ export class AuthService {
     }
   }
 
-  // private method that centralizes error handling
+  // private method that centralizes error handling - ERROR HANDLER
   private handleError(error: Error): Observable<never> {
     // NOTE: use a logging service instead of console.error
     // replace this with a more robust logging mechcanism - a dedicated logging service

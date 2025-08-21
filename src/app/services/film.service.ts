@@ -9,8 +9,12 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  query,
+  orderBy,
+  limit,
+  startAfter,
 } from '@angular/fire/firestore';
-import { deleteDoc } from 'firebase/firestore';
+import { deleteDoc, DocumentSnapshot, QueryDocumentSnapshot } from 'firebase/firestore';
 
 // rxjs
 import { Observable, from, map, switchMap, of, catchError } from 'rxjs';
@@ -43,6 +47,8 @@ export class FilmService {
       })
     );
   }
+
+  
 
   // ADD NEW FILM
   public addFilm(film: FilmInput): Observable<Film> {
