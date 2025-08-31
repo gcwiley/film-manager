@@ -7,7 +7,10 @@ import {
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+// router
+import { Router, RouterModule } from '@angular/router';
+
+// rxjs
 import { catchError, of } from 'rxjs';
 
 // angular material
@@ -24,33 +27,34 @@ import { AuthService } from '../../services/auth.service';
 
 // define constants for error messages
 const ERROR_MESSAGES = {
-  INVALID_CREDENTIALS: 'Incorrect email or password',
-  NETWORK_ERROR: 'A network error occured. Please try again later.',
-  UNKNOWN_ERROR: 'An unxpected error occurred.',
+  INVALID_CREDENTIALS: 'Invalid email or password.',
+  NETWORK_ERROR: 'A network error occurred. Please try again later.',
+  UNKNOWN_ERROR: 'An unexpected error occurred.',
 };
 
 @Component({
   standalone: true,
-  selector: 'app-signin-page',
+  selector: 'app-signin',
   templateUrl: './signin-page.component.html',
-  styleUrl: './signin-page.component.scss',
+  styleUrls: ['./signin-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
-    FormsModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    FormsModule,
+    RouterModule,
   ],
 })
 export class SigninPageComponent implements OnInit {
   public signinForm!: FormGroup;
   public isLoading = false;
   public errorMessage: string | null = null;
-  public showPassword = false; // to toggle password on/off
+  public showPassword = false; // for toggle password on/off
 
   // inject dependencies
   private formBuilder = inject(FormBuilder);
@@ -58,7 +62,7 @@ export class SigninPageComponent implements OnInit {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initializeForm();
   }
 
@@ -66,11 +70,15 @@ export class SigninPageComponent implements OnInit {
   private initializeForm(): void {
     this.signinForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]], // Example: Minimum password length
     });
   }
 
-  // sign in with email and password, if successfull, navigate authenticated user to the home page
+  public toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  // sign in with email and password, if successfull, navigate authenicated user to the home page
   public onSubmitSignIn(): void {
     this.errorMessage = null;
     if (this.signinForm.invalid) {
@@ -88,10 +96,10 @@ export class SigninPageComponent implements OnInit {
           if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
             message = ERROR_MESSAGES.INVALID_CREDENTIALS;
           } else if (error.code === 'auth/network-request-failed') {
-            message = ERROR_MESSAGES.UNKNOWN_ERROR;
+            message = ERROR_MESSAGES.NETWORK_ERROR;
           }
           this.errorMessage = message;
-          return of(null); // return an observable of null to continue the stream.
+          return of(null); // Return an observable of null to continue the stream
         })
       )
       .subscribe({
@@ -100,22 +108,18 @@ export class SigninPageComponent implements OnInit {
           if (user) {
             this.router.navigateByUrl('/');
           } else {
-            this.snackBar.open(this.errorMessage!, 'CLOSE', {
-              duration: 5000,
-            });
+            this.snackBar.open(this.errorMessage!, 'Close');
           }
         },
         error: () => {
           this.isLoading = false;
-          this.snackBar.open(ERROR_MESSAGES.UNKNOWN_ERROR, 'CLOSE', {
-            duration: 5000,
-          });
+          this.snackBar.open(ERROR_MESSAGES.UNKNOWN_ERROR, 'Close');
         },
       });
   }
 
-  // getter for easy access to form controls in the template
-  get formControls(): { [key: string]: AbstractControl } {
+  // Getter for easy access to form controls in the template
+  get formControls(): Record<string, AbstractControl> {
     return this.signinForm.controls;
   }
 }

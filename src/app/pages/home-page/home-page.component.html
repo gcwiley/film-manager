@@ -2,6 +2,8 @@
   <app-navbar></app-navbar>
 </header>
 
+<app-menu></app-menu>
+
 <main class="home-page-container" role="main" aria-label="Homepage Main Content">
   <h1>Featured Films</h1>
   <app-film-carousel [films]="(featuredFilms$ | async) ?? []"></app-film-carousel>

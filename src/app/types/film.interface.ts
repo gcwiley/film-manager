@@ -10,7 +10,7 @@ export interface Film {
     language: string;
     country: string;
     rating: FilmRating;
-    releaseDate: Date;
+    releaseDate: string;
     runningTime: number;
     genre: string;
     favorite: boolean;

@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 // shared components
-import { NavbarComponent, FooterComponent } from '../../components';
+import { NavbarComponent, MenuComponent, FooterComponent } from '../../components';
 
 // film service and interface
 import { FilmService } from '../../services/film.service';
@@ -34,6 +34,7 @@ import { FilmCarouselComponent } from '../../films';
     MatDividerModule,
     MatIconModule,
     NavbarComponent,
+    MenuComponent,
     FooterComponent,
     FilmCarouselComponent,
     AsyncPipe,

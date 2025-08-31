@@ -1,7 +1,7 @@
 <form [formGroup]="filmForm" novalidate (ngSubmit)="onSaveFilm()">
   <mat-card class="film-form" appearance="outlined">
     <mat-card-header>
-      <mat-card-title>Add Film</mat-card-title>
+      <mat-card-title>{{ mode === 'create' ? 'New Film' : 'Edit Film' }}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
@@ -61,11 +61,11 @@
 
       <div class="row">
         <div class="column">
-          <!-- summary -->
+          <!-- description -->
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Summary</mat-label>
-            <textarea matInput rows="10" formControlName="summary"></textarea>
-            @if (filmForm.controls['summary'].hasError('required')) {
+            <textarea matInput rows="10" formControlName="description"></textarea>
+            @if (filmForm.controls['description'].hasError('required')) {
             <mat-error>Please enter the film's director</mat-error>
             }
           </mat-form-field>
@@ -75,11 +75,25 @@
 
     <mat-card-actions class="card-actions">
       @if (this.mode === 'create') {
-      <button matButton="elevated" type="submit" [disabled]="!filmForm.valid" aria-label="Create Film">Create</button>
+      <button
+        matButton="elevated"
+        type="submit"
+        [disabled]="!filmForm.valid"
+        aria-label="Create Film">
+        Create
+      </button>
       } @else {
-      <button matButton="elevated" type="submit" [disabled]="!filmForm.valid" aria-label="Update Film">Update</button>
+      <button
+        matButton="elevated"
+        type="submit"
+        [disabled]="!filmForm.valid"
+        aria-label="Update Film">
+        Update
+      </button>
       }
-      <button matButton="outlined" type="button" (click)="filmForm.reset()" aria-label="Clear Form">Clear</button>
+      <button matButton="outlined" type="button" (click)="filmForm.reset()" aria-label="Clear Form">
+        Clear
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>

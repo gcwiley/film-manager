@@ -6,3 +6,4 @@ export { HeroComponent } from "./hero/hero.component";
 export { LogoComponent } from "./logo/logo.component";
 export { MenuComponent } from "./menu/menu.component";
 export { NavbarComponent } from "./navbar/navbar.component";
+export { SearchBarComponent } from "./search-bar/search-bar.component";

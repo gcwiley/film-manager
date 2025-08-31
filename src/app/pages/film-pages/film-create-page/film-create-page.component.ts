@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 // shared component
-import { NavbarComponent, FooterComponent } from '../../../components';
+import { NavbarComponent, MenuComponent, FooterComponent } from '../../../components';
 
 // film components
 import { FilmFormComponent, RecentFilmsComponent } from '../../../films/index';
@@ -12,6 +12,12 @@ import { FilmFormComponent, RecentFilmsComponent } from '../../../films/index';
   templateUrl: './film-create-page.component.html',
   styleUrl: './film-create-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavbarComponent, FooterComponent, FilmFormComponent, RecentFilmsComponent],
+  imports: [
+    NavbarComponent,
+    MenuComponent,
+    FooterComponent,
+    FilmFormComponent,
+    RecentFilmsComponent,
+  ],
 })
 export class FilmCreatePageComponent {}

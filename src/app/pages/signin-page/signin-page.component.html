@@ -1,9 +1,8 @@
-<main class="signin-page-container">
-  <mat-card appearance="outlined" class="signin-form">
-    <!-- title text -->
+<main class="signin-page-container" aria-label="Sign In Page">
+  <mat-card class="signin-form" appearance="raised">
     <div class="title-text">
-      <h3>Sign In</h3>
-      <h4>Please sign in to your account.</h4>
+      <h1>Sign In</h1>
+      <p>Please sign in to your account.</p>
     </div>
     <mat-card-content>
       <form [formGroup]="signinForm" (ngSubmit)="onSubmitSignIn()">
@@ -14,12 +13,15 @@
             matInput
             type="email"
             formControlName="email"
-            required
-            placeholder="name@example.com" />
+            placeholder="name@example.com"
+            autocomplete="username"
+            aria-describedby="email-errors" />
           @if (formControls['email'].hasError('required')) {
-          <mat-error>Email is required.</mat-error>
+          <mat-error id="email-required" aria-live="polite"
+            >Please enter your email address.</mat-error
+          >
           } @if (formControls['email'].hasError('email')) {
-          <mat-error>Invalid email format.</mat-error>
+          <mat-error id="email-invalid" aria-live="polite">Invalid email format.</mat-error>
           }
         </mat-form-field>
 
@@ -28,23 +30,46 @@
           <mat-label>Password</mat-label>
           <input
             matInput
-            type="password"
+            [type]="showPassword ? 'text' : 'password'"
             formControlName="password"
-            required
-            placeholder="password" />
+            placeholder="Password"
+            autocomplete="current-password"
+            aria-describedby="password-errors" />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="toggleShowPassword()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+            <mat-icon>
+              {{ showPassword ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </button>
           @if (formControls['password'].hasError('required')) {
-          <mat-error>Password is required</mat-error>
+          <mat-error id="password-required" aria-live="polite"
+            >Please enter your password.</mat-error
+          >
           } @if (formControls['password'].hasError('minlength')) {
-          <mat-error>Password must be at least 6 characters.</mat-error>
+          <mat-error id="password-invalid" aria-live="polite"
+            >Your password must be at least 6 characters.</mat-error
+          >
           }
         </mat-form-field>
 
-        <!-- BUTTONS -->
-        <div class="card-actions">
-          <button matButton class="sign-in-button" type="submit" [disabled]="signinForm.invalid">
-            Sign In
-          </button>
+        <!-- forgot password -->
+        <div class="forgot-password">
+          <a>Forgot Password?</a>
         </div>
+
+        <mat-card-actions>
+          <button
+            matButton="filled"
+            class="sign-in-button"
+            type="submit"
+            [disabled]="signinForm.invalid || isLoading">
+            SIGN IN
+          </button>
+        </mat-card-actions>
       </form>
     </mat-card-content>
   </mat-card>

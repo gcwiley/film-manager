@@ -1,20 +1,29 @@
-<mat-grid-list [cols]="cols" [rowHeight]="rowHeight" [gutterSize]="gutterSize">
-   @for (film of films; track film) {
-   <mat-grid-tile [colspan]="colspan" [rowspan]="rowspan">
-      <mat-card class="hero-card" appearance="raised">
-         <mat-card-header>
-            <mat-card-title>{{ film.title }}</mat-card-title>
-            <mat-card-subtitle>{{ film.director }}</mat-card-subtitle>
-         </mat-card-header>
+<mat-grid-list [cols]="cols | async" [rowHeight]="rowHeight" [gutterSize]="gutterSize">
+  @for (film of films | async; track trackByFilmId($index, film)) {
+  <mat-grid-tile [colspan]="colspan" [rowspan]="rowspan">
+    <mat-card class="hero-card" appearance="raised">
+      <mat-card-header>
+        <mat-card-title>{{ film.title }}</mat-card-title>
+        <mat-card-subtitle>{{ film.director }}</mat-card-subtitle>
+      </mat-card-header>
 
-         <span class="spacer"></span>
+      <span class="spacer"></span>
 
-         <mat-card-actions>
-            <a mat-button routerLink="/films/{{ film.id }}">OPEN</a>
-         </mat-card-actions>
-      </mat-card>
-   </mat-grid-tile>
-   } @empty {
-   <p>No Films Found</p>
-   }
+      <mat-card-actions>
+        <a mat-button [routerLink]="['/films', film.id]">OPEN</a>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  }
 </mat-grid-list>
+
+<!-- Handle loading/empty states -->
+@if ((films | async) === null) {
+<div class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+} @if ((films | async)?.length === 0) {
+<div class="empty-message">
+  <p>No Projects found.</p>
+</div>
+}

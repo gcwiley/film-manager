@@ -1,55 +1,59 @@
-<nav class="navbar-container" aria-label="Navigation Toolbar">
-  <!-- app logo -->
-  <a routerLink="/" mat-icon-button aria-label="Film Manager">
-    <app-logo />
-  </a>
+<nav class="navbar-container" role="navigation" aria-label="Navigation Toolbar">
+  <div class="navbar-content">
+    <!-- app logo -->
+    <a routerLink="/" mat-icon-button aria-label="Film Manager">
+      <app-logo />
+    </a>
 
-  <!-- title -->
-  <span>Film Manager</span>
+    <!-- title -->
+    <span>Film Manager</span>
 
-  <!-- spacer -->
-  <span class="spacer"></span>
+    <!-- spacer -->
+    <span class="flex-spacer"></span>
 
-  <!-- Navigation Links (Visible on larger screens) -->
-  <button matButton routerLink="/films" aria-label="View all films" class="hidden-sm">Films</button>
-
-  <button matButton routerLink="/about" aria-label="Learn about the app" class="hidden-sm">
-    About
-  </button>
-
-  <!-- nav bar menu -->
-  @if (isAuthenticated$ | async) {
-  <!-- Menu for authenticated users -->
-  <button mat-icon-button [matMenuTriggerFor]="authMenu" aria-label="Authenticated user menu">
-    <mat-icon>person</mat-icon>
-  </button>
-
-  <mat-menu #authMenu="matMenu">
-    <!-- Display user email or name (optional) -->
-    <button mat-menu-item disabled title="Your email address">
-      <span>Logged in as: {{ userEmail$ | async }}</span>
+    <!-- Navigation Links (Visible on larger screens) -->
+    <button matButton routerLink="/films" aria-label="View all films" class="hidden-sm">
+      Films
     </button>
-    <mat-divider></mat-divider>
 
-    <!-- Navigation links within the menu (can be hidden on large screens) -->
-    <button mat-menu-item routerLink="/films" class="visible-sm">
-      <mat-icon>movie</mat-icon>
-      <span>Films</span>
+    <button matButton routerLink="/about" aria-label="Learn about the app" class="hidden-sm">
+      About
     </button>
-    <button mat-menu-item routerLink="/about" class="visible-sm">
-      <mat-icon>info</mat-icon>
-      <span>About</span>
-    </button>
-    <mat-divider class="visible-sm"></mat-divider>
 
-    <button mat-menu-item (click)="onClickSignOut()" aria-label="Sign out">
-      <mat-icon>logout</mat-icon>
-      <span>Sign Out</span>
+    <!-- nav bar menu -->
+    @if (isAuthenticated$ | async) {
+    <!-- Menu for authenticated users -->
+    <button mat-icon-button [matMenuTriggerFor]="authMenu" aria-label="Authenticated user menu">
+      <mat-icon>person</mat-icon>
     </button>
-  </mat-menu>
-  } @else {
-  <!-- Buttons for logged out users -->
-  <button mat-button routerLink="/signin" aria-label="Sign in to your account">Sign In</button>
-  <button mat-button routerLink="/signup" aria-label="Create a new account">Sign Up</button>
-  }
+
+    <mat-menu #authMenu="matMenu">
+      <!-- Display user email or name (optional) -->
+      <button mat-menu-item disabled title="Your email address">
+        <span>Logged in as: {{ userEmail$ | async }}</span>
+      </button>
+      <mat-divider></mat-divider>
+
+      <!-- Navigation links within the menu (can be hidden on large screens) -->
+      <button mat-menu-item routerLink="/films" class="visible-sm">
+        <mat-icon>movie</mat-icon>
+        <span>Films</span>
+      </button>
+      <button mat-menu-item routerLink="/about" class="visible-sm">
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </button>
+      <mat-divider class="visible-sm"></mat-divider>
+
+      <button mat-menu-item (click)="onClickSignOut()" aria-label="Sign out">
+        <mat-icon>logout</mat-icon>
+        <span>Sign Out</span>
+      </button>
+    </mat-menu>
+    } @else {
+    <!-- Buttons for logged out users -->
+    <button mat-button routerLink="/signin" aria-label="Sign in to your account">Sign In</button>
+    <button mat-button routerLink="/signup" aria-label="Create a new account">Sign Up</button>
+    }
+  </div>
 </nav>
