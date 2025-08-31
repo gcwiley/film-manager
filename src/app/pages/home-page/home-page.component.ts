@@ -1,5 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+
+// rxjs
+import { Observable } from 'rxjs';
 
 // angular material
 import { MatCardModule } from '@angular/material/card';
@@ -8,13 +12,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 // shared components
-import {
-  NavbarComponent,
-  FooterComponent,
-} from '../../components';
+import { NavbarComponent, FooterComponent } from '../../components';
+
+// film service and interface
+import { FilmService } from '../../services/film.service';
+import { Film } from '../../types/film.interface';
 
 // film components
-import { FilmGridComponent, RecentFilmsComponent} from '../../films'
+import { FilmCarouselComponent } from '../../films';
 
 @Component({
   standalone: true,
@@ -30,8 +35,17 @@ import { FilmGridComponent, RecentFilmsComponent} from '../../films'
     MatIconModule,
     NavbarComponent,
     FooterComponent,
-    FilmGridComponent,
-    RecentFilmsComponent,
+    FilmCarouselComponent,
+    AsyncPipe,
   ],
 })
-export class HomePageComponent {}
+export class HomePageComponent implements OnInit {
+  // inject dependenices
+  private filmService = inject(FilmService);
+
+  public featuredFilms$!: Observable<Film[]>;
+
+  public ngOnInit(): void {
+    this.featuredFilms$ = this.filmService.getFilms();
+  }
+}

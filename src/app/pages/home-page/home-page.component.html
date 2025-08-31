@@ -1,17 +1,10 @@
-<header>
+<header role="banner">
   <app-navbar></app-navbar>
 </header>
 
-<main class="home-page-container">
-  <article class="film-grid">
-    <h2>Current Films</h2>
-    <app-film-grid></app-film-grid>
-  </article>
-
-  <aside class="recent-films">
-    <h2>Recent Films</h2>
-    <app-recent-films></app-recent-films>
-  </aside>
+<main class="home-page-container" role="main" aria-label="Homepage Main Content">
+  <h1>Featured Films</h1>
+  <app-film-carousel [films]="(featuredFilms$ | async) ?? []"></app-film-carousel>
 </main>
 
 <app-footer></app-footer>

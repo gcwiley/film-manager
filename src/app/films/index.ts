@@ -1,3 +1,4 @@
+export { FilmCarouselComponent } from "./film-carousel/film-carousel.component";
 export { FilmDescriptionComponent } from "./film-description/film-description.component";
 export { FilmDetailsComponent } from "./film-details/film-details.component";
 export { FilmFormComponent } from "./film-form/film-form.component";
